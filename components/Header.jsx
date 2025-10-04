@@ -1,13 +1,25 @@
+import Link from "next/link";
+
 const Header = () => {
   return (
-    <header className="bg-blue-700 p-5 px-10">
-      <nav className="grid grid-cols-5">
+    <header className="bg-[#5e17eb] p-5 px-10">
+      <nav className="grid grid-cols-5 text-white">
         <h1 className="text-2xl font-bold font-serif col-start-1 col-end-2">
           Jobs
         </h1>
         <ul className="col-start-2 col-end-3 flex items-center justify-center">
-          <li className="px-2">Home</li>
-          <li className="px-2">Add Invoice</li>
+          <Link
+            href="/"
+            className="mx-2 px-2 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer "
+          >
+            Home
+          </Link>
+          <Link
+            href={"/add_invoice"}
+            className="mx-2 px-2 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer"
+          >
+            Add Invoice
+          </Link>
         </ul>
       </nav>
     </header>
