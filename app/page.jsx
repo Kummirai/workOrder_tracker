@@ -57,6 +57,7 @@ export default function Home() {
       {jobs.map((job) => {
         <JobSummaryCard job={job} key={job.jobNumber} />;
       })}
+      Hello world
     </main>
   );
 }
