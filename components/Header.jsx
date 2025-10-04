@@ -10,13 +10,13 @@ const Header = () => {
         <ul className="col-start-2 col-end-3 flex items-center justify-center">
           <Link
             href="/"
-            className="mx-2 px-2 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer "
+            className="mx-2 px-4 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer "
           >
             Home
           </Link>
           <Link
             href={"/add_invoice"}
-            className="mx-2 px-2 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer"
+            className="mx-2 px-4 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer"
           >
             Add Invoice
           </Link>
