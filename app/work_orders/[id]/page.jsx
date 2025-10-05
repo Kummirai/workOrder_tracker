@@ -45,8 +45,8 @@ export default function WorkOrderDetailsPage({ params }) {
     <main className="p-5">
       <h1 className="text-2xl font-bold mb-5">Work Order Details</h1>
       <div className="border p-4 rounded-lg border-gray-300">
-        <div className="flex justify-between items-start">
-          <div>
+        <div className="flex flex-col md:flex-row md:justify-between md:items-start">
+          <div className="mb-4 md:mb-0">
             <h2 className="text-xl font-bold mb-2">{workOrder.jobAddress.jobNumber}</h2>
             <address className="not-italic mb-4">
               {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
@@ -65,7 +65,8 @@ export default function WorkOrderDetailsPage({ params }) {
         <p className="mb-4"><strong>Status:</strong> {workOrder.status}</p>
 
         <h3 className="text-lg font-bold mb-2">Work Items</h3>
-        <table className="w-full border-collapse border border-gray-300 mb-4">
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse border border-gray-300 mb-4">
           <thead>
             <tr className="bg-gray-100">
               <th className="border border-gray-300 p-2">Description</th>
@@ -85,9 +86,9 @@ export default function WorkOrderDetailsPage({ params }) {
                 <td className="border border-gray-300 p-2">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
-          </tbody>
-        </table>
-        <div className="text-right">
+            </tbody>
+          </table>
+        </div>        <div className="text-right">
           <h4 className="text-xl font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
           {!workOrder.paid && (
             <p className="text-lg font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>

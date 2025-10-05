@@ -126,7 +126,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="max-w-3xl border p-4 rounded-lg border-gray-300 col-start-1 col-end-2"
+      className="w-full max-w-3xl border p-4 rounded-lg border-gray-300"
     >
       <div className="border border-gray-200 p-4 rounded-s mt-4">
         {/* Address Fields */}
@@ -211,7 +211,8 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         {workItems.length === 0 ? (
           <p>No items added yet.</p>
         ) : (
-          <table className="w-full">
+          <div className="overflow-x-auto">
+            <table className="w-full">
             <thead>
               <tr>
                 <th className="text-left">Description</th>
@@ -241,6 +242,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
               ))}
             </tbody>
           </table>
+          </div>
         )}
         <div className="mt-4 text-right">
           <h4 className="text-xl font-bold">Total Cost: R{totalCost.toFixed(2)}</h4>

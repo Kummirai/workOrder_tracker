@@ -36,7 +36,7 @@ const JobSummaryCard = ({ job, status }) => {
       <div className="md:col-start-3 md:col-end-4 flex flex-col md:justify-between items-start md:items-end">
         <h2 className="text-xl font-bold text-gray-950">R {job.jobDetails.cost.toFixed(2)}</h2>
       </div>
-      <div className="md:col-span-3 flex justify-end gap-2 mt-2">
+      <div className="md:col-span-3 flex flex-wrap justify-end gap-2 mt-2">
         <Link href={`/work_orders/${job._id}`} className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm">
           View
         </Link>

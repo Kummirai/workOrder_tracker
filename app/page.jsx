@@ -29,8 +29,8 @@ export default function Home() {
 
   return (
     <main className="p-5">
-      <div className="flex justify-between items-center mb-5">
-        <div className="flex">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
+        <div className="flex flex-wrap justify-center mb-4 md:mb-0">
           <button
             className={`mr-2 px-4 py-2 rounded-md ${activeTab === 'new' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
             onClick={() => setActiveTab('new')}
@@ -56,7 +56,7 @@ export default function Home() {
             Paid
           </button>
         </div>
-        <div className="p-2 border rounded-lg bg-red-100 border-red-400">
+        <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
           <h2 className="text-lg font-bold text-red-800">Outstanding: R {totalOutstandingAmount.toFixed(2)}</h2>
         </div>
       </div>

@@ -8,7 +8,8 @@ export default async function BoqItems() {
   return (
     <main className="p-5">
       <h1 className="text-2xl font-bold mb-5">BOQ Items</h1>
-      <table className="w-full border-collapse border border-gray-300">
+      <div className="overflow-x-auto">
+        <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
             <th className="border border-gray-300 p-2">Item Number</th>
@@ -32,6 +33,7 @@ export default async function BoqItems() {
           ))}
         </tbody>
       </table>
+      </div>
     </main>
   );
 }
