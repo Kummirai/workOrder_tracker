@@ -1,8 +1,7 @@
+import { MongoClient } from "mongodb";
 
-import { MongoClient } from 'mongodb';
-
-const uri = 'mongodb://localhost:27017/';
-const dbName = 'boq';
+const uri = process.env.MONGODB_URI;
+const dbName = "work_order_tracker";
 
 let cachedClient = null;
 let cachedDb = null;
@@ -28,8 +27,8 @@ export async function connectToDatabase() {
 }
 
 export async function getCollections() {
-    const { db } = await connectToDatabase();
-    const boqItemsCollection = db.collection('boq_items');
-    const workOrdersCollection = db.collection('work_orders');
-    return { boqItemsCollection, workOrdersCollection };
+  const { db } = await connectToDatabase();
+  const boqItemsCollection = db.collection("boq_items");
+  const workOrdersCollection = db.collection("work_orders");
+  return { boqItemsCollection, workOrdersCollection };
 }
