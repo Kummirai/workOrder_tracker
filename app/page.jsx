@@ -46,25 +46,31 @@ export default function Home() {
         {activeTab === 'new' && (
           <div>
             <h2 className="text-2xl font-bold mb-5">New</h2>
-            {newJobs.map((job) => (
-              <JobSummaryCard job={job} key={job._id} status="new" />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {newJobs.map((job) => (
+                <JobSummaryCard job={job} key={job._id} status="new" />
+              ))}
+            </div>
           </div>
         )}
         {activeTab === 'in-progress' && (
           <div>
             <h2 className="text-2xl font-bold mb-5">In Progress</h2>
-            {inProgressJobs.map((job) => (
-              <JobSummaryCard job={job} key={job._id} status="in-progress" />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {inProgressJobs.map((job) => (
+                <JobSummaryCard job={job} key={job._id} status="in-progress" />
+              ))}
+            </div>
           </div>
         )}
         {activeTab === 'complete' && (
           <div>
             <h2 className="text-2xl font-bold mb-5">Complete</h2>
-            {completeJobs.map((job) => (
-              <JobSummaryCard job={job} key={job._id} status="complete" />
-            ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {completeJobs.map((job) => (
+                <JobSummaryCard job={job} key={job._id} status="complete" />
+              ))}
+            </div>
           </div>
         )}
       </div>
