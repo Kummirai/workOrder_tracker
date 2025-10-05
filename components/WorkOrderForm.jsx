@@ -4,7 +4,7 @@ import InputField from "@/components/InputField";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-const WorkOrderForm = () => {
+const WorkOrderForm = ({ workOrderToEdit }) => {
   const router = useRouter();
   const [jobNumber, setJobNumber] = useState("");
   const [streetName, setStreetName] = useState("");
@@ -29,6 +29,19 @@ const WorkOrderForm = () => {
     };
     fetchBoqItems();
   }, []);
+
+  useEffect(() => {
+    if (workOrderToEdit) {
+      setJobNumber(workOrderToEdit.jobAddress.jobNumber);
+      setStreetName(workOrderToEdit.jobAddress.streetName);
+      setStreetNumber(workOrderToEdit.jobAddress.streetNumber);
+      setSurburb(workOrderToEdit.jobAddress.surburb);
+      setCity(workOrderToEdit.jobAddress.city);
+      setStatus(workOrderToEdit.status);
+      setDate(workOrderToEdit.date);
+      setWorkItems(workOrderToEdit.jobDetails.workItems);
+    }
+  }, [workOrderToEdit]);
 
   useEffect(() => {
     const newTotalCost = workItems.reduce((sum, item) => sum + item.cost, 0);
@@ -79,8 +92,13 @@ const WorkOrderForm = () => {
       date: date,
     };
 
-    const response = await fetch("/api/work_orders", {
-      method: "POST",
+    const url = workOrderToEdit
+      ? `/api/work_orders/${workOrderToEdit._id}`
+      : "/api/work_orders";
+    const method = workOrderToEdit ? "PUT" : "POST";
+
+    const response = await fetch(url, {
+      method: method,
       headers: {
         "Content-Type": "application/json",
       },
@@ -88,14 +106,18 @@ const WorkOrderForm = () => {
     });
 
     if (response.ok) {
-      setJobNumber("");
-      setStreetName("");
-      setStreetNumber("");
-      setSurburb("");
-      setCity("");
-      setWorkItems([]);
-      setSelectedBoqItem("");
-      setQuantity(1);
+      if (workOrderToEdit) {
+        router.push(`/work_orders/${workOrderToEdit._id}`);
+      } else {
+        setJobNumber("");
+        setStreetName("");
+        setStreetNumber("");
+        setSurburb("");
+        setCity("");
+        setWorkItems([]);
+        setSelectedBoqItem("");
+        setQuantity(1);
+      }
       router.refresh();
     }
   };
@@ -227,7 +249,7 @@ const WorkOrderForm = () => {
       {/* Submit Button */}
       <div className="text-white mt-4 flex items-center justify-end">
         <button type="submit" className="rounded-md bg-blue-800 px-3 py-1">
-          Submit Job
+          {workOrderToEdit ? "Update Job" : "Submit Job"}
         </button>
       </div>
     </form>
