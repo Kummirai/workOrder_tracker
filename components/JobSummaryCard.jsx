@@ -16,17 +16,21 @@ const JobSummaryCard = ({ job, status }) => {
 
   return (
     <div
-      className={`grid grid-cols-3 p-4 border rounded-lg h-[140px] ${getStatusColor()}`}>
-      <div className="col-start-1 col-end-3 flex flex-col justify-between">
+      className={`p-4 border rounded-lg ${getStatusColor()} flex flex-col md:grid md:grid-cols-3 gap-4`}
+    >
+      {/* Main content */}
+      <div className="md:col-start-1 md:col-end-3 flex flex-col justify-between">
         <h2 className="text-2xl font-bold text-gray-950">{job.jobAddress.jobNumber}</h2>
-        <address className="text-[0.8rem] text-gray-700">
+        <address className="text-sm text-gray-700 not-italic">
           {job.jobAddress.streetNumber} {job.jobAddress.streetName}, {job.jobAddress.surburb} <br />
           {job.jobAddress.city}
         </address>
-        <p className="text-[0.8rem] font-semibold text-gray-900">{job.date}</p>
+        <p className="text-sm font-semibold text-gray-900 mt-2 md:mt-0">{job.date}</p>
       </div>
-      <div className="col-start-3 col-end-4 flex flex-col justify-between">
-        <h2 className="text-xl font-bold text-gray-950">R {job.jobDetails.cost}</h2>
+
+      {/* Cost and maybe other details */}
+      <div className="md:col-start-3 md:col-end-4 flex flex-col md:justify-between items-start md:items-end">
+        <h2 className="text-xl font-bold text-gray-950">R {job.jobDetails.cost.toFixed(2)}</h2>
       </div>
     </div>
   );
