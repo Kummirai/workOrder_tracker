@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 const JobSummaryCard = ({ job, status }) => {
   const getStatusColor = () => {
     switch (status) {
@@ -31,6 +33,17 @@ const JobSummaryCard = ({ job, status }) => {
       {/* Cost and maybe other details */}
       <div className="md:col-start-3 md:col-end-4 flex flex-col md:justify-between items-start md:items-end">
         <h2 className="text-xl font-bold text-gray-950">R {job.jobDetails.cost.toFixed(2)}</h2>
+      </div>
+      <div className="md:col-span-3 flex justify-end gap-2 mt-2">
+        <Link href={`/work_orders/${job._id}`} className="px-3 py-1 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm">
+          View
+        </Link>
+        <Link href={`/work_orders/${job._id}/edit`} className="px-3 py-1 bg-yellow-500 text-white rounded-md hover:bg-yellow-600 text-sm">
+          Edit
+        </Link>
+        <Link href={`/work_orders/${job._id}/print`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 text-sm">
+          Print
+        </Link>
       </div>
     </div>
   );
