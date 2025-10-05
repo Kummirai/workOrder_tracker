@@ -11,6 +11,8 @@ const JobSummaryCard = ({ job, status }) => {
         return "bg-yellow-100 border-yellow-400";
       case "complete":
         return "bg-green-100 border-green-400";
+      case "paid":
+        return "bg-purple-100 border-purple-400";
       default:
         return "bg-gray-100 border-gray-400";
     }

@@ -11,14 +11,17 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   const { id } = params;
-  const { workOrder } = await request.json();
+  const payload = await request.json();
   const { workOrdersCollection } = await getCollections();
-  
-  delete workOrder._id;
+
+  const dataToUpdate = payload.workOrder ? payload.workOrder : payload;
+  if (dataToUpdate._id) {
+    delete dataToUpdate._id;
+  }
 
   const result = await workOrdersCollection.updateOne(
     { _id: new ObjectId(id) },
-    { $set: workOrder }
+    { $set: dataToUpdate }
   );
   return NextResponse.json({ result });
 }

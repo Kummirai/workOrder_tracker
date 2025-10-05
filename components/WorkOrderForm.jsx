@@ -90,6 +90,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       },
       status: status,
       date: date,
+      paid: workOrderToEdit ? workOrderToEdit.paid || false : false,
     };
 
     const url = workOrderToEdit

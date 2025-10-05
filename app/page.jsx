@@ -19,6 +19,7 @@ export default function Home() {
   const newJobs = jobs.filter((job) => job.status === "new");
   const inProgressJobs = jobs.filter((job) => job.status === "in-progress");
   const completeJobs = jobs.filter((job) => job.status === "complete");
+  const paidJobs = jobs.filter((job) => job.paid);
 
   return (
     <main className="p-5">
@@ -36,10 +37,16 @@ export default function Home() {
           In Progress
         </button>
         <button
-          className={`px-4 py-2 rounded-md ${activeTab === 'complete' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          className={`mr-2 px-4 py-2 rounded-md ${activeTab === 'complete' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
           onClick={() => setActiveTab('complete')}
         >
           Complete
+        </button>
+        <button
+          className={`px-4 py-2 rounded-md ${activeTab === 'paid' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
+          onClick={() => setActiveTab('paid')}
+        >
+          Paid
         </button>
       </div>
       <div>
@@ -69,6 +76,16 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {completeJobs.map((job) => (
                 <JobSummaryCard job={job} key={job._id} status="complete" />
+              ))}
+            </div>
+          </div>
+        )}
+        {activeTab === 'paid' && (
+          <div>
+            <h2 className="text-2xl font-bold mb-5">Paid</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {paidJobs.map((job) => (
+                <JobSummaryCard job={job} key={job._id} status="paid" />
               ))}
             </div>
           </div>

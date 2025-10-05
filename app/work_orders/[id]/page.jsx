@@ -1,36 +1,66 @@
-import { getCollections } from "@/utils/db";
-import { ObjectId } from "mongodb";
+"use client";
 
-async function getWorkOrder(id) {
-  const { workOrdersCollection } = await getCollections();
-  const workOrder = await workOrdersCollection.findOne({ _id: new ObjectId(id) });
-  if (workOrder) {
-    workOrder._id = workOrder._id.toString();
-    if(workOrder.jobDetails && workOrder.jobDetails.workItems) {
-        workOrder.jobDetails.workItems.forEach(item => {
-            if(item.boqId) item.boqId = item.boqId.toString();
-        });
+import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+
+export default function WorkOrderDetailsPage({ params }) {
+  const [workOrder, setWorkOrder] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (params.id) {
+      const fetchWorkOrder = async () => {
+        const response = await fetch(`/api/work_orders/${params.id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setWorkOrder(data);
+        }
+      };
+      fetchWorkOrder();
     }
-  }
-  return workOrder;
-}
+  }, [params.id]);
 
-export default async function WorkOrderDetailsPage({ params }) {
-  const workOrder = await getWorkOrder(params.id);
+  const handleMarkAsPaid = async () => {
+    const response = await fetch(`/api/work_orders/${params.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ paid: true, status: 'paid' }),
+    });
+
+    if (response.ok) {
+      setWorkOrder({ ...workOrder, paid: true, status: 'paid' });
+      router.push('/');
+    }
+  };
 
   if (!workOrder) {
     return <p>Work order not found.</p>;
   }
 
+  const outstandingPayment = (workOrder.jobDetails.cost / 2) * 0.08;
+
   return (
     <main className="p-5">
       <h1 className="text-2xl font-bold mb-5">Work Order Details</h1>
       <div className="border p-4 rounded-lg border-gray-300">
-        <h2 className="text-xl font-bold mb-2">{workOrder.jobAddress.jobNumber}</h2>
-        <address className="not-italic mb-4">
-          {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
-          {workOrder.jobAddress.city}
-        </address>
+        <div className="flex justify-between items-start">
+          <div>
+            <h2 className="text-xl font-bold mb-2">{workOrder.jobAddress.jobNumber}</h2>
+            <address className="not-italic mb-4">
+              {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
+              {workOrder.jobAddress.city}
+            </address>
+          </div>
+          <div>
+            {workOrder.paid ? (
+              <span className="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">Paid</span>
+            ) : (
+              <span className="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded-full">Unpaid</span>
+            )}
+          </div>
+        </div>
         <p className="mb-4"><strong>Date:</strong> {workOrder.date}</p>
         <p className="mb-4"><strong>Status:</strong> {workOrder.status}</p>
 
@@ -59,7 +89,20 @@ export default async function WorkOrderDetailsPage({ params }) {
         </table>
         <div className="text-right">
           <h4 className="text-xl font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
+          {!workOrder.paid && (
+            <p className="text-lg font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>
+          )}
         </div>
+        {!workOrder.paid && (
+          <div className="flex justify-end mt-4">
+            <button
+              onClick={handleMarkAsPaid}
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+            >
+              Mark as Paid
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
