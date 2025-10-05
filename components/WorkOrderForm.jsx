@@ -215,21 +215,21 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
             <table className="w-full">
             <thead>
               <tr>
-                <th className="text-left">Description</th>
-                <th className="text-right">Qty</th>
-                <th className="text-right">Rate</th>
-                <th className="text-right">Cost</th>
-                <th></th>
+                <th className="text-left whitespace-nowrap">Description</th>
+                <th className="text-right whitespace-nowrap">Qty</th>
+                <th className="text-right whitespace-nowrap">Rate</th>
+                <th className="text-right whitespace-nowrap">Cost</th>
+                <th className="whitespace-nowrap"></th>
               </tr>
             </thead>
             <tbody>
               {workItems.map((item, index) => (
                 <tr key={index}>
-                  <td>{item.description}</td>
-                  <td className="text-right">{item.quantity}</td>
-                  <td className="text-right">{item.rate.toFixed(2)}</td>
-                  <td className="text-right">{item.cost.toFixed(2)}</td>
-                  <td className="text-center">
+                  <td className="whitespace-nowrap">{item.description}</td>
+                  <td className="text-right whitespace-nowrap">{item.quantity}</td>
+                  <td className="text-right whitespace-nowrap">{item.rate.toFixed(2)}</td>
+                  <td className="text-right whitespace-nowrap">{item.cost.toFixed(2)}</td>
+                  <td className="text-center whitespace-nowrap">
                     <button
                       type="button"
                       onClick={() => handleRemoveItem(index)}

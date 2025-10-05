@@ -69,21 +69,21 @@ export default function WorkOrderDetailsPage({ params }) {
           <table className="w-full border-collapse border border-gray-300 mb-4">
           <thead>
             <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-2">Description</th>
-              <th className="border border-gray-300 p-2">Unit</th>
-              <th className="border border-gray-300 p-2">Quantity</th>
-              <th className="border border-gray-300 p-2">Rate</th>
-              <th className="border border-gray-300 p-2">Cost</th>
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Description</th>
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Unit</th>
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Quantity</th>
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Rate</th>
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Cost</th>
             </tr>
           </thead>
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index}>
-                <td className="border border-gray-300 p-2">{item.description}</td>
-                <td className="border border-gray-300 p-2">{item.unit}</td>
-                <td className="border border-gray-300 p-2">{item.quantity}</td>
-                <td className="border border-gray-300 p-2">R {item.rate.toFixed(2)}</td>
-                <td className="border border-gray-300 p-2">R {item.cost.toFixed(2)}</td>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.unit}</td>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.quantity}</td>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
             </tbody>

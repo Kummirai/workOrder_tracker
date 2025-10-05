@@ -12,23 +12,23 @@ export default async function BoqItems() {
         <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
-            <th className="border border-gray-300 p-2">Item Number</th>
-            <th className="border border-gray-300 p-2">Description</th>
-            <th className="border border-gray-300 p-2">Unit</th>
-            <th className="border border-gray-300 p-2">Quantity Unit</th>
-            <th className="border border-gray-300 p-2">Rate</th>
-            <th className="border border-gray-300 p-2">Currency</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Item Number</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Description</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Unit</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Quantity Unit</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Rate</th>
+            <th className="border border-gray-300 p-2 whitespace-nowrap">Currency</th>
           </tr>
         </thead>
         <tbody>
           {boqItems.map((item) => (
             <tr key={item._id}>
-              <td className="border border-gray-300 p-2">{item.itemNumber}</td>
-              <td className="border border-gray-300 p-2">{item.description}</td>
-              <td className="border border-ray-300 p-2">{item.unit}</td>
-              <td className="border border-gray-300 p-2">{item.quantityUnit}</td>
-              <td className="border border-gray-300 p-2">{item.rate}</td>
-              <td className="border border-gray-300 p-2">{item.currency}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.itemNumber}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
+              <td className="border border-ray-300 p-2 whitespace-nowrap">{item.unit}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.quantityUnit}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.rate}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.currency}</td>
             </tr>
           ))}
         </tbody>
