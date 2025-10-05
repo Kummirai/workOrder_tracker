@@ -15,10 +15,10 @@ const Header = () => {
             Home
           </Link>
           <Link
-            href={"/add_invoice"}
+            href={"/work_orders"}
             className="mx-2 px-4 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer"
           >
-            Add Invoice
+            Work Orders
           </Link>
         </ul>
       </nav>
