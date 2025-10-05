@@ -9,7 +9,7 @@ export default async function WorkOrders() {
   return (
     <main className="grid grid-cols-3 p-5 gap-4 mt-5">
       {jobs.map((job) => (
-        <JobSummaryCard job={job.jobAddress} key={job._id} />
+        <JobSummaryCard job={job} key={job._id} status={job.status} />
       ))}
     </main>
   );

@@ -2,22 +2,24 @@
 
 import InputField from "@/components/InputField";
 import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 const WorkOrderForm = () => {
+  const router = useRouter();
   const [jobNumber, setJobNumber] = useState("");
   const [streetName, setStreetName] = useState("");
   const [streetNumber, setStreetNumber] = useState("");
   const [surburb, setSurburb] = useState("");
   const [city, setCity] = useState("");
-  const [workDone, setWorkDone] = useState("");
-  const [quantity, setQuantity] = useState(0);
-  const [jobAddress, setJobAddress] = useState([]);
   const [status, setStatus] = useState("new");
   const [date, setDate] = useState(new Date().toLocaleDateString());
-  const [cost, setCost] = useState(0);
+  
   const [boqItems, setBoqItems] = useState([]);
   const [selectedBoqItem, setSelectedBoqItem] = useState("");
-  const [rate, setRate] = useState(0);
+  const [quantity, setQuantity] = useState(1);
+  
+  const [workItems, setWorkItems] = useState([]);
+  const [totalCost, setTotalCost] = useState(0);
 
   useEffect(() => {
     const fetchBoqItems = async () => {
@@ -29,58 +31,84 @@ const WorkOrderForm = () => {
   }, []);
 
   useEffect(() => {
-    if (selectedBoqItem) {
-      const selectedItem = boqItems.find((item) => item._id === selectedBoqItem);
-      if (selectedItem) {
-        setWorkDone(selectedItem.description);
-        setRate(selectedItem.rate);
-      }
+    const newTotalCost = workItems.reduce((sum, item) => sum + item.cost, 0);
+    setTotalCost(newTotalCost);
+  }, [workItems]);
+
+  const handleAddItem = () => {
+    if (!selectedBoqItem || quantity <= 0) {
+      return;
     }
-  }, [selectedBoqItem, boqItems]);
-
-  useEffect(() => {
-    setCost(quantity * rate);
-  }, [quantity, rate]);
-
-  const jobData = {
-    jobAddress: {
-      jobNumber: jobNumber,
-      streetName: streetName,
-      streetNumber: streetNumber,
-      surburb: surburb,
-      city: city,
-    },
-    jobDetails: {
-      workDone: workDone,
-      quantity: quantity,
-      cost: cost,
-    },
-    status: status,
-    date: date,
+    const selectedItem = boqItems.find((item) => item._id === selectedBoqItem);
+    if (selectedItem) {
+      const newItem = {
+        boqId: selectedItem._id,
+        description: selectedItem.description,
+        unit: selectedItem.unit,
+        rate: selectedItem.rate,
+        quantity: parseFloat(quantity),
+        cost: selectedItem.rate * parseFloat(quantity),
+      };
+      setWorkItems([...workItems, newItem]);
+      setSelectedBoqItem("");
+      setQuantity(1);
+    }
   };
 
-  const AddJobDetails = async (e) => {
+  const handleRemoveItem = (index) => {
+    const newWorkItems = [...workItems];
+    newWorkItems.splice(index, 1);
+    setWorkItems(newWorkItems);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/add_invoice", {
+    const workOrder = {
+      jobAddress: {
+        jobNumber,
+        streetName,
+        streetNumber,
+        surburb,
+        city,
+      },
+      jobDetails: {
+        workItems: workItems,
+        cost: totalCost,
+      },
+      status: status,
+      date: date,
+    };
+
+    const response = await fetch("/api/work_orders", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ jobData }),
+      body: JSON.stringify({ workOrder }),
     });
-    const data = await response.json();
-    setJobAddress(data);
-    console.log(jobAddress);
+
+    if (response.ok) {
+      setJobNumber("");
+      setStreetName("");
+      setStreetNumber("");
+      setSurburb("");
+      setCity("");
+      setWorkItems([]);
+      setSelectedBoqItem("");
+      setQuantity(1);
+      router.refresh();
+    }
   };
 
   return (
     <form
-      action=""
+      onSubmit={handleSubmit}
       className="max-w-3xl border p-4 rounded-lg border-gray-300 col-start-1 col-end-2"
     >
       <div className="border border-gray-200 p-4 rounded-s mt-4">
+        {/* Address Fields */}
         <InputField
-          fieldType={"text"}
+          fieldtype={"text"}
           fieldLabel={"Job Number"}
           htmlFor={"jobNumber"}
           placeholder={"Enter Job Number"}
@@ -88,7 +116,7 @@ const WorkOrderForm = () => {
           inputValue={jobNumber}
         />
         <InputField
-          fieldType={"text"}
+          fieldtype={"text"}
           fieldLabel={"Street Number"}
           htmlFor={"streetNumber"}
           placeholder={"Enter Street Number"}
@@ -96,7 +124,7 @@ const WorkOrderForm = () => {
           inputValue={streetNumber}
         />
         <InputField
-          fieldType={"text"}
+          fieldtype={"text"}
           fieldLabel={"Street Name"}
           htmlFor={"streetName"}
           placeholder={"Enter Street Name"}
@@ -104,7 +132,7 @@ const WorkOrderForm = () => {
           inputValue={streetName}
         />
         <InputField
-          fieldType={"text"}
+          fieldtype={"text"}
           fieldLabel={"Surburb"}
           htmlFor={"surburb"}
           placeholder={"Enter Surburb"}
@@ -112,26 +140,21 @@ const WorkOrderForm = () => {
           inputValue={surburb}
         />
         <InputField
-          fieldType={"text"}
+          fieldtype={"text"}
           fieldLabel={"City"}
           htmlFor={"city"}
           placeholder={"Enter City"}
           handleChange={(e) => setCity(e.target.value)}
           inputValue={city}
         />
-        <div className="text-white mt-4 flex items-center justify-start">
-          <button
-            onClick={(e) => AddJobDetails(e)}
-            className="rounded-md bg-blue-800 px-3 py-1"
-          >
-            Add job details
-          </button>
-        </div>
       </div>
+
+      {/* Item Selection */}
       <div className="border border-gray-300 p-3 rounded-s mt-4">
         <select
           className="border w-[100%] mt-1 rounded-s outline-blue-200 border-gray-200 p-1 text-[0.85rem]"
           onChange={(e) => setSelectedBoqItem(e.target.value)}
+          value={selectedBoqItem}
         >
           <option value="">Select Work Done</option>
           {boqItems.map((item) => (
@@ -141,7 +164,7 @@ const WorkOrderForm = () => {
           ))}
         </select>
         <InputField
-          fieldType={"number"}
+          fieldtype={"number"}
           fieldLabel={"Quantity"}
           htmlFor={"quantity"}
           placeholder={"Quantity"}
@@ -149,13 +172,61 @@ const WorkOrderForm = () => {
           inputValue={quantity}
         />
         <div className="text-white mt-4">
-          <button className="rounded-md bg-blue-800 px-3 py-1">
+          <button
+            type="button"
+            onClick={handleAddItem}
+            className="rounded-md bg-blue-800 px-3 py-1"
+          >
             Add Item
           </button>
         </div>
       </div>
+
+      {/* Added Items List */}
+      <div className="border border-gray-300 p-3 rounded-s mt-4">
+        <h3 className="text-lg font-bold mb-2">Work Items</h3>
+        {workItems.length === 0 ? (
+          <p>No items added yet.</p>
+        ) : (
+          <table className="w-full">
+            <thead>
+              <tr>
+                <th className="text-left">Description</th>
+                <th className="text-right">Qty</th>
+                <th className="text-right">Rate</th>
+                <th className="text-right">Cost</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {workItems.map((item, index) => (
+                <tr key={index}>
+                  <td>{item.description}</td>
+                  <td className="text-right">{item.quantity}</td>
+                  <td className="text-right">{item.rate.toFixed(2)}</td>
+                  <td className="text-right">{item.cost.toFixed(2)}</td>
+                  <td className="text-center">
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveItem(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
+        <div className="mt-4 text-right">
+          <h4 className="text-xl font-bold">Total Cost: R{totalCost.toFixed(2)}</h4>
+        </div>
+      </div>
+
+      {/* Submit Button */}
       <div className="text-white mt-4 flex items-center justify-end">
-        <button className="rounded-md bg-blue-800 px-3 py-1">
+        <button type="submit" className="rounded-md bg-blue-800 px-3 py-1">
           Submit Job
         </button>
       </div>
