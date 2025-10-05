@@ -1,16 +1,20 @@
+import WorkOrderForm from "@/components/WorkOrderForm";
+import WorkOrdersList from "./WorkOrdersList";
 
-import JobSummaryCard from "@/components/JobSummaryCard";
-import { getCollections } from "@/utils/db";
-
-export default async function WorkOrders() {
-  const { workOrdersCollection } = await getCollections();
-  const jobs = await workOrdersCollection.find({}).toArray();
-
+export default function WorkOrdersPage() {
   return (
-    <main className="grid grid-cols-3 p-5 gap-4 mt-5">
-      {jobs.map((job) => (
-        <JobSummaryCard job={job.jobAddress} key={job._id} />
-      ))}
+    <main className="p-5">
+      <h1 className="text-2xl font-bold mb-5">Work Orders</h1>
+      <div className="grid grid-cols-2 gap-4">
+        <div>
+          <h2 className="text-xl font-bold mb-5">Add New Work Order</h2>
+          <WorkOrderForm />
+        </div>
+        <div>
+          <h2 className="text-xl font-bold mb-5">Existing Work Orders</h2>
+          <WorkOrdersList />
+        </div>
+      </div>
     </main>
   );
 }
