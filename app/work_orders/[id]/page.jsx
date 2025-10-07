@@ -60,6 +60,20 @@ export default function WorkOrderDetailsPage() {
     }
   };
 
+  const handleDelete = async () => {
+    if (window.confirm("Are you sure you want to delete this work order?")) {
+      const response = await fetch(`/api/work_orders/${id}`, {
+        method: 'DELETE',
+      });
+
+      if (response.ok) {
+        router.push('/'); // Redirect to home page after deletion
+      } else {
+        console.error("Failed to delete work order");
+      }
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-screen">
@@ -114,6 +128,12 @@ export default function WorkOrderDetailsPage() {
               Mark Complete
             </button>
           )}
+          <button
+            onClick={handleDelete}
+            className="bg-red-500 text-white px-3 py-1 rounded-md hover:bg-red-600 text-sm cursor-pointer"
+          >
+            Delete Work Order
+          </button>
         </div>
 
         <h3 class="text-lg font-bold mb-2">Work Items</h3>
