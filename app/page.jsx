@@ -49,36 +49,36 @@ export default function Home() {
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
         <div className="flex flex-wrap justify-center mb-4 md:mb-0 gap-2">
           <button
-            className={`px-4 py-2 rounded-md ${
-              activeTab === "new" ? "bg-blue-500 text-white" : "bg-gray-200"
+            className={`px-4 py-2 rounded-md cursor-pointer ${
+              activeTab === "new" ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-200 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("new")}
           >
             New
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${
+            className={`px-4 py-2 rounded-md cursor-pointer ${
               activeTab === "in-progress"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-200 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("in-progress")}
           >
             In Progress
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${
+            className={`px-4 py-2 rounded-md cursor-pointer ${
               activeTab === "complete"
-                ? "bg-blue-500 text-white"
-                : "bg-gray-200"
+                ? "bg-blue-500 text-white hover:bg-blue-600"
+                : "bg-gray-200 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("complete")}
           >
             Complete
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${
-              activeTab === "paid" ? "bg-blue-500 text-white" : "bg-gray-200"
+            className={`px-4 py-2 rounded-md cursor-pointer ${
+              activeTab === "paid" ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-200 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("paid")}
           >

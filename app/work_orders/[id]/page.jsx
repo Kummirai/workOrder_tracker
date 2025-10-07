@@ -101,7 +101,7 @@ export default function WorkOrderDetailsPage() {
           {workOrder.status !== 'in-progress' && workOrder.status !== 'paid' && (
             <button
               onClick={() => handleUpdateStatus('in-progress')}
-              className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+              className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm cursor-pointer"
             >
               Mark In-Progress
             </button>
@@ -109,7 +109,7 @@ export default function WorkOrderDetailsPage() {
           {workOrder.status !== 'complete' && workOrder.status !== 'paid' && (
             <button
               onClick={() => handleUpdateStatus('complete')}
-              className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm"
+              className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm cursor-pointer"
             >
               Mark Complete
             </button>
@@ -178,7 +178,7 @@ export default function WorkOrderDetailsPage() {
           <div class="flex justify-end mt-4">
             <button
               onClick={handleMarkAsPaid}
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"
+              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 cursor-pointer"
             >
               Mark as Paid
             </button>

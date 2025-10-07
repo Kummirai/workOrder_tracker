@@ -268,7 +268,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddItem}
-            className="rounded-md bg-blue-800 px-3 py-1"
+            className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer"
           >
             Add Item
           </button>
@@ -305,7 +305,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveItem(index)}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -352,7 +352,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddMaterial}
-            className="rounded-md bg-blue-800 px-3 py-1"
+            className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer"
           >
             Add Material
           </button>
@@ -385,7 +385,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveMaterial(index)}
-                      className="text-red-500 hover:text-red-700"
+                      className="text-red-500 hover:text-red-700 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -400,7 +400,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       {/* Submit Button */}
       <div className="text-white mt-4 flex items-center justify-end">
-        <button type="submit" className="rounded-md bg-blue-800 px-3 py-1">
+        <button type="submit" className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer">
           {workOrderToEdit ? "Update Job" : "Submit Job"}
         </button>
       </div>
