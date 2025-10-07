@@ -26,6 +26,9 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   const [materialDescription, setMaterialDescription] = useState("");
   const [materialQuantity, setMaterialQuantity] = useState(1);
 
+  const [boqSearchQuery, setBoqSearchQuery] = useState("");
+  const [filteredBoqItems, setFilteredBoqItems] = useState([]);
+
   useEffect(() => {
     const fetchBoqItems = async () => {
       const response = await fetch("/api/boq_items");
@@ -56,6 +59,24 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
     setTotalCost(newTotalCost);
   }, [workItems]);
 
+  useEffect(() => {
+    if (boqSearchQuery) {
+        const lowercasedQuery = boqSearchQuery.toLowerCase();
+        const filtered = boqItems.filter(item =>
+            item.description.toLowerCase().includes(lowercasedQuery)
+        );
+        setFilteredBoqItems(filtered);
+    } else {
+        setFilteredBoqItems([]);
+    }
+  }, [boqSearchQuery, boqItems]);
+
+  const handleSelectBoqItem = (item) => {
+    setSelectedBoqItem(item._id);
+    setBoqSearchQuery(item.description);
+    setFilteredBoqItems([]);
+  }
+
   const handleAddItem = () => {
     if (!selectedBoqItem || quantity <= 0) {
       return;
@@ -73,6 +94,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       };
       setWorkItems([...workItems, newItem]);
       setSelectedBoqItem("");
+      setBoqSearchQuery("");
       setQuantity(1);
     }
   };
@@ -148,6 +170,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         setCity("");
         setWorkItems([]);
         setSelectedBoqItem("");
+        setBoqSearchQuery("");
         setQuantity(1);
         setMaterials([]);
         setMaterialCode("");
@@ -209,18 +232,30 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       {/* Item Selection */}
       <div className="border border-gray-300 p-3 rounded-s mt-4">
-        <select
-          className="border w-[100%] mt-1 rounded-s outline-blue-200 border-gray-200 p-1 text-[0.85rem]"
-          onChange={(e) => setSelectedBoqItem(e.target.value)}
-          value={selectedBoqItem}
-        >
-          <option value="">Select Work Done</option>
-          {boqItems.map((item) => (
-            <option key={item._id} value={item._id}>
-              {item.description}
-            </option>
-          ))}
-        </select>
+        <InputField
+          fieldtype={"text"}
+          fieldLabel={"Search Work Done"}
+          htmlFor={"boqSearch"}
+          placeholder={"Enter description to search..."}
+          handleChange={(e) => {
+              setBoqSearchQuery(e.target.value);
+              setSelectedBoqItem("");
+          }}
+          inputValue={boqSearchQuery}
+        />
+        {filteredBoqItems.length > 0 && (
+          <ul className="border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto">
+            {filteredBoqItems.map(item => (
+              <li 
+                key={item._id} 
+                className="p-2 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleSelectBoqItem(item)}
+              >
+                {item.description}
+              </li>
+            ))}
+          </ul>
+        )}
         <InputField
           fieldtype={"number"}
           fieldLabel={"Quantity"}
