@@ -25,3 +25,10 @@ export async function PUT(request, { params }) {
   );
   return NextResponse.json({ result });
 }
+
+export async function DELETE(request, { params }) {
+    const { id } = params;
+    const { workOrdersCollection } = await getCollections();
+    const result = await workOrdersCollection.deleteOne({ _id: new ObjectId(id) });
+    return NextResponse.json({ result });
+}

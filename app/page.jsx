@@ -3,11 +3,13 @@
 import { useState, useEffect } from "react";
 import JobSummaryCard from "@/components/JobSummaryCard";
 import InputField from "@/components/InputField";
+import { useRouter } from "next/navigation"; // Import useRouter
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState("new");
+  const router = useRouter(); // Initialize useRouter
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -22,6 +24,19 @@ export default function Home() {
 
     return () => clearTimeout(debounceTimeout);
   }, [searchQuery]);
+
+  const handleDelete = async (id) => {
+    const response = await fetch(`/api/work_orders/${id}`, {
+      method: 'DELETE',
+    });
+
+    if (response.ok) {
+      setJobs(jobs.filter((job) => job._id !== id));
+      router.refresh(); // Refresh the page to reflect changes
+    } else {
+      console.error("Failed to delete work order");
+    }
+  };
 
   const newJobs = jobs.filter((job) => job.status === "new");
   const inProgressJobs = jobs.filter((job) => job.status === "in-progress");
@@ -96,7 +111,7 @@ export default function Home() {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {newJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="new" />
+                <JobSummaryCard job={job} key={job._id} status="new" onDelete={handleDelete} />
               ))}
             </div>
           </div>
@@ -105,7 +120,7 @@ export default function Home() {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {inProgressJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="in-progress" />
+                <JobSummaryCard job={job} key={job._id} status="in-progress" onDelete={handleDelete} />
               ))}
             </div>
           </div>
@@ -114,7 +129,7 @@ export default function Home() {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {completeJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="complete" />
+                <JobSummaryCard job={job} key={job._id} status="complete" onDelete={handleDelete} />
               ))}
             </div>
           </div>
@@ -123,7 +138,7 @@ export default function Home() {
           <div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {paidJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="paid" />
+                <JobSummaryCard job={job} key={job._id} status="paid" onDelete={handleDelete} />
               ))}
             </div>
           </div>

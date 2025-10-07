@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 
-const JobSummaryCard = ({ job, status }) => {
+const JobSummaryCard = ({ job, status, onDelete }) => {
   const getStatusColor = () => {
     switch (status) {
       case "new":
@@ -15,6 +15,12 @@ const JobSummaryCard = ({ job, status }) => {
         return "bg-purple-100 border-purple-400";
       default:
         return "bg-gray-100 border-gray-400";
+    }
+  };
+
+  const handleDelete = () => {
+    if (window.confirm("Are you sure you want to delete this work order?")) {
+      onDelete(job._id);
     }
   };
 
@@ -46,6 +52,9 @@ const JobSummaryCard = ({ job, status }) => {
         <Link href={`/work_orders/${job._id}/print`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 text-sm">
           Print
         </Link>
+        <button onClick={handleDelete} className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm">
+          Delete
+        </button>
       </div>
     </div>
   );
