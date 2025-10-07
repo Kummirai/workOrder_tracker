@@ -1,13 +1,40 @@
 
-import { getCollections } from "@/utils/db";
+"use client";
 
-export default async function BoqItems() {
-  const { boqItemsCollection } = await getCollections();
-  const boqItems = await boqItemsCollection.find({}).toArray();
+import { useState, useEffect } from "react";
+import InputField from "@/components/InputField";
+
+export default function BoqItems() {
+  const [boqItems, setBoqItems] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    const fetchBoqItems = async () => {
+      const response = await fetch(`/api/boq_items?search=${searchQuery}`);
+      const data = await response.json();
+      setBoqItems(data);
+    };
+
+    const debounceTimeout = setTimeout(() => {
+      fetchBoqItems();
+    }, 300);
+
+    return () => clearTimeout(debounceTimeout);
+  }, [searchQuery]);
 
   return (
     <main className="p-5">
       <h1 className="text-2xl font-bold mb-5">BOQ Items</h1>
+      <div className="mb-5">
+        <InputField
+          fieldtype={"text"}
+          fieldLabel={"Search by Item Number or Description"}
+          htmlFor={"boqSearch"}
+          placeholder={"Enter search term..."}
+          handleChange={(e) => setSearchQuery(e.target.value)}
+          inputValue={searchQuery}
+        />
+      </div>
       <div className="overflow-x-auto">
         <table className="w-full border-collapse border border-gray-300">
         <thead>
@@ -25,7 +52,7 @@ export default async function BoqItems() {
             <tr key={item._id}>
               <td className="border border-gray-300 p-2 whitespace-nowrap">{item.itemNumber}</td>
               <td className="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
-              <td className="border border-ray-300 p-2 whitespace-nowrap">{item.unit}</td>
+              <td className="border border-gray-300 p-2 whitespace-nowrap">{item.unit}</td>
               <td className="border border-gray-300 p-2 whitespace-nowrap">{item.quantityUnit}</td>
               <td className="border border-gray-300 p-2 whitespace-nowrap">{item.rate}</td>
               <td className="border border-gray-300 p-2 whitespace-nowrap">{item.currency}</td>

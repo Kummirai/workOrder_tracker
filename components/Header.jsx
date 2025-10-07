@@ -18,6 +18,12 @@ const Header = () => {
           >
             Add Work Order
           </Link>
+          <Link
+            href={"/boq_items"}
+            className="mx-2 my-1 md:my-0 px-4 border rounded-md hover:text-[#5e17eb]   hover:bg-white hover:cursor-pointer"
+          >
+            BOQ Items
+          </Link>
         </ul>
       </nav>
     </header>
