@@ -184,54 +184,58 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-3xl border p-4 rounded-lg border-gray-300"
+      className="w-full max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg"
     >
-      <div className="border border-gray-200 p-4 rounded-s mt-4">
-        {/* Address Fields */}
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Job Number"}
-          htmlFor={"jobNumber"}
-          placeholder={"Enter Job Number"}
-          handleChange={(e) => setJobNumber(e.target.value)}
-          inputValue={jobNumber}
-        />
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Street Number"}
-          htmlFor={"streetNumber"}
-          placeholder={"Enter Street Number"}
-          handleChange={(e) => setStreetNumber(e.target.value)}
-          inputValue={streetNumber}
-        />
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Street Name"}
-          htmlFor={"streetName"}
-          placeholder={"Enter Street Name"}
-          handleChange={(e) => setStreetName(e.target.value)}
-          inputValue={streetName}
-        />
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Surburb"}
-          htmlFor={"surburb"}
-          placeholder={"Enter Surburb"}
-          handleChange={(e) => setSurburb(e.target.value)}
-          inputValue={surburb}
-        />
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"City"}
-          htmlFor={"city"}
-          placeholder={"Enter City"}
-          handleChange={(e) => setCity(e.target.value)}
-          inputValue={city}
-        />
-      </div>
+      <h2 className="text-2xl font-bold mb-6 text-gray-800">Job Details</h2>
 
-      {/* Item Selection */}
-      <div className="border border-gray-300 p-3 rounded-s mt-4">
+      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+        <h3 className="text-xl font-semibold mb-4 text-gray-700">Job Address</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Job Number"}
+            htmlFor={"jobNumber"}
+            placeholder={"Enter Job Number"}
+            handleChange={(e) => setJobNumber(e.target.value)}
+            inputValue={jobNumber}
+          />
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Street Number"}
+            htmlFor={"streetNumber"}
+            placeholder={"Enter Street Number"}
+            handleChange={(e) => setStreetNumber(e.target.value)}
+            inputValue={streetNumber}
+          />
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Street Name"}
+            htmlFor={"streetName"}
+            placeholder={"Enter Street Name"}
+            handleChange={(e) => setStreetName(e.target.value)}
+            inputValue={streetName}
+          />
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Surburb"}
+            htmlFor={"surburb"}
+            placeholder={"Enter Surburb"}
+            handleChange={(e) => setSurburb(e.target.value)}
+            inputValue={surburb}
+          />
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"City"}
+            htmlFor={"city"}
+            placeholder={"Enter City"}
+            handleChange={(e) => setCity(e.target.value)}
+            inputValue={city}
+          />
+        </div>
+      </section>
+
+      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+        <h3 className="text-xl font-semibold mb-4 text-gray-700">Work Items</h3>
         <InputField
           fieldtype={"text"}
           fieldLabel={"Search Work Done"}
@@ -244,11 +248,11 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           inputValue={boqSearchQuery}
         />
         {filteredBoqItems.length > 0 && (
-          <ul className="border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto">
+          <ul className="border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto bg-white z-10 relative">
             {filteredBoqItems.map(item => (
               <li 
                 key={item._id} 
-                className="p-2 hover:bg-gray-100 cursor-pointer"
+                className="p-2 hover:bg-blue-100 cursor-pointer"
                 onClick={() => handleSelectBoqItem(item)}
               >
                 {item.description}
@@ -264,48 +268,45 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           handleChange={(e) => setQuantity(e.target.value)}
           inputValue={quantity}
         />
-        <div className="text-white mt-4">
+        <div className="mt-4 text-right">
           <button
             type="button"
             onClick={handleAddItem}
-            className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer"
+            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
           >
             Add Item
           </button>
         </div>
-      </div>
 
-      {/* Added Items List */}
-      <div className="border border-gray-300 p-3 rounded-s mt-4">
-        <h3 className="text-lg font-bold mb-2">Work Items</h3>
+        <h4 className="text-lg font-semibold mt-6 mb-3 text-gray-700">Added Work Items</h4>
         {workItems.length === 0 ? (
-          <p>No items added yet.</p>
+          <p className="text-gray-500">No items added yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-            <thead>
+          <div className="overflow-x-auto bg-white rounded-md border border-gray-200">
+            <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-100">
               <tr>
-                <th className="text-left whitespace-nowrap">Item #</th>
-                <th className="text-left whitespace-nowrap">Description</th>
-                <th className="text-right whitespace-nowrap">Qty</th>
-                <th className="text-right whitespace-nowrap">Rate</th>
-                <th className="text-right whitespace-nowrap">Cost</th>
-                <th className="whitespace-nowrap"></th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Item #</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Qty</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Rate</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Cost</th>
+                <th className="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white divide-y divide-gray-200">
               {workItems.map((item, index) => (
                 <tr key={index}>
-                  <td className="whitespace-nowrap">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
-                  <td className="whitespace-nowrap">{item.description}</td>
-                  <td className="text-right whitespace-nowrap">{item.quantity}</td>
-                  <td className="text-right whitespace-nowrap">{item.rate.toFixed(2)}</td>
-                  <td className="text-right whitespace-nowrap">{item.cost.toFixed(2)}</td>
-                  <td className="text-center whitespace-nowrap">
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{item.description}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">{item.quantity}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">R {item.rate.toFixed(2)}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">R {item.cost.toFixed(2)}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-center">
                     <button
                       type="button"
                       onClick={() => handleRemoveItem(index)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200"
                     >
                       Remove
                     </button>
@@ -316,76 +317,74 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           </table>
           </div>
         )}
-        <div className="mt-4 text-right">
-          <h4 className="text-xl font-bold">Total Cost: R{totalCost.toFixed(2)}</h4>
+        <div className="mt-4 text-right pr-4">
+          <h4 className="text-xl font-bold text-gray-800">Total Cost: R{totalCost.toFixed(2)}</h4>
         </div>
-      </div>
+      </section>
 
-      {/* Material Section */}
-      <div className="border border-gray-300 p-3 rounded-s mt-4">
-        <h3 className="text-lg font-bold mb-2">Materials</h3>
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Material Code"}
-          htmlFor={"materialCode"}
-          placeholder={"Enter Material Code"}
-          handleChange={(e) => setMaterialCode(e.target.value)}
-          inputValue={materialCode}
-        />
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Description"}
-          htmlFor={"materialDescription"}
-          placeholder={"Enter Description"}
-          handleChange={(e) => setMaterialDescription(e.target.value)}
-          inputValue={materialDescription}
-        />
-        <InputField
-          fieldtype={"number"}
-          fieldLabel={"Quantity"}
-          htmlFor={"materialQuantity"}
-          placeholder={"Quantity"}
-          handleChange={(e) => setMaterialQuantity(e.target.value)}
-          inputValue={materialQuantity}
-        />
-        <div className="text-white mt-4">
+      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+        <h3 className="text-xl font-semibold mb-4 text-gray-700">Materials</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Material Code"}
+            htmlFor={"materialCode"}
+            placeholder={"Enter Material Code"}
+            handleChange={(e) => setMaterialCode(e.target.value)}
+            inputValue={materialCode}
+          />
+          <InputField
+            fieldtype={"text"}
+            fieldLabel={"Description"}
+            htmlFor={"materialDescription"}
+            placeholder={"Enter Description"}
+            handleChange={(e) => setMaterialDescription(e.target.value)}
+            inputValue={materialDescription}
+          />
+          <InputField
+            fieldtype={"number"}
+            fieldLabel={"Quantity"}
+            htmlFor={"materialQuantity"}
+            placeholder={"Quantity"}
+            handleChange={(e) => setMaterialQuantity(e.target.value)}
+            inputValue={materialQuantity}
+          />
+        </div>
+        <div className="mt-4 text-right">
           <button
             type="button"
             onClick={handleAddMaterial}
-            className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer"
+            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
           >
             Add Material
           </button>
         </div>
-      </div>
 
-      {/* Added Materials List */}
-      <div className="border border-gray-300 p-3 rounded-s mt-4">
-        <h3 className="text-lg font-bold mb-2">Added Materials</h3>
+        <h4 className="text-lg font-semibold mt-6 mb-3 text-gray-700">Added Materials</h4>
         {materials.length === 0 ? (
-          <p>No materials added yet.</p>
+          <p className="text-gray-500">No materials added yet.</p>
         ) : (
-          <div className="overflow-x-auto">
-            <table className="w-full">
-            <thead>
+          <div className="overflow-x-auto bg-white rounded-md border border-gray-200">
+            <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-100">
               <tr>
-                <th className="text-left whitespace-nowrap">Material Code</th>
-                <th className="text-left whitespace-nowrap">Description</th>
-                <th className="text-right whitespace-nowrap">Qty</th>
-                <th className="whitespace-nowrap"></th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Material Code</th>
+                <th className="px-4 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th className="px-4 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Qty</th>
+                <th className="px-4 py-2 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="bg-white divide-y divide-gray-200">
               {materials.map((material, index) => (
                 <tr key={index}>
-                  <td className="whitespace-nowrap">{material.materialCode}</td>
-                  <td className="whitespace-nowrap">{material.description}</td>
-                  <td className="text-right whitespace-nowrap">{material.quantity}</td>
-                  <td className="text-center whitespace-nowrap">
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{material.materialCode}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900">{material.description}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">{material.quantity}</td>
+                  <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-center">
                     <button
                       type="button"
                       onClick={() => handleRemoveMaterial(index)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200"
                     >
                       Remove
                     </button>
@@ -396,11 +395,11 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           </table>
           </div>
         )}
-      </div>
+      </section>
 
       {/* Submit Button */}
-      <div className="text-white mt-4 flex items-center justify-end">
-        <button type="submit" className="rounded-md bg-blue-800 px-3 py-1 hover:bg-blue-700 cursor-pointer">
+      <div className="mt-8 flex justify-end">
+        <button type="submit" className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors duration-200">
           {workOrderToEdit ? "Update Job" : "Submit Job"}
         </button>
       </div>
