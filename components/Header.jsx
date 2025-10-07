@@ -9,7 +9,9 @@ const Header = () => {
   return (
     <header className="bg-[#5e17eb] p-5 px-10">
       <nav className="flex items-center justify-between text-white">
-        <h1 className="text-2xl font-bold font-serif">Jobs</h1>
+        <Link href="/">
+          <h1 className="text-2xl font-bold font-serif">Jobs</h1>
+        </Link>
         
         {/* Hamburger Button */}
         <div className="md:hidden">
