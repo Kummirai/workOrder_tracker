@@ -60,7 +60,11 @@ export default function WorkOrderDetailsPage({ params }) {
   };
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-2xl font-semibold text-gray-500">Loading...</p>
+      </div>
+    );
   }
 
   if (!workOrder) {
