@@ -184,9 +184,9 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-4xl mx-auto p-6 bg-white shadow-lg rounded-lg"
+      className="w-full max-w-6xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg"
     >
-      <h2 className="text-2xl font-bold mb-6 text-gray-800">Job Details</h2>
+      <h2 className="text-3xl font-bold mb-6 text-gray-800">Job Details</h2>
 
       <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
         <h3 className="text-xl font-semibold mb-4 text-gray-700">Job Address</h3>
@@ -272,7 +272,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddItem}
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
           >
             Add Item
           </button>
@@ -282,7 +282,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         {workItems.length === 0 ? (
           <p className="text-gray-500">No items added yet.</p>
         ) : (
-          <div className="overflow-x-auto bg-white rounded-md border border-gray-200">
+          <div className="overflow-x-auto lg:overflow-visible bg-white rounded-md border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100">
               <tr>
@@ -306,7 +306,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveItem(index)}
-                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200"
+                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -354,7 +354,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddMaterial}
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200"
+            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
           >
             Add Material
           </button>
@@ -364,7 +364,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         {materials.length === 0 ? (
           <p className="text-gray-500">No materials added yet.</p>
         ) : (
-          <div className="overflow-x-auto bg-white rounded-md border border-gray-200">
+          <div className="overflow-x-auto lg:overflow-visible bg-white rounded-md border border-gray-200">
             <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-100">
               <tr>
@@ -384,7 +384,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
                     <button
                       type="button"
                       onClick={() => handleRemoveMaterial(index)}
-                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200"
+                      className="text-red-600 hover:text-red-900 font-medium transition-colors duration-200 cursor-pointer"
                     >
                       Remove
                     </button>
@@ -399,7 +399,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       {/* Submit Button */}
       <div className="mt-8 flex justify-end">
-        <button type="submit" className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors duration-200">
+        <button type="submit" className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors duration-200 cursor-pointer">
           {workOrderToEdit ? "Update Job" : "Submit Job"}
         </button>
       </div>

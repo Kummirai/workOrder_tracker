@@ -62,7 +62,7 @@ const JobSummaryCard = ({ job, status, onDelete }) => {
         <Link href={`/work_orders/${job._id}/print`} target="_blank" rel="noopener noreferrer" className="px-3 py-1 bg-gray-500 text-white rounded-md hover:bg-gray-600 text-sm flex-grow text-center">
           Print
         </Link>
-        <button onClick={handleDelete} className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm flex-grow text-center">
+        <button onClick={handleDelete} className="px-3 py-1 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm flex-grow text-center cursor-pointer">
           Delete
         </button>
       </div>

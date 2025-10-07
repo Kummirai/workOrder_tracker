@@ -20,7 +20,11 @@ export default async function EditWorkOrderPage({ params: { id } }) {
   const workOrder = await getWorkOrder(id);
 
   if (!workOrder) {
-    return <p>Work order not found.</p>;
+    return (
+      <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+        <p className="text-2xl font-semibold text-red-500">Work order not found.</p>
+      </div>
+    );
   }
 
   return (
