@@ -1,13 +1,13 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import JobSummaryCard from "@/components/JobSummaryCard";
 import InputField from "@/components/InputField";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState('new');
+  const [activeTab, setActiveTab] = useState("new");
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -49,38 +49,51 @@ export default function Home() {
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
         <div className="flex flex-wrap justify-center mb-4 md:mb-0 gap-2">
           <button
-            className={`px-4 py-2 rounded-md ${activeTab === 'new' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActiveTab('new')}
+            className={`px-4 py-2 rounded-md ${
+              activeTab === "new" ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("new")}
           >
             New
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${activeTab === 'in-progress' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActiveTab('in-progress')}
+            className={`px-4 py-2 rounded-md ${
+              activeTab === "in-progress"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("in-progress")}
           >
             In Progress
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${activeTab === 'complete' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActiveTab('complete')}
+            className={`px-4 py-2 rounded-md ${
+              activeTab === "complete"
+                ? "bg-blue-500 text-white"
+                : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("complete")}
           >
             Complete
           </button>
           <button
-            className={`px-4 py-2 rounded-md ${activeTab === 'paid' ? 'bg-blue-500 text-white' : 'bg-gray-200'}`}
-            onClick={() => setActiveTab('paid')}
+            className={`px-4 py-2 rounded-md ${
+              activeTab === "paid" ? "bg-blue-500 text-white" : "bg-gray-200"
+            }`}
+            onClick={() => setActiveTab("paid")}
           >
             Paid
           </button>
         </div>
         <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
-          <h2 className="text-lg font-bold text-red-800">Outstanding: R {totalOutstandingAmount.toFixed(2)}</h2>
+          <h2 className="text-lg font-bold text-red-800">
+            Outstanding: R {totalOutstandingAmount.toFixed(2)}
+          </h2>
         </div>
       </div>
       <div>
-        {activeTab === 'new' && (
+        {activeTab === "new" && (
           <div>
-            <h2 className="text-2xl font-bold mb-5">New</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {newJobs.map((job) => (
                 <JobSummaryCard job={job} key={job._id} status="new" />
@@ -88,9 +101,8 @@ export default function Home() {
             </div>
           </div>
         )}
-        {activeTab === 'in-progress' && (
+        {activeTab === "in-progress" && (
           <div>
-            <h2 className="text-2xl font-bold mb-5">In Progress</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {inProgressJobs.map((job) => (
                 <JobSummaryCard job={job} key={job._id} status="in-progress" />
@@ -98,9 +110,8 @@ export default function Home() {
             </div>
           </div>
         )}
-        {activeTab === 'complete' && (
+        {activeTab === "complete" && (
           <div>
-            <h2 className="text-2xl font-bold mb-5">Complete</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {completeJobs.map((job) => (
                 <JobSummaryCard job={job} key={job._id} status="complete" />
@@ -108,7 +119,7 @@ export default function Home() {
             </div>
           </div>
         )}
-        {activeTab === 'paid' && (
+        {activeTab === "paid" && (
           <div>
             <h2 className="text-2xl font-bold mb-5">Paid</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
