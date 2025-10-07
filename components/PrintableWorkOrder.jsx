@@ -33,6 +33,30 @@ const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
           ))}
         </tbody>
       </table>
+
+      {workOrder.jobDetails.materials && workOrder.jobDetails.materials.length > 0 && (
+        <>
+            <h3 className="text-lg font-bold mb-2 mt-4">Materials</h3>
+            <table className="w-full border-collapse border border-gray-300">
+                <thead>
+                    <tr className="bg-gray-100">
+                        <th className="border border-gray-300 p-2">Material Code</th>
+                        <th className="border border-gray-300 p-2">Description</th>
+                        <th className="border border-gray-300 p-2">Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {workOrder.jobDetails.materials.map((material, index) => (
+                        <tr key={index}>
+                            <td className="border border-gray-300 p-2">{material.materialCode}</td>
+                            <td className="border border-gray-300 p-2">{material.description}</td>
+                            <td className="border border-gray-300 p-2">{material.quantity}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </>
+      )}
     </div>
   );
 });

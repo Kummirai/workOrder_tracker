@@ -116,40 +116,66 @@ export default function WorkOrderDetailsPage() {
           )}
         </div>
 
-        <h3 className="text-lg font-bold mb-2">Work Items</h3>
-        <div className="overflow-x-auto">
-          <table className="w-full border-collapse border border-gray-300 mb-4">
+        <h3 class="text-lg font-bold mb-2">Work Items</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full border-collapse border border-gray-300 mb-4">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Item #</th>
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Description</th>
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Unit</th>
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Quantity</th>
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Rate</th>
-              <th className="border border-gray-300 p-2 whitespace-nowrap">Cost</th>
+            <tr class="bg-gray-100">
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Item #</th>
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Description</th>
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Unit</th>
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Quantity</th>
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Rate</th>
+              <th class="border border-gray-300 p-2 whitespace-nowrap">Cost</th>
             </tr>
           </thead>
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index}>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.unit}</td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.quantity}</td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
-                <td className="border border-gray-300 p-2 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">{item.unit}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">{item.quantity}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
+                <td class="border border-gray-300 p-2 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
             </tbody>
           </table>
-        </div>        <div className="text-right">
-          <h4 className="text-xl font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
+        </div>
+        {workOrder.jobDetails.materials && workOrder.jobDetails.materials.length > 0 && (
+          <>
+            <h3 class="text-lg font-bold mb-2 mt-4">Materials</h3>
+            <div class="overflow-x-auto">
+              <table class="w-full border-collapse border border-gray-300 mb-4">
+                <thead>
+                  <tr class="bg-gray-100">
+                    <th class="border border-gray-300 p-2 whitespace-nowrap">Material Code</th>
+                    <th class="border border-gray-300 p-2 whitespace-nowrap">Description</th>
+                    <th class="border border-gray-300 p-2 whitespace-nowrap">Quantity</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {workOrder.jobDetails.materials.map((material, index) => (
+                    <tr key={index}>
+                      <td class="border border-gray-300 p-2 whitespace-nowrap">{material.materialCode}</td>
+                      <td class="border border-gray-300 p-2 whitespace-nowrap">{material.description}</td>
+                      <td class="border border-gray-300 p-2 whitespace-nowrap">{material.quantity}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </>
+        )}
+        <div class="text-right">
+          <h4 class="text-xl font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
           {!workOrder.paid && (
-            <p className="text-lg font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>
+            <p class="text-lg font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>
           )}
         </div>
         {!workOrder.paid && (
-          <div className="flex justify-end mt-4">
+          <div class="flex justify-end mt-4">
             <button
               onClick={handleMarkAsPaid}
               className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600"

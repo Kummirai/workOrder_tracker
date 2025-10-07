@@ -21,6 +21,11 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   const [workItems, setWorkItems] = useState([]);
   const [totalCost, setTotalCost] = useState(0);
 
+  const [materials, setMaterials] = useState([]);
+  const [materialCode, setMaterialCode] = useState("");
+  const [materialDescription, setMaterialDescription] = useState("");
+  const [materialQuantity, setMaterialQuantity] = useState(1);
+
   useEffect(() => {
     const fetchBoqItems = async () => {
       const response = await fetch("/api/boq_items");
@@ -40,6 +45,9 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       setStatus(workOrderToEdit.status);
       setDate(workOrderToEdit.date);
       setWorkItems(workOrderToEdit.jobDetails.workItems);
+      if (workOrderToEdit.jobDetails.materials) {
+        setMaterials(workOrderToEdit.jobDetails.materials);
+      }
     }
   }, [workOrderToEdit]);
 
@@ -75,6 +83,27 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
     setWorkItems(newWorkItems);
   };
 
+  const handleAddMaterial = () => {
+    if (!materialCode || !materialDescription || materialQuantity <= 0) {
+      return;
+    }
+    const newMaterial = {
+      materialCode,
+      description: materialDescription,
+      quantity: parseFloat(materialQuantity),
+    };
+    setMaterials([...materials, newMaterial]);
+    setMaterialCode("");
+    setMaterialDescription("");
+    setMaterialQuantity(1);
+  };
+
+  const handleRemoveMaterial = (index) => {
+    const newMaterials = [...materials];
+    newMaterials.splice(index, 1);
+    setMaterials(newMaterials);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const workOrder = {
@@ -88,6 +117,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       jobDetails: {
         workItems: workItems,
         cost: totalCost,
+        materials: materials,
       },
       status: status,
       date: date,
@@ -119,6 +149,10 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         setWorkItems([]);
         setSelectedBoqItem("");
         setQuantity(1);
+        setMaterials([]);
+        setMaterialCode("");
+        setMaterialDescription("");
+        setMaterialQuantity(1);
       }
       router.refresh();
     }
@@ -250,6 +284,83 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         <div className="mt-4 text-right">
           <h4 className="text-xl font-bold">Total Cost: R{totalCost.toFixed(2)}</h4>
         </div>
+      </div>
+
+      {/* Material Section */}
+      <div className="border border-gray-300 p-3 rounded-s mt-4">
+        <h3 className="text-lg font-bold mb-2">Materials</h3>
+        <InputField
+          fieldtype={"text"}
+          fieldLabel={"Material Code"}
+          htmlFor={"materialCode"}
+          placeholder={"Enter Material Code"}
+          handleChange={(e) => setMaterialCode(e.target.value)}
+          inputValue={materialCode}
+        />
+        <InputField
+          fieldtype={"text"}
+          fieldLabel={"Description"}
+          htmlFor={"materialDescription"}
+          placeholder={"Enter Description"}
+          handleChange={(e) => setMaterialDescription(e.target.value)}
+          inputValue={materialDescription}
+        />
+        <InputField
+          fieldtype={"number"}
+          fieldLabel={"Quantity"}
+          htmlFor={"materialQuantity"}
+          placeholder={"Quantity"}
+          handleChange={(e) => setMaterialQuantity(e.target.value)}
+          inputValue={materialQuantity}
+        />
+        <div className="text-white mt-4">
+          <button
+            type="button"
+            onClick={handleAddMaterial}
+            className="rounded-md bg-blue-800 px-3 py-1"
+          >
+            Add Material
+          </button>
+        </div>
+      </div>
+
+      {/* Added Materials List */}
+      <div className="border border-gray-300 p-3 rounded-s mt-4">
+        <h3 className="text-lg font-bold mb-2">Added Materials</h3>
+        {materials.length === 0 ? (
+          <p>No materials added yet.</p>
+        ) : (
+          <div className="overflow-x-auto">
+            <table className="w-full">
+            <thead>
+              <tr>
+                <th className="text-left whitespace-nowrap">Material Code</th>
+                <th className="text-left whitespace-nowrap">Description</th>
+                <th className="text-right whitespace-nowrap">Qty</th>
+                <th className="whitespace-nowrap"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {materials.map((material, index) => (
+                <tr key={index}>
+                  <td className="whitespace-nowrap">{material.materialCode}</td>
+                  <td className="whitespace-nowrap">{material.description}</td>
+                  <td className="text-right whitespace-nowrap">{material.quantity}</td>
+                  <td className="text-center whitespace-nowrap">
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveMaterial(index)}
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Remove
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          </div>
+        )}
       </div>
 
       {/* Submit Button */}
