@@ -67,7 +67,7 @@ export default function Home() {
   };
 
   return (
-    <main className="p-5">
+    <main className="p-4 md:p-8">
       <div className="mb-5">
         <InputField
           fieldtype={"text"}
