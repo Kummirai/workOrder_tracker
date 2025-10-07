@@ -49,6 +49,23 @@ export default function Home() {
     return sum + outstandingForJob;
   }, 0);
 
+  const renderJobCards = (jobList, statusType) => {
+    if (jobList.length === 0) {
+      return (
+        <div className="text-center py-10 text-gray-500 text-lg">
+          No work orders found for this category.
+        </div>
+      );
+    }
+    return (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        {jobList.map((job) => (
+          <JobSummaryCard job={job} key={job._id} status={statusType} onDelete={handleDelete} />
+        ))}
+      </div>
+    );
+  };
+
   return (
     <main className="p-5">
       <div className="mb-5">
@@ -107,42 +124,10 @@ export default function Home() {
         </div>
       </div>
       <div>
-        {activeTab === "new" && (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {newJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="new" onDelete={handleDelete} />
-              ))}
-            </div>
-          </div>
-        )}
-        {activeTab === "in-progress" && (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {inProgressJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="in-progress" onDelete={handleDelete} />
-              ))}
-            </div>
-          </div>
-        )}
-        {activeTab === "complete" && (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {completeJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="complete" onDelete={handleDelete} />
-              ))}
-            </div>
-          </div>
-        )}
-        {activeTab === "paid" && (
-          <div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {paidJobs.map((job) => (
-                <JobSummaryCard job={job} key={job._id} status="paid" onDelete={handleDelete} />
-              ))}
-            </div>
-          </div>
-        )}
+        {activeTab === "new" && renderJobCards(newJobs, "new")}
+        {activeTab === "in-progress" && renderJobCards(inProgressJobs, "in-progress")}
+        {activeTab === "complete" && renderJobCards(completeJobs, "complete")}
+        {activeTab === "paid" && renderJobCards(paidJobs, "paid")}
       </div>
     </main>
   );
