@@ -188,8 +188,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
     >
       <h2 className="text-3xl font-bold mb-6 text-gray-800">Job Details</h2>
 
-      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
-        <h3 className="text-xl font-semibold mb-4 text-gray-700">Job Address</h3>
+      <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <InputField
             fieldtype={"text"}
@@ -234,7 +233,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         </div>
       </section>
 
-      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+      <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <h3 className="text-xl font-semibold mb-4 text-gray-700">Work Items</h3>
         <InputField
           fieldtype={"text"}
@@ -272,7 +271,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddItem}
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
+            className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
           >
             Add Item
           </button>
@@ -322,7 +321,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
         </div>
       </section>
 
-      <section className="mb-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+      <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <h3 className="text-xl font-semibold mb-4 text-gray-700">Materials</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <InputField
@@ -354,7 +353,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           <button
             type="button"
             onClick={handleAddMaterial}
-            className="bg-blue-600 text-white px-5 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
+            className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
           >
             Add Material
           </button>
@@ -399,7 +398,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       {/* Submit Button */}
       <div className="mt-8 flex justify-end">
-        <button type="submit" className="bg-green-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors duration-200 cursor-pointer">
+        <button type="submit" className="bg-green-600 text-white px-6 py-2 rounded-md text-lg font-semibold hover:bg-green-700 transition-colors duration-200 cursor-pointer">
           {workOrderToEdit ? "Update Job" : "Submit Job"}
         </button>
       </div>

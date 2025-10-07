@@ -199,7 +199,7 @@ export default function WorkOrderDetailsPage() {
           <div class="flex justify-end mt-4">
             <button
               onClick={handleMarkAsPaid}
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 cursor-pointer"
+              className="bg-green-500 text-white px-3 py-1 rounded-md hover:bg-green-600 cursor-pointer"
             >
               Mark as Paid
             </button>

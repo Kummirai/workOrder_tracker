@@ -9,14 +9,14 @@ const Header = () => {
   const pathname = usePathname(); // Get current pathname
 
   const navLinkClasses = (href) => {
-    const baseClasses = "mx-2 my-1 md:my-0 px-4 py-2 rounded-md transition-colors duration-200";
+    const baseClasses = "mx-2 my-1 md:my-0 px-3 py-1 rounded-md transition-colors duration-200";
     const activeClasses = "bg-white text-[#5e17eb]";
     const inactiveClasses = "hover:bg-white hover:text-[#5e17eb]";
     return `${baseClasses} ${pathname === href ? activeClasses : inactiveClasses}`;
   };
 
   const mobileNavLinkClasses = (href) => {
-    const baseClasses = "my-1 px-4 py-2 rounded-md w-full text-center transition-colors duration-200";
+    const baseClasses = "my-1 px-3 py-1 rounded-md w-full text-center transition-colors duration-200";
     const activeClasses = "bg-white text-[#5e17eb]";
     const inactiveClasses = "hover:bg-white hover:text-[#5e17eb]";
     return `${baseClasses} ${pathname === href ? activeClasses : inactiveClasses}`;
