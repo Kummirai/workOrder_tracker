@@ -2,19 +2,26 @@
 
 import { useState, useEffect } from 'react';
 import JobSummaryCard from "@/components/JobSummaryCard";
+import InputField from "@/components/InputField";
 
 export default function Home() {
   const [jobs, setJobs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState('new');
 
   useEffect(() => {
     const fetchJobs = async () => {
-      const response = await fetch('/api/work_orders');
+      const response = await fetch(`/api/work_orders?search=${searchQuery}`);
       const data = await response.json();
       setJobs(data);
     };
-    fetchJobs();
-  }, []);
+
+    const debounceTimeout = setTimeout(() => {
+      fetchJobs();
+    }, 300);
+
+    return () => clearTimeout(debounceTimeout);
+  }, [searchQuery]);
 
   const newJobs = jobs.filter((job) => job.status === "new");
   const inProgressJobs = jobs.filter((job) => job.status === "in-progress");
@@ -29,6 +36,16 @@ export default function Home() {
 
   return (
     <main className="p-5">
+      <div className="mb-5">
+        <InputField
+          fieldtype={"text"}
+          fieldLabel={"Search by Work Order # or Street Name"}
+          htmlFor={"workOrderSearch"}
+          placeholder={"Enter search term..."}
+          handleChange={(e) => setSearchQuery(e.target.value)}
+          inputValue={searchQuery}
+        />
+      </div>
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
         <div className="flex flex-wrap justify-center mb-4 md:mb-0 gap-2">
           <button
