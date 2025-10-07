@@ -35,6 +35,20 @@ export default function WorkOrderDetailsPage({ params }) {
     }
   };
 
+  const handleUpdateStatus = async (newStatus) => {
+    const response = await fetch(`/api/work_orders/${params.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ status: newStatus }),
+    });
+
+    if (response.ok) {
+      setWorkOrder({ ...workOrder, status: newStatus });
+    }
+  };
+
   if (!workOrder) {
     return <p>Work order not found.</p>;
   }
@@ -63,6 +77,25 @@ export default function WorkOrderDetailsPage({ params }) {
         </div>
         <p className="mb-4"><strong>Date:</strong> {workOrder.date}</p>
         <p className="mb-4"><strong>Status:</strong> {workOrder.status}</p>
+
+        <div className="flex items-center gap-2 mb-4">
+          {workOrder.status !== 'in-progress' && workOrder.status !== 'paid' && (
+            <button
+              onClick={() => handleUpdateStatus('in-progress')}
+              className="bg-yellow-500 text-white px-3 py-1 rounded-md hover:bg-yellow-600 text-sm"
+            >
+              Mark In-Progress
+            </button>
+          )}
+          {workOrder.status !== 'complete' && workOrder.status !== 'paid' && (
+            <button
+              onClick={() => handleUpdateStatus('complete')}
+              className="bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 text-sm"
+            >
+              Mark Complete
+            </button>
+          )}
+        </div>
 
         <h3 className="text-lg font-bold mb-2">Work Items</h3>
         <div className="overflow-x-auto">
