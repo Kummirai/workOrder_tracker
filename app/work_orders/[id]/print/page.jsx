@@ -2,18 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import PrintableWorkOrder from '@/components/PrintableWorkOrder';
+import { useParams } from 'next/navigation';
 
-export default function PrintPage({ params }) {
+export default function PrintPage() {
+  const { id } = useParams();
   const [workOrder, setWorkOrder] = useState(null);
 
   useEffect(() => {
     const fetchWorkOrder = async () => {
-      const response = await fetch(`/api/work_orders/${params.id}`);
+      const response = await fetch(`/api/work_orders/${id}`);
       const data = await response.json();
       setWorkOrder(data);
     };
     fetchWorkOrder();
-  }, [params.id]);
+  }, [id]);
 
   useEffect(() => {
     if (workOrder) {

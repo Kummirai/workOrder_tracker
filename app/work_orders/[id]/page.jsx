@@ -1,19 +1,20 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useParams } from 'next/navigation';
 
-export default function WorkOrderDetailsPage({ params }) {
+export default function WorkOrderDetailsPage() {
+  const { id } = useParams();
   const [workOrder, setWorkOrder] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
-    if (params.id) {
+    if (id) {
       const fetchWorkOrder = async () => {
         setIsLoading(true);
         try {
-          const response = await fetch(`/api/work_orders/${params.id}`);
+          const response = await fetch(`/api/work_orders/${id}`);
           if (response.ok) {
             const data = await response.json();
             setWorkOrder(data);
@@ -28,10 +29,10 @@ export default function WorkOrderDetailsPage({ params }) {
       };
       fetchWorkOrder();
     }
-  }, [params.id]);
+  }, [id]);
 
   const handleMarkAsPaid = async () => {
-    const response = await fetch(`/api/work_orders/${params.id}`, {
+    const response = await fetch(`/api/work_orders/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +47,7 @@ export default function WorkOrderDetailsPage({ params }) {
   };
 
   const handleUpdateStatus = async (newStatus) => {
-    const response = await fetch(`/api/work_orders/${params.id}`, {
+    const response = await fetch(`/api/work_orders/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',

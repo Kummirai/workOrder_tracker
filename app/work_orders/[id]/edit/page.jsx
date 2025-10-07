@@ -16,8 +16,8 @@ async function getWorkOrder(id) {
   return workOrder;
 }
 
-export default async function EditWorkOrderPage({ params }) {
-  const workOrder = await getWorkOrder(params.id);
+export default async function EditWorkOrderPage({ params: { id } }) {
+  const workOrder = await getWorkOrder(id);
 
   if (!workOrder) {
     return <p>Work order not found.</p>;
