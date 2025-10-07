@@ -5,5 +5,5 @@ import { NextResponse } from 'next/server';
 export async function GET() {
   const { boqItemsCollection } = await getCollections();
   const boqItems = await boqItemsCollection.find({}).toArray();
-  return NextResponse.json(boqItems);
+  return NextResponse.json(JSON.parse(JSON.stringify(boqItems)));
 }

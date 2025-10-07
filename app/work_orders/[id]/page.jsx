@@ -69,6 +69,7 @@ export default function WorkOrderDetailsPage({ params }) {
           <table className="w-full border-collapse border border-gray-300 mb-4">
           <thead>
             <tr className="bg-gray-100">
+              <th className="border border-gray-300 p-2 whitespace-nowrap">Item #</th>
               <th className="border border-gray-300 p-2 whitespace-nowrap">Description</th>
               <th className="border border-gray-300 p-2 whitespace-nowrap">Unit</th>
               <th className="border border-gray-300 p-2 whitespace-nowrap">Quantity</th>
@@ -79,6 +80,7 @@ export default function WorkOrderDetailsPage({ params }) {
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index}>
+                <td className="border border-gray-300 p-2 whitespace-nowrap">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
                 <td className="border border-gray-300 p-2 whitespace-nowrap">{item.description}</td>
                 <td className="border border-gray-300 p-2 whitespace-nowrap">{item.unit}</td>
                 <td className="border border-gray-300 p-2 whitespace-nowrap">{item.quantity}</td>

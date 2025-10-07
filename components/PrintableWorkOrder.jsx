@@ -16,6 +16,7 @@ const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
       <table className="w-full border-collapse border border-gray-300">
         <thead>
           <tr className="bg-gray-100">
+            <th className="border border-gray-300 p-2">Item #</th>
             <th className="border border-gray-300 p-2">Description</th>
             <th className="border border-gray-300 p-2">Unit</th>
             <th className="border border-gray-300 p-2">Quantity</th>
@@ -24,6 +25,7 @@ const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
         <tbody>
           {workOrder.jobDetails.workItems.map((item, index) => (
             <tr key={index}>
+              <td className="border border-gray-300 p-2">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
               <td className="border border-gray-300 p-2">{item.description}</td>
               <td className="border border-gray-300 p-2">{item.unit}</td>
               <td className="border border-gray-300 p-2">{item.quantity}</td>

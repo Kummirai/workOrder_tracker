@@ -56,6 +56,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
     if (selectedItem) {
       const newItem = {
         boqId: selectedItem._id,
+        itemNumber: selectedItem.itemNumber,
         description: selectedItem.description,
         unit: selectedItem.unit,
         rate: selectedItem.rate,
@@ -215,6 +216,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
             <table className="w-full">
             <thead>
               <tr>
+                <th className="text-left whitespace-nowrap">Item #</th>
                 <th className="text-left whitespace-nowrap">Description</th>
                 <th className="text-right whitespace-nowrap">Qty</th>
                 <th className="text-right whitespace-nowrap">Rate</th>
@@ -225,6 +227,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
             <tbody>
               {workItems.map((item, index) => (
                 <tr key={index}>
+                  <td className="whitespace-nowrap">{item.itemNumber && (typeof item.itemNumber === 'object' ? item.itemNumber.$numberInt : item.itemNumber)}</td>
                   <td className="whitespace-nowrap">{item.description}</td>
                   <td className="text-right whitespace-nowrap">{item.quantity}</td>
                   <td className="text-right whitespace-nowrap">{item.rate.toFixed(2)}</td>
