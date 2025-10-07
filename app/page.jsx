@@ -121,7 +121,6 @@ export default function Home() {
         )}
         {activeTab === "paid" && (
           <div>
-            <h2 className="text-2xl font-bold mb-5">Paid</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {paidJobs.map((job) => (
                 <JobSummaryCard job={job} key={job._id} status="paid" />
