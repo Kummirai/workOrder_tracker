@@ -5,15 +5,25 @@ import { useRouter } from 'next/navigation';
 
 export default function WorkOrderDetailsPage({ params }) {
   const [workOrder, setWorkOrder] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
   useEffect(() => {
     if (params.id) {
       const fetchWorkOrder = async () => {
-        const response = await fetch(`/api/work_orders/${params.id}`);
-        if (response.ok) {
-          const data = await response.json();
-          setWorkOrder(data);
+        setIsLoading(true);
+        try {
+          const response = await fetch(`/api/work_orders/${params.id}`);
+          if (response.ok) {
+            const data = await response.json();
+            setWorkOrder(data);
+          } else {
+            setWorkOrder(null);
+          }
+        } catch (error) {
+          setWorkOrder(null);
+        } finally {
+          setIsLoading(false);
         }
       };
       fetchWorkOrder();
@@ -48,6 +58,10 @@ export default function WorkOrderDetailsPage({ params }) {
       setWorkOrder({ ...workOrder, status: newStatus });
     }
   };
+
+  if (isLoading) {
+    return <p>Loading...</p>;
+  }
 
   if (!workOrder) {
     return <p>Work order not found.</p>;
