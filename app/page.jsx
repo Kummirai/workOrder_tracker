@@ -81,40 +81,40 @@ export default function Home() {
       <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
         <div className="flex flex-wrap justify-center mb-4 md:mb-0 gap-2">
           <button
-            className={`px-3 py-1 rounded-md cursor-pointer ${
-              activeTab === "new" ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-200 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
+              activeTab === "new" ? "bg-[#5e17eb] text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("new")}
           >
-            New
+            New ({newJobs.length})
           </button>
           <button
-            className={`px-3 py-1 rounded-md cursor-pointer ${
+            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
               activeTab === "in-progress"
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-[#5e17eb] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("in-progress")}
           >
-            In Progress
+            In Progress ({inProgressJobs.length})
           </button>
           <button
-            className={`px-3 py-1 rounded-md cursor-pointer ${
+            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
               activeTab === "complete"
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-gray-200 hover:bg-gray-300"
+                ? "bg-[#5e17eb] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("complete")}
           >
-            Complete
+            Complete ({completeJobs.length})
           </button>
           <button
-            className={`px-3 py-1 rounded-md cursor-pointer ${
-              activeTab === "paid" ? "bg-blue-500 text-white hover:bg-blue-600" : "bg-gray-200 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
+              activeTab === "paid" ? "bg-[#5e17eb] text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("paid")}
           >
-            Paid
+            Paid ({paidJobs.length})
           </button>
         </div>
         <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
