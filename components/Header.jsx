@@ -26,7 +26,7 @@ const Header = () => {
     <header className="bg-[#5e17eb] p-5 px-10 shadow-lg">
       <nav className="flex items-center justify-between text-white">
         <Link href="/" className="flex items-center">
-          <h1 className="text-3xl font-extrabold font-serif tracking-wide">Jobs</h1>
+          <h1 className="font-extrabold font-serif tracking-wide">Jobs</h1>
         </Link>
         
         {/* Hamburger Button */}

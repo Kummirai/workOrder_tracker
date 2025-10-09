@@ -186,7 +186,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       onSubmit={handleSubmit}
       className="w-full max-w-6xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg"
     >
-      <h2 className="text-3xl font-bold mb-6 text-gray-800">Job Details</h2>
+      <h2 className="font-bold mb-6 text-gray-800">Job Details</h2>
 
       <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -234,7 +234,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       </section>
 
       <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
-        <h3 className="text-xl font-semibold mb-4 text-gray-700">Work Items</h3>
+        <h3 className="font-semibold mb-4 text-gray-700">Work Items</h3>
         <InputField
           fieldtype={"text"}
           fieldLabel={"Search Work Done"}
@@ -277,7 +277,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           </button>
         </div>
 
-        <h4 className="text-lg font-semibold mt-6 mb-3 text-gray-700">Added Work Items</h4>
+        <h4 className="font-semibold mt-6 mb-3 text-gray-700">Added Work Items</h4>
         {workItems.length === 0 ? (
           <p className="text-gray-500">No items added yet.</p>
         ) : (
@@ -317,12 +317,12 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
           </div>
         )}
         <div className="mt-4 text-right pr-4">
-          <h4 className="text-xl font-bold text-gray-800">Total Cost: R{totalCost.toFixed(2)}</h4>
+          <h4 className="font-bold text-gray-800">Total Cost: R{totalCost.toFixed(2)}</h4>
         </div>
       </section>
 
       <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
-        <h3 className="text-xl font-semibold mb-4 text-gray-700">Materials</h3>
+        <h3 className="font-semibold mb-4 text-gray-700">Materials</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <InputField
             fieldtype={"text"}

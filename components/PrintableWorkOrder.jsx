@@ -5,14 +5,14 @@ const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
 
   return (
     <div ref={ref} className="p-5">
-      <h1 className="text-2xl font-bold mb-5">Work Order: {workOrder.jobAddress.jobNumber}</h1>
+      <h1 className="font-bold mb-5">Work Order: {workOrder.jobAddress.jobNumber}</h1>
       <address className="not-italic mb-4">
         {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
         {workOrder.jobAddress.city}
       </address>
       <p className="mb-4"><strong>Date:</strong> {workOrder.date}</p>
       
-      <h3 className="text-lg font-bold mb-2">Work Items</h3>
+      <h3 className="font-bold mb-2">Work Items</h3>
       <div className="overflow-x-auto"> {/* Added overflow-x-auto */}
         <table className="w-full border-collapse border border-gray-300">
           <thead>

@@ -22,14 +22,14 @@ export default async function EditWorkOrderPage({ params: { id } }) {
   if (!workOrder) {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-        <p className="text-2xl font-semibold text-red-500">Work order not found.</p>
+        <p className="font-semibold text-red-500">Work order not found.</p>
       </div>
     );
   }
 
   return (
     <main className="p-5 flex flex-col items-center">
-      <h1 className="text-2xl font-bold mb-5">Edit Work Order</h1>
+      <h1 className="font-bold mb-5">Edit Work Order</h1>
       <div className="w-full max-w-4xl">
         <WorkOrderForm workOrderToEdit={workOrder} />
       </div>

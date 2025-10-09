@@ -30,7 +30,7 @@ const JobSummaryCard = ({ job, status, onDelete }) => {
     >
       <div className="flex justify-between items-start mb-2">
         <div>
-          <h2 className="text-xl font-bold text-gray-950">{job.jobAddress.jobNumber}</h2>
+          <h2 className="font-bold text-gray-950">{job.jobAddress.jobNumber}</h2>
           <address className="text-sm text-gray-700 not-italic">
             {job.jobAddress.streetNumber} {job.jobAddress.streetName}, {job.jobAddress.surburb} <br />
             {job.jobAddress.city}
@@ -49,7 +49,7 @@ const JobSummaryCard = ({ job, status, onDelete }) => {
 
       <div className="flex justify-between items-end mt-auto">
         <p className="text-sm font-semibold text-gray-900">{job.date}</p>
-        <h2 className="text-lg font-bold text-gray-950">R {job.jobDetails.cost.toFixed(2)}</h2>
+        <h2 className="font-bold text-gray-950">R {job.jobDetails.cost.toFixed(2)}</h2>
       </div>
 
       <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-gray-300">

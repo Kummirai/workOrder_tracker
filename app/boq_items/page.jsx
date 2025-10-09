@@ -24,7 +24,7 @@ export default function BoqItems() {
 
   return (
     <main className="p-5 max-w-6xl mx-auto">
-      <h1 className="text-2xl font-bold mb-5">BOQ Items</h1>
+      <h1 className="font-bold mb-5">BOQ Items</h1>
       <div className="mb-5">
         <InputField
           fieldtype={"text"}

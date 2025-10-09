@@ -52,7 +52,7 @@ export default function Home() {
   const renderJobCards = (jobList, statusType) => {
     if (jobList.length === 0) {
       return (
-        <div className="text-center py-10 text-gray-500 text-lg">
+        <div className="text-center py-10 text-gray-500">
           No work orders found for this category.
         </div>
       );
@@ -128,7 +128,7 @@ export default function Home() {
         </div>
         {activeTab === "paid" && (
           <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
-            <h2 className="text-lg font-bold text-red-800">
+            <h2 className="font-bold text-red-800">
               Outstanding: R {totalOutstandingAmount.toFixed(2)}
             </h2>
           </div>

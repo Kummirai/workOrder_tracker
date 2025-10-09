@@ -78,7 +78,7 @@ export default function WorkOrderDetailsPage() {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-        <p className="text-2xl font-semibold text-gray-700">Loading Work Order Details...</p>
+        <p className="font-semibold text-gray-700">Loading Work Order Details...</p>
       </div>
     );
   }
@@ -91,11 +91,11 @@ export default function WorkOrderDetailsPage() {
 
   return (
     <main className="p-5">
-      <h1 className="text-2xl font-bold mb-5">Work Order Details</h1>
+      <h1 className="font-bold mb-5">Work Order Details</h1>
       <div className="border p-4 rounded-lg border-gray-300">
         <div className="flex flex-col md:flex-row md:justify-between md:items-start">
           <div className="mb-4 md:mb-0">
-            <h2 className="text-xl font-bold mb-2">{workOrder.jobAddress.jobNumber}</h2>
+            <h2 className="font-bold mb-2">{workOrder.jobAddress.jobNumber}</h2>
             <address className="not-italic mb-4">
               {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
               {workOrder.jobAddress.city}
@@ -137,7 +137,7 @@ export default function WorkOrderDetailsPage() {
           </button>
         </div>
 
-        <h3 class="text-lg font-bold mb-2">Work Items</h3>
+        <h3 class="font-bold mb-2">Work Items</h3>
         <div class="overflow-x-auto">
           <table class="w-full border-collapse border border-gray-300 mb-4">
           <thead>
@@ -166,7 +166,7 @@ export default function WorkOrderDetailsPage() {
         </div>
         {workOrder.jobDetails.materials && workOrder.jobDetails.materials.length > 0 && (
           <>
-            <h3 class="text-lg font-bold mb-2 mt-4">Materials</h3>
+            <h3 class="font-bold mb-2 mt-4">Materials</h3>
             <div class="overflow-x-auto">
               <table class="w-full border-collapse border border-gray-300 mb-4">
                 <thead>
@@ -190,9 +190,9 @@ export default function WorkOrderDetailsPage() {
           </>
         )}
         <div class="text-right">
-          <h4 class="text-xl font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
+          <h4 class="font-bold">Total Cost: R {workOrder.jobDetails.cost.toFixed(2)}</h4>
           {!workOrder.paid && (
-            <p class="text-lg font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>
+            <p class="font-semibold text-red-600">Outstanding: R {outstandingPayment.toFixed(2)}</p>
           )}
         </div>
         {!workOrder.paid && (
