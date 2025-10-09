@@ -184,7 +184,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-6xl mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg"
+      className="w-full border p-4 rounded-lg border-gray-300"
     >
       <h2 className="font-bold mb-6 text-gray-800">Job Details</h2>
 

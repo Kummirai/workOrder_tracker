@@ -28,9 +28,9 @@ export default async function EditWorkOrderPage({ params: { id } }) {
   }
 
   return (
-    <main className="p-5 flex flex-col items-center">
-      <h1 className="font-bold mb-5">Edit Work Order</h1>
-      <div className="w-full max-w-4xl">
+    <main className="p-5">
+      <div className="max-w-6xl mx-auto">
+        <h1 className="font-bold mb-5">Edit Work Order</h1>
         <WorkOrderForm workOrderToEdit={workOrder} />
       </div>
     </main>
