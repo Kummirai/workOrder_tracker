@@ -19,3 +19,7 @@ h3 {
 h4 {
   @apply text-base sm:text-lg;
 }
+
+button {
+  @apply whitespace-nowrap;
+}
