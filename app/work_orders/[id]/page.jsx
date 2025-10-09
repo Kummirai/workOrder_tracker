@@ -112,7 +112,7 @@ export default function WorkOrderDetailsPage() {
         <p className="mb-4"><strong>Date:</strong> {workOrder.date}</p>
         <p className="mb-4"><strong>Status:</strong> {workOrder.status}</p>
 
-        <div className="flex items-center gap-2 mb-4">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 mb-4">
           {workOrder.status !== 'in-progress' && workOrder.status !== 'paid' && (
             <button
               onClick={() => handleUpdateStatus('in-progress')}
