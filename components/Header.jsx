@@ -16,17 +16,17 @@ const Header = () => {
   };
 
   const mobileNavLinkClasses = (href) => {
-    const baseClasses = "my-1 px-3 py-1 rounded-md w-full text-center transition-colors duration-200";
+    const baseClasses = "my-1 px-3 py-1 rounded-md w-full text-center transition-colors duration-200 text-base font-medium";
     const activeClasses = "bg-white text-[#5e17eb]";
     const inactiveClasses = "hover:bg-white hover:text-[#5e17eb]";
     return `${baseClasses} ${pathname === href ? activeClasses : inactiveClasses}`;
   };
 
   return (
-    <header className="bg-[#5e17eb] p-5 px-10 shadow-lg">
+    <header className="bg-[#5e17eb] p-4 sm:p-5 sm:px-10 shadow-lg">
       <nav className="flex items-center justify-between text-white">
         <Link href="/" className="flex items-center">
-          <h1 className="font-extrabold font-serif tracking-wide">Jobs</h1>
+          <p className="font-extrabold font-serif tracking-wide text-xl sm:text-2xl">Jobs</p>
         </Link>
         
         {/* Hamburger Button */}
