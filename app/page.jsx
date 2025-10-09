@@ -27,7 +27,7 @@ export default function Home() {
 
   const handleDelete = async (id) => {
     const response = await fetch(`/api/work_orders/${id}`, {
-      method: 'DELETE',
+      method: "DELETE",
     });
 
     if (response.ok) {
@@ -60,7 +60,12 @@ export default function Home() {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {jobList.map((job) => (
-          <JobSummaryCard job={job} key={job._id} status={statusType} onDelete={handleDelete} />
+          <JobSummaryCard
+            job={job}
+            key={job._id}
+            status={statusType}
+            onDelete={handleDelete}
+          />
         ))}
       </div>
     );
@@ -78,18 +83,20 @@ export default function Home() {
           inputValue={searchQuery}
         />
       </div>
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
+      <div className="flex flex-col md:flex-row justify-between md:items-center mb-5">
         <div className="flex flex-wrap justify-center mb-4 md:mb-0 gap-2">
           <button
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
-              activeTab === "new" ? "bg-[#5e17eb] text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
+              activeTab === "new"
+                ? "bg-[#5e17eb] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("new")}
           >
             New ({newJobs.length})
           </button>
           <button
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
+            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
               activeTab === "in-progress"
                 ? "bg-[#5e17eb] text-white"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -99,7 +106,7 @@ export default function Home() {
             In Progress ({inProgressJobs.length})
           </button>
           <button
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
+            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
               activeTab === "complete"
                 ? "bg-[#5e17eb] text-white"
                 : "bg-gray-200 text-gray-800 hover:bg-gray-300"
@@ -109,8 +116,10 @@ export default function Home() {
             Complete ({completeJobs.length})
           </button>
           <button
-            className={`px-4 py-2 rounded-full font-semibold transition-all duration-200 ${
-              activeTab === "paid" ? "bg-[#5e17eb] text-white" : "bg-gray-200 text-gray-800 hover:bg-gray-300"
+            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
+              activeTab === "paid"
+                ? "bg-[#5e17eb] text-white"
+                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
             }`}
             onClick={() => setActiveTab("paid")}
           >
@@ -125,7 +134,8 @@ export default function Home() {
       </div>
       <div>
         {activeTab === "new" && renderJobCards(newJobs, "new")}
-        {activeTab === "in-progress" && renderJobCards(inProgressJobs, "in-progress")}
+        {activeTab === "in-progress" &&
+          renderJobCards(inProgressJobs, "in-progress")}
         {activeTab === "complete" && renderJobCards(completeJobs, "complete")}
         {activeTab === "paid" && renderJobCards(paidJobs, "paid")}
       </div>
