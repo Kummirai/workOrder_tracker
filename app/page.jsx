@@ -15,13 +15,20 @@ export default function LoginPage() {
     }
   }, [router]);
 
-  const handlePinSubmit = (e) => {
+  const handlePinSubmit = async (e) => {
     e.preventDefault();
-    if (pin === "1234") { // Hardcoded PIN
-      sessionStorage.setItem("isAuthenticated", "true");
-      router.push("/dashboard");
-    } else {
-      alert("Incorrect PIN");
+    try {
+      const response = await fetch("/api/pin");
+      const { pin: correctPin } = await response.json();
+      if (pin === correctPin) {
+        sessionStorage.setItem("isAuthenticated", "true");
+        router.push("/dashboard");
+      } else {
+        alert("Incorrect PIN");
+        setPin("");
+      }
+    } catch (error) {
+      alert("Error verifying PIN. Please try again.");
       setPin("");
     }
   };

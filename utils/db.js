@@ -30,5 +30,6 @@ export async function getCollections() {
   const { db } = await connectToDatabase();
   const boqItemsCollection = db.collection("boq_items");
   const workOrdersCollection = db.collection("work_orders");
-  return { boqItemsCollection, workOrdersCollection };
+  const appPinCollection = db.collection("app-pin");
+  return { boqItemsCollection, workOrdersCollection, appPinCollection };
 }

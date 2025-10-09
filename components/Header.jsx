@@ -78,6 +78,9 @@ const Header = () => {
           <Link href={'/boq_items'} className={navLinkClasses('/boq_items')}>
             BOQ Items
           </Link>
+          <Link href={'/settings'} className={navLinkClasses('/settings')}>
+            Settings
+          </Link>
           <button
             onClick={handleSignOut}
             className={`${navLinkClasses('/signout')} cursor-pointer`}
@@ -111,6 +114,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               BOQ Items
+            </Link>
+            <Link
+              href={'/settings'}
+              className={mobileNavLinkClasses('/settings')}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Settings
             </Link>
             <button
               onClick={() => {
