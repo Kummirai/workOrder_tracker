@@ -1,145 +1,53 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import JobSummaryCard from "@/components/JobSummaryCard";
+import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
-import { useRouter } from "next/navigation"; // Import useRouter
 
-export default function Home() {
-  const [jobs, setJobs] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [activeTab, setActiveTab] = useState("new");
-  const router = useRouter(); // Initialize useRouter
+export default function LoginPage() {
+  const [pin, setPin] = useState("");
+  const router = useRouter();
 
   useEffect(() => {
-    const fetchJobs = async () => {
-      const response = await fetch(`/api/work_orders?search=${searchQuery}`);
-      const data = await response.json();
-      setJobs(data);
-    };
+    const authStatus = sessionStorage.getItem("isAuthenticated") === "true";
+    if (authStatus) {
+      router.replace("/dashboard");
+    }
+  }, [router]);
 
-    const debounceTimeout = setTimeout(() => {
-      fetchJobs();
-    }, 300);
-
-    return () => clearTimeout(debounceTimeout);
-  }, [searchQuery]);
-
-  const handleDelete = async (id) => {
-    const response = await fetch(`/api/work_orders/${id}`, {
-      method: "DELETE",
-    });
-
-    if (response.ok) {
-      setJobs(jobs.filter((job) => job._id !== id));
-      router.refresh(); // Refresh the page to reflect changes
+  const handlePinSubmit = (e) => {
+    e.preventDefault();
+    if (pin === "1234") { // Hardcoded PIN
+      sessionStorage.setItem("isAuthenticated", "true");
+      router.push("/dashboard");
     } else {
-      console.error("Failed to delete work order");
+      alert("Incorrect PIN");
+      setPin("");
     }
-  };
-
-  const newJobs = jobs.filter((job) => job.status === "new");
-  const inProgressJobs = jobs.filter((job) => job.status === "in-progress");
-  const completeJobs = jobs.filter((job) => job.status === "complete");
-  const paidJobs = jobs.filter((job) => job.paid);
-  const unpaidJobs = jobs.filter((job) => !job.paid);
-
-  const totalOutstandingAmount = unpaidJobs.reduce((sum, job) => {
-    const outstandingForJob = (job.jobDetails.cost / 2) * 0.08;
-    return sum + outstandingForJob;
-  }, 0);
-
-  const renderJobCards = (jobList, statusType) => {
-    if (jobList.length === 0) {
-      return (
-        <div className="text-center py-10 text-gray-500">
-          No work orders found for this category.
-        </div>
-      );
-    }
-    return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {jobList.map((job) => (
-          <JobSummaryCard
-            job={job}
-            key={job._id}
-            status={statusType}
-            onDelete={handleDelete}
-          />
-        ))}
-      </div>
-    );
   };
 
   return (
-    <main className="p-4 md:p-8">
-      <div className="mb-5">
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Search by Work Order # or Street Name"}
-          htmlFor={"workOrderSearch"}
-          placeholder={"Enter search term..."}
-          handleChange={(e) => setSearchQuery(e.target.value)}
-          inputValue={searchQuery}
-        />
-      </div>
-      <div className="flex flex-col md:flex-row md:justify-between md:items-center mb-5">
-        <div className="flex flex-wrap justify-between mb-4 md:mb-0 gap-2">
-          <button
-            className={`px-4 py-2 rounded-xl flex-1 font-semibold transition-all duration-200 ${
-              activeTab === "new"
-                ? "bg-[#5e17eb] text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-            }`}
-            onClick={() => setActiveTab("new")}
-          >
-            New ({newJobs.length})
-          </button>
-          <button
-            className={`px-4 py-2 rounded-xl font-semibold transition-all duration-200 ${
-              activeTab === "in-progress"
-                ? "bg-[#5e17eb] text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-            }`}
-            onClick={() => setActiveTab("in-progress")}
-          >
-            In Progress ({inProgressJobs.length})
-          </button>
-          <button
-            className={`px-4 py-2 rounded-xl  font-semibold transition-all duration-200 ${
-              activeTab === "complete"
-                ? "bg-[#5e17eb] text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-            }`}
-            onClick={() => setActiveTab("complete")}
-          >
-            Complete ({completeJobs.length})
-          </button>
-          <button
-            className={`px-4 py-2 rounded-xl flex-1 font-semibold transition-all duration-200 ${
-              activeTab === "paid"
-                ? "bg-[#5e17eb] text-white"
-                : "bg-gray-200 text-gray-800 hover:bg-gray-300"
-            }`}
-            onClick={() => setActiveTab("paid")}
-          >
-            Paid ({paidJobs.length})
-          </button>
-        </div>
-        {activeTab === "paid" && (
-          <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
-            <h2 className="font-bold text-red-800">
-              Outstanding: R {totalOutstandingAmount.toFixed(2)}
-            </h2>
+    <main className="flex justify-center items-center h-screen bg-gray-100">
+      <div className="w-full max-w-xs">
+        <form onSubmit={handlePinSubmit} className="bg-white shadow-md rounded-lg px-8 pt-6 pb-8 mb-4">
+          <div className="mb-6">
+            <h1 className="text-2xl font-bold text-center text-gray-800">Welcome</h1>
+            <p className="text-center text-gray-500">Enter your PIN to continue</p>
           </div>
-        )}
-      </div>
-      <div>
-        {activeTab === "new" && renderJobCards(newJobs, "new")}
-        {activeTab === "in-progress" &&
-          renderJobCards(inProgressJobs, "in-progress")}
-        {activeTab === "complete" && renderJobCards(completeJobs, "complete")}
-        {activeTab === "paid" && renderJobCards(paidJobs, "paid")}
+          <InputField
+            fieldtype="password"
+            fieldLabel="PIN"
+            htmlFor="pin"
+            placeholder="****"
+            handleChange={(e) => setPin(e.target.value)}
+            inputValue={pin}
+          />
+          <div className="flex items-center justify-between mt-6">
+            <button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md focus:outline-none focus:shadow-outline">
+              Unlock
+            </button>
+          </div>
+        </form>
       </div>
     </main>
   );
