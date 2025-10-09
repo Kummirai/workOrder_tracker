@@ -184,7 +184,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="w-full max-w-6xl mx-auto p-4 sm:p-6 bg-white shadow-lg rounded-lg"
+      className="w-full max-w-6xl mx-auto p-2 sm:p-6 bg-white shadow-lg rounded-lg"
     >
       <h2 className="font-bold mb-6 text-gray-800">Job Details</h2>
 
@@ -235,46 +235,52 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <h3 className="font-semibold mb-4 text-gray-700">Work Items</h3>
-        <InputField
-          fieldtype={"text"}
-          fieldLabel={"Search Work Done"}
-          htmlFor={"boqSearch"}
-          placeholder={"Enter description to search..."}
-          handleChange={(e) => {
-              setBoqSearchQuery(e.target.value);
-              setSelectedBoqItem("");
-          }}
-          inputValue={boqSearchQuery}
-        />
-        {filteredBoqItems.length > 0 && (
-          <ul className="border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto bg-white z-10 relative">
-            {filteredBoqItems.map(item => (
-              <li 
-                key={item._id} 
-                className="p-2 hover:bg-blue-100 cursor-pointer"
-                onClick={() => handleSelectBoqItem(item)}
-              >
-                {item.description}
-              </li>
-            ))}
-          </ul>
-        )}
-        <InputField
-          fieldtype={"number"}
-          fieldLabel={"Quantity"}
-          htmlFor={"quantity"}
-          placeholder={"Quantity"}
-          handleChange={(e) => setQuantity(e.target.value)}
-          inputValue={quantity}
-        />
-        <div className="mt-4 text-right">
-          <button
-            type="button"
-            onClick={handleAddItem}
-            className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
-          >
-            Add Item
-          </button>
+        <div className="grid grid-cols-1 sm:grid-cols-4 items-end gap-4">
+          <div className="sm:col-span-2 relative">
+            <InputField
+              fieldtype={"text"}
+              fieldLabel={"Search Work Done"}
+              htmlFor={"boqSearch"}
+              placeholder={"Enter description to search..."}
+              handleChange={(e) => {
+                  setBoqSearchQuery(e.target.value);
+                  setSelectedBoqItem("");
+              }}
+              inputValue={boqSearchQuery}
+            />
+            {filteredBoqItems.length > 0 && (
+              <ul className="border border-gray-300 rounded-md mt-1 max-h-60 overflow-y-auto bg-white z-10 absolute w-full">
+                {filteredBoqItems.map(item => (
+                  <li 
+                    key={item._id} 
+                    className="p-2 hover:bg-blue-100 cursor-pointer"
+                    onClick={() => handleSelectBoqItem(item)}
+                  >
+                    {item.description}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+          <div>
+            <InputField
+              fieldtype={"number"}
+              fieldLabel={"Quantity"}
+              htmlFor={"quantity"}
+              placeholder={"Quantity"}
+              handleChange={(e) => setQuantity(e.target.value)}
+              inputValue={quantity}
+            />
+          </div>
+          <div>
+            <button
+              type="button"
+              onClick={handleAddItem}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer w-full"
+            >
+              Add Item
+            </button>
+          </div>
         </div>
 
         <h4 className="font-semibold mt-6 mb-3 text-gray-700">Added Work Items</h4>
@@ -323,7 +329,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
       <section className="mb-8 p-4 sm:p-6 border border-gray-200 rounded-lg bg-gray-50">
         <h3 className="font-semibold mb-4 text-gray-700">Materials</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 items-end gap-4">
           <InputField
             fieldtype={"text"}
             fieldLabel={"Material Code"}
@@ -348,15 +354,15 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
             handleChange={(e) => setMaterialQuantity(e.target.value)}
             inputValue={materialQuantity}
           />
-        </div>
-        <div className="mt-4 text-right">
-          <button
-            type="button"
-            onClick={handleAddMaterial}
-            className="bg-blue-600 text-white px-4 py-1 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
-          >
-            Add Material
-          </button>
+          <div>
+            <button
+              type="button"
+              onClick={handleAddMaterial}
+              className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer w-full"
+            >
+              Add Material
+            </button>
+          </div>
         </div>
 
         <h4 className="text-lg font-semibold mt-6 mb-3 text-gray-700">Added Materials</h4>
