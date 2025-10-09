@@ -21,7 +21,7 @@ export default function LoginPage() {
       const response = await fetch("/api/pin");
       const { pin: correctPin } = await response.json();
       if (pin === correctPin) {
-        sessionStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("isAuthenticated", "true");
         router.push("/dashboard");
       } else {
         alert("Incorrect PIN");

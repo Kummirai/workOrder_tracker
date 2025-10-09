@@ -9,7 +9,7 @@ export default function ProtectedLayout({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    const authStatus = sessionStorage.getItem("isAuthenticated") === "true";
+    const authStatus = localStorage.getItem("isAuthenticated") === "true";
     if (!authStatus) {
       router.replace("/"); // Redirect to login page
     } else {

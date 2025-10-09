@@ -10,7 +10,7 @@ const Header = () => {
   const router = useRouter(); // Initialize useRouter
 
   const handleSignOut = () => {
-    sessionStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('isAuthenticated');
     router.push('/');
   };
 
@@ -42,7 +42,7 @@ const Header = () => {
             className='text-white hover:text-gray-300 focus:outline-none'
           >
             <svg
-              className='w-8 h-8'
+              className={`w-8 h-8 transition-transform duration-300 ${isMenuOpen ? 'rotate-90' : ''}`}
               fill='none'
               stroke='currentColor'
               viewBox='0 0 24 24'
