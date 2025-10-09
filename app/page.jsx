@@ -126,11 +126,13 @@ export default function Home() {
             Paid ({paidJobs.length})
           </button>
         </div>
-        <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
-          <h2 className="text-lg font-bold text-red-800">
-            Outstanding: R {totalOutstandingAmount.toFixed(2)}
-          </h2>
-        </div>
+        {activeTab === "paid" && (
+          <div className="p-2 border rounded-lg bg-red-100 border-red-400 w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
+            <h2 className="text-lg font-bold text-red-800">
+              Outstanding: R {totalOutstandingAmount.toFixed(2)}
+            </h2>
+          </div>
+        )}
       </div>
       <div>
         {activeTab === "new" && renderJobCards(newJobs, "new")}
