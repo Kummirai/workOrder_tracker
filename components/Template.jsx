@@ -119,7 +119,7 @@ const Invoice = ({ workOrder }) => {
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
               <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Code</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Description</th>
               <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Quantity</th>
               <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Unit Price</th>
               <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Tax</th>
@@ -130,7 +130,7 @@ const Invoice = ({ workOrder }) => {
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
                 <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
-                <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.description}</td>
                 <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
                 <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
                 <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
