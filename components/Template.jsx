@@ -4,7 +4,7 @@ const Invoice = () => {
       {/* Header Section */}
       <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
-        <div>
+        <div className="flex items-start">
           <div className="flex items-center mb-4">
             {/* Logo Image - Simple version */}
             <img
