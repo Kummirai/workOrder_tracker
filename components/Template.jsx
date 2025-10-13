@@ -10,14 +10,8 @@ const Invoice = () => {
             <img
               src="/Picture1.png"
               alt="TLOPO Construction Logo"
-              className="w-16 h-16 mr-4 object-contain"
+              className="w-50 h-25 mr-4 object-contain"
             />
-            {/* <div>
-              <div className="font-bold text-lg">TLOPO</div>
-              <div className="text-sm font-semibold">
-                CONSTRUCTION & GENERAL SERVICES
-              </div>
-            </div> */}
           </div>
           <div className="space-y-1 text-sm">
             <div>
