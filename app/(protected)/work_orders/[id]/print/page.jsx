@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import jsPDF from 'jspdf';
-import 'jspdf-autotable';
+import autoTable from 'jspdf-autotable';
 
 export default function PrintPage() {
   const { id } = useParams();
@@ -59,7 +59,7 @@ export default function PrintPage() {
       doc.text(workOrder.jobAddress.city, 15, 68);
 
       // Add work items table
-      doc.autoTable({
+      autoTable(doc, {
         startY: 75,
         head: [['Item #', 'Description', 'Unit', 'Quantity', 'Rate', 'Cost']],
         body: workOrder.jobDetails.workItems.map(item => [
@@ -76,7 +76,7 @@ export default function PrintPage() {
 
       // Add materials table
       if (workOrder.jobDetails.materials && workOrder.jobDetails.materials.length > 0) {
-        doc.autoTable({
+        autoTable(doc, {
           startY: finalY + 10,
           head: [['Material Code', 'Description', 'Quantity']],
           body: workOrder.jobDetails.materials.map(material => [
