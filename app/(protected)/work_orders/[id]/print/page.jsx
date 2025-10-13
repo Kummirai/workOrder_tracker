@@ -42,9 +42,7 @@ export default function PrintPage() {
           Print
         </button>
       </div>
-      <div ref={componentRef}>
-        <Invoice workOrder={workOrder} />
-      </div>
+      <Invoice ref={componentRef} workOrder={workOrder} />
     </main>
   );
 }
