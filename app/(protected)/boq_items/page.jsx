@@ -3,6 +3,7 @@
 
 import { useState, useEffect } from "react";
 import InputField from "@/components/InputField";
+import Template from "@/components/Template";
 
 export default function BoqItems() {
   const [boqItems, setBoqItems] = useState([]);
@@ -61,6 +62,7 @@ export default function BoqItems() {
         </tbody>
       </table>
       </div>
+      <Template />
     </main>
   );
 }
