@@ -204,7 +204,7 @@ const Invoice = () => {
         <div className="font-bold text-lg mb-4 text-center">
           BANKING DETAILS
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-sm text-center">
+        <div className="grid grid-cols-1  gap-4 text-sm text-start">
           <div>
             <div className="font-semibold">Bank Name:</div>
             <div>First National Bank</div>
