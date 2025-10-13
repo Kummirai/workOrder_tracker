@@ -1,3 +1,5 @@
+import { format } from 'date-fns';
+
 const Invoice = ({ workOrder }) => {
   if (!workOrder) {
     return null; // Or a loading state
@@ -6,18 +8,6 @@ const Invoice = ({ workOrder }) => {
   const subTotal = workOrder.jobDetails.cost;
   const tax = subTotal * 0.15;
   const total = subTotal + tax;
-
-  const formatDate = (dateString) => {
-    if (!dateString) return '';
-    const date = new Date(dateString);
-    const day = date.getDate();
-    const month = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-    ][date.getMonth()];
-    const year = date.getFullYear();
-    return `${day} ${month} ${year}`;
-  };
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white border border-gray-300">
@@ -48,7 +38,7 @@ const Invoice = ({ workOrder }) => {
         <div className="text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
-            <div className="font-semibold">{formatDate(workOrder.date)}</div>
+            <div className="font-semibold">{format(new Date(workOrder.date), 'dd MMM yyyy')}</div>
           </div>
           <div>
             <div className="font-semibold">Tax Invoice no: TLCP/{workOrder.jobAddress.jobNumber}</div>
@@ -139,12 +129,12 @@ const Invoice = ({ workOrder }) => {
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
-                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
-                <td className="py-3 px-4 border-r border-gray-300">{item.description}</td>
-                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
-                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
-                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
-                <td className="py-3 px-4 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
+                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-1 px-4 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
 

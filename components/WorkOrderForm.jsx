@@ -12,7 +12,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
   const [surburb, setSurburb] = useState("");
   const [city, setCity] = useState("");
   const [status, setStatus] = useState("new");
-  const [date, setDate] = useState(new Date().toLocaleDateString());
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
   
   const [boqItems, setBoqItems] = useState([]);
   const [selectedBoqItem, setSelectedBoqItem] = useState("");
@@ -46,7 +46,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       setSurburb(workOrderToEdit.jobAddress.surburb);
       setCity(workOrderToEdit.jobAddress.city);
       setStatus(workOrderToEdit.status);
-      setDate(workOrderToEdit.date || new Date().toLocaleDateString());
+      setDate(workOrderToEdit.date ? new Date(workOrderToEdit.date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10));
       setWorkItems(workOrderToEdit.jobDetails.workItems);
       if (workOrderToEdit.jobDetails.materials) {
         setMaterials(workOrderToEdit.jobDetails.materials);
@@ -229,6 +229,14 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
             placeholder={"Enter City"}
             handleChange={(e) => setCity(e.target.value)}
             inputValue={city}
+          />
+           <InputField
+            fieldtype={"date"}
+            fieldLabel={"Date"}
+            htmlFor={"date"}
+            placeholder={"Enter Date"}
+            handleChange={(e) => setDate(e.target.value)}
+            inputValue={date}
           />
         </div>
       </section>

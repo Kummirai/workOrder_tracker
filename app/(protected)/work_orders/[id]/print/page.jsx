@@ -2,15 +2,17 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
+import { useReactToPrint } from 'react-to-print';
 import Invoice from '@/components/Template.jsx';
 
 export default function PrintPage() {
   const { id } = useParams();
   const [workOrder, setWorkOrder] = useState(null);
-  const [isGenerating, setIsGenerating] = useState(false);
-  const invoiceRef = useRef();
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     const fetchWorkOrder = async () => {
@@ -20,31 +22,6 @@ export default function PrintPage() {
     };
     fetchWorkOrder();
   }, [id]);
-
-  const generateAndDownloadPdf = async () => {
-    setIsGenerating(true);
-    const element = invoiceRef.current;
-    if (!element) {
-      setIsGenerating(false);
-      return;
-    }
-
-    try {
-      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
-      const imgData = canvas.toDataURL('image/png');
-
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${workOrder.jobAddress.jobNumber}.pdf`);
-    } catch (error) {
-      console.error("Error generating PDF:", error);
-    } finally {
-      setIsGenerating(false);
-    }
-  };
 
   if (!workOrder) {
     return (
@@ -59,14 +36,13 @@ export default function PrintPage() {
     <main className="p-5">
       <div className="mb-4">
         <button
-          onClick={generateAndDownloadPdf}
-          disabled={isGenerating}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer disabled:bg-gray-400"
+          onClick={handlePrint}
+          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer"
         >
-          {isGenerating ? 'Generating PDF...' : 'Download PDF'}
+          Print
         </button>
       </div>
-      <div ref={invoiceRef}>
+      <div ref={componentRef}>
         <Invoice workOrder={workOrder} />
       </div>
     </main>
