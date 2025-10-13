@@ -1,201 +1,224 @@
 const Invoice = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white shadow-lg">
-      {/* Header Section with Logo */}
-      <div className="grid grid-cols-3 gap-8 mb-8 items-start">
-        {/* Logo Section */}
-        <div className="flex items-center justify-start">
-          <div className="w-32 h-32 bg-gray-200 border border-gray-300 flex items-center justify-center">
-            <img 
-              src="/logo.png" 
-              alt="Company Logo" 
-              className="max-w-full max-h-full object-contain"
-              onError={(e) => {
-                e.target.style.display = 'none';
-                e.target.nextSibling.style.display = 'block';
-              }}
-            />
-            <div className="hidden text-center text-gray-500 text-sm">
-              Company Logo
+    <div className="max-w-4xl mx-auto p-6 bg-white border-2 border-gray-800">
+      {/* Header Section */}
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b-2 border-gray-800 pb-4">
+        {/* Left Column - Company Details */}
+        <div>
+          <div className="flex items-center mb-4">
+            {/* Logo Placeholder */}
+            <div className="w-16 h-16 bg-gray-200 border border-gray-400 mr-4 flex items-center justify-center">
+              <span className="text-xs text-gray-500 text-center">LOGO</span>
+            </div>
+            <div>
+              <div className="font-bold text-lg">TLOPO</div>
+              <div className="text-sm font-semibold">
+                CONSTRUCTION & GENERAL SERVICES
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-1 text-sm">
+            <div>
+              <span className="font-semibold">Reg No</span>
+              <span className="ml-2">2002/098222/23</span>
+            </div>
+            <div>
+              <span className="font-semibold">Val Reg</span>
+              <span className="ml-2">4800225080</span>
             </div>
           </div>
         </div>
-        
-        {/* Company Details */}
-        <div>
-          <div className="mb-4">
-            <div className="text-sm text-gray-600">Reg No</div>
-            <div className="font-semibold">2002/098222/23</div>
-          </div>
-          <div className="mb-4">
-            <div className="text-sm text-gray-600">Vat Reg</div>
-            <div className="font-semibold">4800225080</div>
-          </div>
-        </div>
-        
-        {/* Invoice Details */}
-        <div className="text-right">
-          <div className="text-xl font-bold mb-2">TAX INVOICE</div>
+
+        {/* Right Column - Invoice Details */}
+        <div className="text-right border-2 border-gray-800 p-3">
+          <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
-            <div className="text-sm text-gray-600">DATE</div>
+            <div className="font-semibold">DATE</div>
           </div>
           <div>
-            <div className="text-sm text-gray-600">Tax Invoice no:</div>
-            <div className="font-semibold">TLCP/</div>
+            <div className="font-semibold">Tax Invoice no: TLCP/</div>
           </div>
         </div>
       </div>
 
-      {/* Contact Information */}
-      <div className="grid grid-cols-2 gap-8 mb-8">
-        <div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">Cell no:</span>
-            <span className="ml-2">082 9272 945 (Mike Sanders)</span>
-          </div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">Tel no:</span>
-            <span className="ml-2">012 644 0874</span>
-          </div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">Fax no:</span>
-            <span className="ml-2">(012) 377-1513</span>
-          </div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">E-mail address:</span>
-            <span className="ml-2">tlopocons@gmail.com</span>
-          </div>
-          
-          <div className="mt-4">
-            <div>Shop no:06</div>
-            <div>48 Botha Avenue</div>
-            <div>Lyttelton</div>
-          </div>
-        </div>
-        
-        <div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">Cell no:</span>
+      {/* Contact Information Section */}
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b-2 border-gray-800 pb-4">
+        {/* Left Column - Sender */}
+        <div className="space-y-2 text-sm">
+          <div>
+            <span className="font-semibold">Cell no:</span>
             <span className="ml-2">071 318 4854 (Prince Ramano)</span>
           </div>
-          <div className="mb-2">
-            <span className="text-sm text-gray-600">Tel no:</span>
-            <span className="ml-2">086 667 9557</span>
+          <div>
+            <span className="font-semibold">Tel no:</span>
+            <span className="ml-2">012 644 0874</span>
           </div>
-          
-          <div className="mt-4 mb-2">
-            <div className="font-semibold">City Power Johannesburg</div>
-            <div className="text-sm text-gray-600">Vat Reg : 4710191182</div>
+          <div>
+            <span className="font-semibold">Fax no:</span>
+            <span className="ml-2">(086 667 9557)</span>
           </div>
-          
+          <div>
+            <span className="font-semibold">E-mail address:</span>
+            <span className="ml-2">liopocons@gmail.com</span>
+          </div>
+
           <div className="mt-4">
-            <div className="text-sm text-gray-600">P.O Box 17</div>
-            <div>GARSFONTEIN</div>
+            <div>Shop no:06</div>
+            <div>48 Bofna Avenue</div>
+            <div>Lytleton</div>
+          </div>
+        </div>
+
+        {/* Right Column - Receiver */}
+        <div className="space-y-2 text-sm">
+          <div className="font-semibold">City Power Johannesburg</div>
+          <div className="text-sm">
+            <span className="font-semibold">Val Reg :</span>
+            <span className="ml-2">4710191182</span>
+          </div>
+
+          <div className="mt-4">
+            <div className="text-sm font-semibold">P.O Box 17</div>
+            <div>GARSFONTEN</div>
             <div>0042</div>
           </div>
+
+          {/* Deliver To Section */}
+          <div className="mt-4 border-2 border-gray-800 p-2">
+            <div className="font-semibold text-sm">Deliver to</div>
+            <div className="font-semibold">City Power Johannesburg</div>
+            <div>Alex Depot</div>
+          </div>
         </div>
       </div>
 
-      {/* Delivery Address */}
-      <div className="mb-8">
-        <div className="text-sm text-gray-600">Deliver to</div>
-        <div className="font-semibold">City Power Johannesburg</div>
-        <div>Alex Depot</div>
-      </div>
-
-      {/* Job Details */}
-      <div className="mb-8 space-y-2">
-        <div>
-          <span className="text-sm text-gray-600">JOB Number:</span>
+      {/* Job Details Section */}
+      <div className="mb-4 border-b-2 border-gray-800 pb-4">
+        <div className="space-y-2 text-sm">
+          <div>
+            <span className="font-semibold">JOB Number:</span>
+          </div>
+          <div>
+            <span className="font-semibold">PO Number:</span>
+          </div>
+          <div>
+            <span className="font-semibold">Reference GRN:</span>
+          </div>
         </div>
-        <div>
-          <span className="text-sm text-gray-600">PO Number:</span>
-        </div>
-        <div>
-          <span className="text-sm text-gray-600">Reference GRN:</span>
-        </div>
-      </div>
-
-      {/* Project Info */}
-      <div className="mb-6">
-        <div className="text-sm text-gray-600 mb-1">(6 Officers x 7 months)</div>
-        <div className="font-semibold">PROJECT: STREETLIGHT ALEX (melvill hyle penk)</div>
       </div>
 
       {/* Items Table */}
-      <div className="mb-8">
+      <div className="mb-6 border-2 border-gray-800">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b-2 border-gray-300">
-              <th className="text-left py-2 px-4 font-semibold">Code</th>
-              <th className="text-left py-2 px-4 font-semibold">Description</th>
-              <th className="text-left py-2 px-4 font-semibold">Quantity</th>
-              <th className="text-left py-2 px-4 font-semibold">Unit Price</th>
-              <th className="text-left py-2 px-4 font-semibold">Tax</th>
+            <tr className="border-b-2 border-gray-800 bg-gray-100">
+              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+                Code
+              </th>
+              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+                Description
+              </th>
+              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+                Quantity
+              </th>
+              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+                Unit Price
+              </th>
+              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+                Tax
+              </th>
               <th className="text-left py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4">221</td>
-              <td className="py-3 px-4">Wire any Pole Size</td>
-              <td className="py-3 px-4">1</td>
-              <td className="py-3 px-4">191.67</td>
+            <tr className="border-b border-gray-300">
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
               <td className="py-3 px-4"></td>
-              <td className="py-3 px-4">191.67</td>
             </tr>
-            <tr className="border-b border-gray-200">
+            <tr className="border-b border-gray-300">
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
               <td className="py-3 px-4"></td>
+            </tr>
+            <tr className="border-b border-gray-300">
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
               <td className="py-3 px-4"></td>
-              <td className="py-3 px-4"></td>
-              <td className="py-3 px-4"></td>
-              <td className="py-3 px-4"></td>
-              <td className="py-3 px-4">0</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      {/* Totals Section */}
-      <div className="grid grid-cols-3 gap-4 mb-8 max-w-md ml-auto">
-        <div className="col-span-2 text-right font-semibold">Sub Total:</div>
-        <div></div>
-        
-        <div className="col-span-2 text-right">Amount excluding Tax</div>
-        <div>0</div>
-        
-        <div className="col-span-2 text-right">Tax</div>
-        <div>0.15</div>
-        
-        <div className="col-span-2 text-right font-semibold">Total</div>
-        <div className="font-semibold">0</div>
-      </div>
-
-      {/* Banking Details */}
-      <div className="border-t-2 border-gray-300 pt-6">
-        <div className="font-bold text-lg mb-4">BANKING DETAILS</div>
-        <div className="space-y-2">
-          <div>
-            <span className="font-semibold">Bank Name:</span>
-            <span className="ml-2">First National Bank</span>
+      {/* Totals and Banking Section */}
+      <div className="grid grid-cols-2 gap-8">
+        {/* Banking Details */}
+        <div className="border-2 border-gray-800 p-4">
+          <div className="font-bold text-lg mb-3 border-b-2 border-gray-800 pb-2">
+            BANKING DETAILS
           </div>
-          <div>
-            <span className="font-semibold">Acc holder:</span>
-            <span className="ml-2">Tlopo Construction and General Services</span>
-          </div>
-          <div>
-            <span className="font-semibold">Acc no:</span>
-            <span className="ml-2">62103590007</span>
-          </div>
-          <div>
-            <span className="font-semibold">Type of Acc:</span>
-            <span className="ml-2">Cheque</span>
-          </div>
-          <div>
-            <span className="font-semibold">Branch Name:</span>
-            <span className="ml-2">Menlyn</span>
+          <div className="space-y-2 text-sm">
+            <div>
+              <span className="font-semibold">Bank Name:</span>
+              <span className="ml-2">First National Bank</span>
+            </div>
+            <div>
+              <span className="font-semibold">Acc holder:</span>
+              <span className="ml-2">
+                Tippo Construction and General Services
+              </span>
+            </div>
+            <div>
+              <span className="font-semibold">Acc no:</span>
+              <span className="ml-2">62103590007</span>
+            </div>
+            <div>
+              <span className="font-semibold">Type of Acc:</span>
+              <span className="ml-2">Cheque</span>
+            </div>
+            <div>
+              <span className="font-semibold">Branch Name:</span>
+              <span className="ml-2">Menlyn</span>
+            </div>
           </div>
         </div>
+
+        {/* Totals Section */}
+        <div className="border-2 border-gray-800 p-4">
+          <div className="space-y-2 text-sm">
+            <div className="flex justify-between">
+              <span className="font-semibold">Sub Total:</span>
+              <span></span>
+            </div>
+            <div className="flex justify-between">
+              <span>Amount excluding Tax</span>
+              <span className="font-semibold">R 0,00</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Tax 15%</span>
+              <span></span>
+            </div>
+            <div className="flex justify-between border-t-2 border-gray-800 pt-2 mt-2">
+              <span className="font-semibold">Total</span>
+              <span className="font-semibold">R 0,00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div className="mt-6 text-center text-sm text-gray-600 border-t-2 border-gray-800 pt-4">
+        Thank you for your business
       </div>
     </div>
   );
