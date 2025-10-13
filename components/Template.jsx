@@ -7,6 +7,18 @@ const Invoice = ({ workOrder }) => {
   const tax = subTotal * 0.15;
   const total = subTotal + tax;
 
+  const formatDate = (dateString) => {
+    if (!dateString) return '';
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const month = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ][date.getMonth()];
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white border border-gray-300">
       {/* Header Section */}
@@ -36,7 +48,7 @@ const Invoice = ({ workOrder }) => {
         <div className="text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
-            <div className="font-semibold">{workOrder.date}</div>
+            <div className="font-semibold">{formatDate(workOrder.date)}</div>
           </div>
           <div>
             <div className="font-semibold">Tax Invoice no: TLCP/{workOrder.jobAddress.jobNumber}</div>
@@ -116,42 +128,42 @@ const Invoice = ({ workOrder }) => {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Code</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Code</th>
               <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Quantity</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Unit Price</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Tax</th>
-              <th className="text-left py-2 px-4 font-semibold">Net Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Quantity</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Unit Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Tax</th>
+              <th className="text-left py-2 px-4 font-semibold whitespace-nowrap">Net Price</th>
             </tr>
           </thead>
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
-                <td className="py-3 px-4 border-r border-gray-300">{item.itemNumber}</td>
+                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
                 <td className="py-3 px-4 border-r border-gray-300">{item.description}</td>
-                <td className="py-3 px-4 border-r border-gray-300">{item.quantity}</td>
-                <td className="py-3 px-4 border-r border-gray-300">R {item.rate.toFixed(2)}</td>
-                <td className="py-3 px-4 border-r border-gray-300">R {(item.cost * 0.15).toFixed(2)}</td>
-                <td className="py-3 px-4">R {item.cost.toFixed(2)}</td>
+                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
+                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
+                <td className="py-3 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-3 px-4 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
 
             {/* Totals Section as part of the table */}
             <tr className="border-t-2 border-gray-300 bg-gray-50">
               <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Sub Total:</td>
-              <td className="py-3 px-4 font-semibold">R {subTotal.toFixed(2)}</td>
+              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
               <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Amount excluding Tax</td>
-              <td className="py-2 px-4 font-semibold">R {subTotal.toFixed(2)}</td>
+              <td className="py-2 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
               <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Tax 15%</td>
-              <td className="py-2 px-4">R {tax.toFixed(2)}</td>
+              <td className="py-2 px-4 whitespace-nowrap">R {tax.toFixed(2)}</td>
             </tr>
             <tr className="border-t-2 border-gray-300 bg-gray-50">
               <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Total</td>
-              <td className="py-3 px-4 font-semibold">R {total.toFixed(2)}</td>
+              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {total.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
