@@ -60,13 +60,13 @@ const Invoice = () => {
           </div>
           <div>
             <span className="font-semibold">E-mail address:</span>
-            <span className="ml-2">liopocons@gmail.com</span>
+            <span className="ml-2">tlopocons@gmail.com</span>
           </div>
 
           <div className="mt-4">
             <div>Shop no:06</div>
-            <div>48 Bofna Avenue</div>
-            <div>Lytleton</div>
+            <div>48 Botha Avenue</div>
+            <div>Lyttelton</div>
           </div>
         </div>
 
@@ -74,7 +74,7 @@ const Invoice = () => {
         <div className="space-y-2 text-sm">
           <div className="font-semibold">City Power Johannesburg</div>
           <div className="text-sm">
-            <span className="font-semibold">Val Reg :</span>
+            <span className="font-semibold">Vat Reg :</span>
             <span className="ml-2">4710191182</span>
           </div>
 
@@ -209,7 +209,7 @@ const Invoice = () => {
           </div>
           <div className="flex">
             <div className="font-semibold flex">Acc holder:</div>
-            <div>Tippo Construction and General Services</div>
+            <div>Tlopo Construction and General Services</div>
           </div>
           <div className="flex">
             <div className="font-semibold">Acc no:</div>
