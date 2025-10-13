@@ -108,8 +108,8 @@ const Invoice = () => {
         </div>
       </div>
 
-      {/* Items Table */}
-      <div className="mb-6 border border-gray-300">
+      {/* Items Table with Totals */}
+      <div className="mb-8 border border-gray-300">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
@@ -132,6 +132,7 @@ const Invoice = () => {
             </tr>
           </thead>
           <tbody>
+            {/* Empty rows for items */}
             <tr className="border-b border-gray-200">
               <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4 border-r border-gray-300"></td>
@@ -155,68 +156,79 @@ const Invoice = () => {
               <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4"></td>
+            </tr>
+
+            {/* Totals Section as part of the table */}
+            <tr className="border-t-2 border-gray-300 bg-gray-50">
+              <td
+                colSpan={5}
+                className="py-3 px-4 text-right font-semibold border-r border-gray-300"
+              >
+                Sub Total:
+              </td>
+              <td className="py-3 px-4 font-semibold"></td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td
+                colSpan={5}
+                className="py-2 px-4 text-right border-r border-gray-300"
+              >
+                Amount excluding Tax
+              </td>
+              <td className="py-2 px-4 font-semibold">R 0,00</td>
+            </tr>
+            <tr className="bg-gray-50">
+              <td
+                colSpan={5}
+                className="py-2 px-4 text-right border-r border-gray-300"
+              >
+                Tax 15%
+              </td>
+              <td className="py-2 px-4"></td>
+            </tr>
+            <tr className="border-t-2 border-gray-300 bg-gray-50">
+              <td
+                colSpan={5}
+                className="py-3 px-4 text-right font-semibold border-r border-gray-300"
+              >
+                Total
+              </td>
+              <td className="py-3 px-4 font-semibold">R 0,00</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      {/* Totals and Banking Section */}
-      <div className="grid grid-cols-2 gap-8">
-        {/* Banking Details */}
-        <div className="border border-gray-300 p-4">
-          <div className="font-bold text-lg mb-3 border-b border-gray-300 pb-2">
-            BANKING DETAILS
-          </div>
-          <div className="space-y-2 text-sm">
-            <div>
-              <span className="font-semibold">Bank Name:</span>
-              <span className="ml-2">First National Bank</span>
-            </div>
-            <div>
-              <span className="font-semibold">Acc holder:</span>
-              <span className="ml-2">
-                Tippo Construction and General Services
-              </span>
-            </div>
-            <div>
-              <span className="font-semibold">Acc no:</span>
-              <span className="ml-2">62103590007</span>
-            </div>
-            <div>
-              <span className="font-semibold">Type of Acc:</span>
-              <span className="ml-2">Cheque</span>
-            </div>
-            <div>
-              <span className="font-semibold">Branch Name:</span>
-              <span className="ml-2">Menlyn</span>
-            </div>
-          </div>
+      {/* Footer with Banking Details */}
+      <div className="border-t border-gray-300 pt-6">
+        <div className="font-bold text-lg mb-4 text-center">
+          BANKING DETAILS
         </div>
-
-        {/* Totals Section */}
-        <div className="border border-gray-300 p-4">
-          <div className="space-y-2 text-sm">
-            <div className="flex justify-between">
-              <span className="font-semibold">Sub Total:</span>
-              <span></span>
-            </div>
-            <div className="flex justify-between">
-              <span>Amount excluding Tax</span>
-              <span className="font-semibold">R 0,00</span>
-            </div>
-            <div className="flex justify-between">
-              <span>Tax 15%</span>
-              <span></span>
-            </div>
-            <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
-              <span className="font-semibold">Total</span>
-              <span className="font-semibold">R 0,00</span>
-            </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 text-sm text-center">
+          <div>
+            <div className="font-semibold">Bank Name:</div>
+            <div>First National Bank</div>
+          </div>
+          <div>
+            <div className="font-semibold">Acc holder:</div>
+            <div>Tippo Construction and General Services</div>
+          </div>
+          <div>
+            <div className="font-semibold">Acc no:</div>
+            <div>62103590007</div>
+          </div>
+          <div>
+            <div className="font-semibold">Type of Acc:</div>
+            <div>Cheque</div>
+          </div>
+          <div>
+            <div className="font-semibold">Branch Name:</div>
+            <div>Menlyn</div>
           </div>
         </div>
       </div>
 
-      {/* Footer */}
+      {/* Thank You Footer */}
       <div className="mt-6 text-center text-sm text-gray-600 border-t border-gray-300 pt-4">
         Thank you for your business
       </div>
