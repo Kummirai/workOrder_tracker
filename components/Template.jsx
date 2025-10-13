@@ -5,7 +5,6 @@ const Invoice = () => {
       <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
         <div>
-          // Simpler version if you don't need error handling
           <div className="flex items-center mb-4">
             {/* Logo Image - Simple version */}
             <img
@@ -13,12 +12,12 @@ const Invoice = () => {
               alt="TLOPO Construction Logo"
               className="w-16 h-16 mr-4 object-contain"
             />
-            <div>
+            {/* <div>
               <div className="font-bold text-lg">TLOPO</div>
               <div className="text-sm font-semibold">
                 CONSTRUCTION & GENERAL SERVICES
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="space-y-1 text-sm">
             <div>
