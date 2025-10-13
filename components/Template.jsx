@@ -202,7 +202,7 @@ const Invoice = () => {
       {/* Footer with Banking Details */}
       <div className="border-t border-gray-300 pt-6">
         <div className="font-bold text-lg mb-4 text-start">BANKING DETAILS</div>
-        <div className="grid grid-cols-1  gap-4 text-sm text-start">
+        <div className="grid grid-cols-1 text-sm text-start">
           <div>
             <div className="font-semibold">Bank Name:</div>
             <div>First National Bank</div>
