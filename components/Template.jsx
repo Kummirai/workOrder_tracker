@@ -201,27 +201,25 @@ const Invoice = () => {
 
       {/* Footer with Banking Details */}
       <div className="border-t border-gray-300 pt-6">
-        <div className="font-bold text-lg mb-4 text-center">
-          BANKING DETAILS
-        </div>
+        <div className="font-bold text-lg mb-4 text-start">BANKING DETAILS</div>
         <div className="grid grid-cols-1  gap-4 text-sm text-start">
           <div>
             <div className="font-semibold">Bank Name:</div>
             <div>First National Bank</div>
           </div>
-          <div>
-            <div className="font-semibold">Acc holder:</div>
+          <div className="flex">
+            <div className="font-semibold flex">Acc holder:</div>
             <div>Tippo Construction and General Services</div>
           </div>
-          <div>
+          <div className="flex">
             <div className="font-semibold">Acc no:</div>
             <div>62103590007</div>
           </div>
-          <div>
+          <div className="flex">
             <div className="font-semibold">Type of Acc:</div>
             <div>Cheque</div>
           </div>
-          <div>
+          <div className="flex">
             <div className="font-semibold">Branch Name:</div>
             <div>Menlyn</div>
           </div>
