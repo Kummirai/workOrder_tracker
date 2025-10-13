@@ -1,4 +1,12 @@
-const Invoice = () => {
+const Invoice = ({ workOrder }) => {
+  if (!workOrder) {
+    return null; // Or a loading state
+  }
+
+  const subTotal = workOrder.jobDetails.cost;
+  const tax = subTotal * 0.15;
+  const total = subTotal + tax;
+
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white border border-gray-300">
       {/* Header Section */}
@@ -6,7 +14,6 @@ const Invoice = () => {
         {/* Left Column - Company Details */}
         <div className="flex items-start">
           <div className="flex items-center mb-4">
-            {/* Logo Image - Simple version */}
             <img
               src="/Picture1.png"
               alt="TLOPO Construction Logo"
@@ -29,10 +36,10 @@ const Invoice = () => {
         <div className="text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
-            <div className="font-semibold">DATE</div>
+            <div className="font-semibold">{workOrder.date}</div>
           </div>
           <div>
-            <div className="font-semibold">Tax Invoice no: TLCP/</div>
+            <div className="font-semibold">Tax Invoice no: TLCP/{workOrder.jobAddress.jobNumber}</div>
           </div>
         </div>
       </div>
@@ -93,6 +100,7 @@ const Invoice = () => {
         <div className="space-y-2 text-sm">
           <div>
             <span className="font-semibold">JOB Number:</span>
+            <span className="ml-2">{workOrder.jobAddress.jobNumber}</span>
           </div>
           <div>
             <span className="font-semibold">PO Number:</span>
@@ -108,87 +116,42 @@ const Invoice = () => {
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
-                Code
-              </th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
-                Description
-              </th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
-                Quantity
-              </th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
-                Unit Price
-              </th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
-                Tax
-              </th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Code</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Quantity</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Unit Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Tax</th>
               <th className="text-left py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
-            {/* Empty rows for items */}
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4"></td>
-            </tr>
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4"></td>
-            </tr>
-            <tr className="border-b border-gray-200">
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4 border-r border-gray-300"></td>
-              <td className="py-3 px-4"></td>
-            </tr>
+            {workOrder.jobDetails.workItems.map((item, index) => (
+              <tr key={index} className="border-b border-gray-200">
+                <td className="py-3 px-4 border-r border-gray-300">{item.itemNumber}</td>
+                <td className="py-3 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-3 px-4 border-r border-gray-300">{item.quantity}</td>
+                <td className="py-3 px-4 border-r border-gray-300">R {item.rate.toFixed(2)}</td>
+                <td className="py-3 px-4 border-r border-gray-300">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-3 px-4">R {item.cost.toFixed(2)}</td>
+              </tr>
+            ))}
 
             {/* Totals Section as part of the table */}
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td
-                colSpan={5}
-                className="py-3 px-4 text-right font-semibold border-r border-gray-300"
-              >
-                Sub Total:
-              </td>
-              <td className="py-3 px-4 font-semibold"></td>
+              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Sub Total:</td>
+              <td className="py-3 px-4 font-semibold">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td
-                colSpan={5}
-                className="py-2 px-4 text-right border-r border-gray-300"
-              >
-                Amount excluding Tax
-              </td>
-              <td className="py-2 px-4 font-semibold">R 0,00</td>
+              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Amount excluding Tax</td>
+              <td className="py-2 px-4 font-semibold">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td
-                colSpan={5}
-                className="py-2 px-4 text-right border-r border-gray-300"
-              >
-                Tax 15%
-              </td>
-              <td className="py-2 px-4"></td>
+              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Tax 15%</td>
+              <td className="py-2 px-4">R {tax.toFixed(2)}</td>
             </tr>
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td
-                colSpan={5}
-                className="py-3 px-4 text-right font-semibold border-r border-gray-300"
-              >
-                Total
-              </td>
-              <td className="py-3 px-4 font-semibold">R 0,00</td>
+              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Total</td>
+              <td className="py-3 px-4 font-semibold">R {total.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>

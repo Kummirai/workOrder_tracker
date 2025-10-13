@@ -1,14 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import jsPDF from 'jspdf';
-import autoTable from 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+import Invoice from '@/components/Template.jsx';
 
 export default function PrintPage() {
   const { id } = useParams();
   const [workOrder, setWorkOrder] = useState(null);
   const [generating, setGenerating] = useState(true);
+  const invoiceRef = useRef();
 
   useEffect(() => {
     const fetchWorkOrder = async () => {
@@ -26,100 +28,50 @@ export default function PrintPage() {
   }, [workOrder]);
 
   const generateAndDownloadPdf = async () => {
-    const doc = new jsPDF();
-
-    const getImageBase64 = async () => {
-      const response = await fetch('/Picture1.png');
-      const blob = await response.blob();
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.readAsDataURL(blob);
-        reader.onloadend = () => resolve(reader.result);
-        reader.onerror = (error) => reject(error);
-      });
-    };
+    const element = invoiceRef.current;
+    if (!element) return;
 
     try {
-      const base64data = await getImageBase64();
+      const canvas = await html2canvas(element, { scale: 2 });
+      const imgData = canvas.toDataURL('image/png');
 
-      // Add logo
-      doc.addImage(base64data, 'PNG', 140, 15, 50, 20); // x, y, width, height
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
-      // Add header
-      doc.setFontSize(20);
-      doc.text(`Work Order: ${workOrder.jobAddress.jobNumber}`, 15, 20);
-      doc.setFontSize(12);
-      doc.text(`Date: ${workOrder.date}`, 15, 30);
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save(`${workOrder.jobAddress.jobNumber}.pdf`);
 
-      // Add address
-      doc.setFontSize(12);
-      doc.text('Job Address:', 15, 50);
-      doc.text(`${workOrder.jobAddress.streetNumber} ${workOrder.jobAddress.streetName}`, 15, 56);
-      doc.text(workOrder.jobAddress.surburb, 15, 62);
-      doc.text(workOrder.jobAddress.city, 15, 68);
-
-      // Add work items table
-      autoTable(doc, {
-        startY: 75,
-        head: [['Item #', 'Description', 'Unit', 'Quantity', 'Rate', 'Cost']],
-        body: workOrder.jobDetails.workItems.map(item => [
-          item.itemNumber,
-          item.description,
-          item.unit,
-          item.quantity,
-          `R ${item.rate.toFixed(2)}`,
-          `R ${item.cost.toFixed(2)}`
-        ]),
-      });
-
-      let finalY = doc.lastAutoTable.finalY || 85;
-
-      // Add materials table
-      if (workOrder.jobDetails.materials && workOrder.jobDetails.materials.length > 0) {
-        autoTable(doc, {
-          startY: finalY + 10,
-          head: [['Material Code', 'Description', 'Quantity']],
-          body: workOrder.jobDetails.materials.map(material => [
-            material.materialCode,
-            material.description,
-            material.quantity
-          ]),
-        });
-        finalY = doc.lastAutoTable.finalY;
-      }
-
-      // Add total cost
-      doc.setFontSize(12);
-      doc.text(`Total Cost: R ${workOrder.jobDetails.cost.toFixed(2)}`, 15, finalY + 10);
-
-      // Save the PDF
-      doc.save(`${workOrder.jobAddress.jobNumber}.pdf`);
       setGenerating(false);
 
-      // Close the window after a short delay
       setTimeout(() => {
         window.close();
       }, 1000);
     } catch (error) {
       console.error("Error generating PDF:", error);
-      // Handle error state, maybe show a message to the user
-      setGenerating(false); // Stop loading
+      setGenerating(false);
     }
   };
 
-  if (generating) {
-    return (
-      <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-        <p className="font-semibold text-gray-700">Generating PDF file...</p>
-      </div>
-    );
-  }
-
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
-      <p className="font-semibold text-gray-700">PDF file has been generated and download should start shortly.</p>
-      <p className="text-sm text-gray-500">This window will close automatically.</p>
+    <div>
+      {generating && (
+        <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+          <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+          <p className="font-semibold text-gray-700">Generating PDF file...</p>
+        </div>
+      )}
+      {!generating && (
+        <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+          <p className="font-semibold text-gray-700">PDF file has been generated and download should start shortly.</p>
+          <p className="text-sm text-gray-500">This window will close automatically.</p>
+        </div>
+      )}
+      <div style={{ position: 'absolute', left: '-9999px' }}>
+        <div ref={invoiceRef}>
+          <Invoice workOrder={workOrder} />
+        </div>
+      </div>
     </div>
   );
 }

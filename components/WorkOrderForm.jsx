@@ -46,7 +46,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       setSurburb(workOrderToEdit.jobAddress.surburb);
       setCity(workOrderToEdit.jobAddress.city);
       setStatus(workOrderToEdit.status);
-      setDate(workOrderToEdit.date);
+      setDate(workOrderToEdit.date || new Date().toLocaleDateString());
       setWorkItems(workOrderToEdit.jobDetails.workItems);
       if (workOrderToEdit.jobDetails.materials) {
         setMaterials(workOrderToEdit.jobDetails.materials);
