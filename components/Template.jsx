@@ -1,13 +1,13 @@
 const Invoice = () => {
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white border-2 border-gray-800">
+    <div className="max-w-4xl mx-auto p-6 bg-white border border-gray-300">
       {/* Header Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b-2 border-gray-800 pb-4">
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
         <div>
           <div className="flex items-center mb-4">
             {/* Logo Placeholder */}
-            <div className="w-16 h-16 bg-gray-200 border border-gray-400 mr-4 flex items-center justify-center">
+            <div className="w-16 h-16 bg-gray-100 border border-gray-300 mr-4 flex items-center justify-center">
               <span className="text-xs text-gray-500 text-center">LOGO</span>
             </div>
             <div>
@@ -31,7 +31,7 @@ const Invoice = () => {
         </div>
 
         {/* Right Column - Invoice Details */}
-        <div className="text-right border-2 border-gray-800 p-3">
+        <div className="text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
             <div className="font-semibold">DATE</div>
@@ -43,7 +43,7 @@ const Invoice = () => {
       </div>
 
       {/* Contact Information Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b-2 border-gray-800 pb-4">
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Sender */}
         <div className="space-y-2 text-sm">
           <div>
@@ -85,7 +85,7 @@ const Invoice = () => {
           </div>
 
           {/* Deliver To Section */}
-          <div className="mt-4 border-2 border-gray-800 p-2">
+          <div className="mt-4 border border-gray-300 p-2">
             <div className="font-semibold text-sm">Deliver to</div>
             <div className="font-semibold">City Power Johannesburg</div>
             <div>Alex Depot</div>
@@ -94,7 +94,7 @@ const Invoice = () => {
       </div>
 
       {/* Job Details Section */}
-      <div className="mb-4 border-b-2 border-gray-800 pb-4">
+      <div className="mb-4 border-b border-gray-300 pb-4">
         <div className="space-y-2 text-sm">
           <div>
             <span className="font-semibold">JOB Number:</span>
@@ -109,51 +109,51 @@ const Invoice = () => {
       </div>
 
       {/* Items Table */}
-      <div className="mb-6 border-2 border-gray-800">
+      <div className="mb-6 border border-gray-300">
         <table className="w-full border-collapse">
           <thead>
-            <tr className="border-b-2 border-gray-800 bg-gray-100">
-              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+            <tr className="border-b border-gray-300 bg-gray-50">
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
                 Code
               </th>
-              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
                 Description
               </th>
-              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
                 Quantity
               </th>
-              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
                 Unit Price
               </th>
-              <th className="text-left py-2 px-4 font-semibold border-r-2 border-gray-800">
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">
                 Tax
               </th>
               <th className="text-left py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
-            <tr className="border-b border-gray-300">
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+            <tr className="border-b border-gray-200">
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4"></td>
             </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+            <tr className="border-b border-gray-200">
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4"></td>
             </tr>
-            <tr className="border-b border-gray-300">
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
-              <td className="py-3 px-4 border-r-2 border-gray-800"></td>
+            <tr className="border-b border-gray-200">
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
+              <td className="py-3 px-4 border-r border-gray-300"></td>
               <td className="py-3 px-4"></td>
             </tr>
           </tbody>
@@ -163,8 +163,8 @@ const Invoice = () => {
       {/* Totals and Banking Section */}
       <div className="grid grid-cols-2 gap-8">
         {/* Banking Details */}
-        <div className="border-2 border-gray-800 p-4">
-          <div className="font-bold text-lg mb-3 border-b-2 border-gray-800 pb-2">
+        <div className="border border-gray-300 p-4">
+          <div className="font-bold text-lg mb-3 border-b border-gray-300 pb-2">
             BANKING DETAILS
           </div>
           <div className="space-y-2 text-sm">
@@ -194,7 +194,7 @@ const Invoice = () => {
         </div>
 
         {/* Totals Section */}
-        <div className="border-2 border-gray-800 p-4">
+        <div className="border border-gray-300 p-4">
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="font-semibold">Sub Total:</span>
@@ -208,7 +208,7 @@ const Invoice = () => {
               <span>Tax 15%</span>
               <span></span>
             </div>
-            <div className="flex justify-between border-t-2 border-gray-800 pt-2 mt-2">
+            <div className="flex justify-between border-t border-gray-300 pt-2 mt-2">
               <span className="font-semibold">Total</span>
               <span className="font-semibold">R 0,00</span>
             </div>
@@ -217,7 +217,7 @@ const Invoice = () => {
       </div>
 
       {/* Footer */}
-      <div className="mt-6 text-center text-sm text-gray-600 border-t-2 border-gray-800 pt-4">
+      <div className="mt-6 text-center text-sm text-gray-600 border-t border-gray-300 pt-4">
         Thank you for your business
       </div>
     </div>
