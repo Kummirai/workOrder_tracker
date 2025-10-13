@@ -14,33 +14,48 @@ export default function PrintPage() {
 
   useEffect(() => {
     const fetchWorkOrder = async () => {
+      console.log("Fetching work order...");
       const response = await fetch(`/api/work_orders/${id}`);
       const data = await response.json();
       setWorkOrder(data);
+      console.log("Work order fetched:", data);
     };
     fetchWorkOrder();
   }, [id]);
 
   useEffect(() => {
     if (workOrder) {
-      generateAndDownloadPdf();
+      console.log("Work order state updated, preparing to generate PDF.");
+      // Timeout to ensure component is rendered
+      setTimeout(() => {
+        generateAndDownloadPdf();
+      }, 500);
     }
   }, [workOrder]);
 
   const generateAndDownloadPdf = async () => {
+    console.log("generateAndDownloadPdf called");
     const element = invoiceRef.current;
-    if (!element) return;
+    if (!element) {
+      console.error("Invoice element not found");
+      return;
+    }
 
+    console.log("Capturing invoice element with html2canvas...");
     try {
-      const canvas = await html2canvas(element, { scale: 2 });
+      const canvas = await html2canvas(element, { scale: 2, useCORS: true });
+      console.log("Canvas created");
       const imgData = canvas.toDataURL('image/png');
+      console.log("Canvas converted to image data");
 
       const pdf = new jsPDF('p', 'mm', 'a4');
       const pdfWidth = pdf.internal.pageSize.getWidth();
       const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
 
       pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      console.log("Image added to PDF");
       pdf.save(`${workOrder.jobAddress.jobNumber}.pdf`);
+      console.log("PDF saved");
 
       setGenerating(false);
 
