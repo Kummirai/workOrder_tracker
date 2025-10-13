@@ -10,16 +10,16 @@ const Invoice = ({ workOrder }) => {
   const total = subTotal + tax;
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white border border-gray-300">
+    <div className="max-w-4xl mx-auto p-4 md:p-6 bg-white border border-gray-300">
       {/* Header Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
         <div className="flex items-start">
           <div className="flex items-center mb-4">
             <img
               src="/Picture1.png"
               alt="TLOPO Construction Logo"
-              className="w-50 h-25 mr-4 object-contain"
+              className="w-40 md:w-50 h-auto mr-4 object-contain"
             />
           </div>
           <div className="space-y-1 text-sm">
@@ -35,7 +35,7 @@ const Invoice = ({ workOrder }) => {
         </div>
 
         {/* Right Column - Invoice Details */}
-        <div className="text-right border border-gray-300 p-3">
+        <div className="text-left md:text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
             <div className="font-semibold">{format(new Date(workOrder.date), 'dd MMM yyyy')}</div>
@@ -47,7 +47,7 @@ const Invoice = ({ workOrder }) => {
       </div>
 
       {/* Contact Information Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Sender */}
         <div className="space-y-2 text-sm">
           <div>
@@ -114,7 +114,7 @@ const Invoice = ({ workOrder }) => {
       </div>
 
       {/* Items Table with Totals */}
-      <div className="mb-8 border border-gray-300">
+      <div className="mb-8 border border-gray-300 overflow-x-auto">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
