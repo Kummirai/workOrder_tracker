@@ -28,13 +28,19 @@ export default function PrintPage() {
   const generateAndDownloadPdf = async () => {
     const doc = new jsPDF();
 
-    // Load image and convert to base64
-    const response = await fetch('/Picture1.png');
-    const blob = await response.blob();
-    const reader = new FileReader();
-    reader.readAsDataURL(blob);
-    reader.onloadend = () => {
-      const base64data = reader.result;
+    const getImageBase64 = async () => {
+      const response = await fetch('/Picture1.png');
+      const blob = await response.blob();
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(blob);
+        reader.onloadend = () => resolve(reader.result);
+        reader.onerror = (error) => reject(error);
+      });
+    };
+
+    try {
+      const base64data = await getImageBase64();
 
       // Add logo
       doc.addImage(base64data, 'PNG', 140, 15, 50, 20); // x, y, width, height
@@ -94,7 +100,11 @@ export default function PrintPage() {
       setTimeout(() => {
         window.close();
       }, 1000);
-    };
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      // Handle error state, maybe show a message to the user
+      setGenerating(false); // Stop loading
+    }
   };
 
   if (generating) {
