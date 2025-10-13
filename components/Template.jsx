@@ -5,11 +5,14 @@ const Invoice = () => {
       <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
         <div>
+          // Simpler version if you don't need error handling
           <div className="flex items-center mb-4">
-            {/* Logo Placeholder */}
-            <div className="w-16 h-16 bg-gray-100 border border-gray-300 mr-4 flex items-center justify-center">
-              <span className="text-xs text-gray-500 text-center">LOGO</span>
-            </div>
+            {/* Logo Image - Simple version */}
+            <img
+              src="/Picture1.png"
+              alt="TLOPO Construction Logo"
+              className="w-16 h-16 mr-4 object-contain"
+            />
             <div>
               <div className="font-bold text-lg">TLOPO</div>
               <div className="text-sm font-semibold">
@@ -17,14 +20,13 @@ const Invoice = () => {
               </div>
             </div>
           </div>
-
           <div className="space-y-1 text-sm">
             <div>
               <span className="font-semibold">Reg No</span>
               <span className="ml-2">2002/098222/23</span>
             </div>
             <div>
-              <span className="font-semibold">Val Reg</span>
+              <span className="font-semibold">Vat Reg</span>
               <span className="ml-2">4800225080</span>
             </div>
           </div>
