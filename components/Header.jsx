@@ -78,6 +78,9 @@ const Header = () => {
           <Link href={'/boq_items'} className={navLinkClasses('/boq_items')}>
             BOQ Items
           </Link>
+          <Link href={'/earnings'} className={navLinkClasses('/earnings')}>
+            Earnings
+          </Link>
           <Link href={'/settings'} className={navLinkClasses('/settings')}>
             Settings
           </Link>
@@ -114,6 +117,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               BOQ Items
+            </Link>
+            <Link
+              href={'/earnings'}
+              className={mobileNavLinkClasses('/earnings')}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Earnings
             </Link>
             <Link
               href={'/settings'}
