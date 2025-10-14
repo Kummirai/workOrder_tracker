@@ -132,7 +132,14 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
             </tr>
           </thead>
           <tbody>
-            {workOrder.jobDetails.workItems.map((item, index) => (
+            {workOrder.jobDetails.workItems
+              .slice()
+              .sort((a, b) => {
+                const itemA = String(a.itemNumber);
+                const itemB = String(b.itemNumber);
+                return itemA.localeCompare(itemB, undefined, { numeric: true, sensitivity: 'base' });
+              })
+              .map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
                 <td className="py-1 px-4 border-r border-gray-300">{item.itemNumber}</td>
                 <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
