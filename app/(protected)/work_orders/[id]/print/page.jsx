@@ -1,18 +1,31 @@
-
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { useReactToPrint } from 'react-to-print';
-import PrintableWorkOrder from '@/components/PrintableWorkOrder.jsx';
+import Invoice from '@/components/Template.jsx';
 
 export default function PrintPage() {
   const { id } = useParams();
   const [workOrder, setWorkOrder] = useState(null);
   const componentRef = useRef();
 
+  const pageStyle = `
+    @page {
+      size: A4;
+      margin: 20mm;
+    }
+    @media print {
+      body {
+        -webkit-print-color-adjust: exact;
+        color-adjust: exact;
+      }
+    }
+  `;
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    pageStyle: pageStyle,
     onAfterPrint: () => {
       window.close();
     },
@@ -33,7 +46,6 @@ export default function PrintPage() {
 
   useEffect(() => {
     if (workOrder) {
-      // Small delay to allow content to render properly before printing
       const timer = setTimeout(() => {
         handlePrint();
       }, 500);
@@ -45,14 +57,14 @@ export default function PrintPage() {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
-        <p className="font-semibold text-gray-700">Preparing document for printing...</p>
+        <p className="font-semibold text-gray-700">Preparing Invoice for printing...</p>
       </div>
     );
   }
 
   return (
     <main>
-      <PrintableWorkOrder ref={componentRef} workOrder={workOrder} />
+      <Invoice ref={componentRef} workOrder={workOrder} />
     </main>
   );
 }
