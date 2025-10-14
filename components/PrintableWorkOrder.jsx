@@ -1,7 +1,13 @@
 import React from 'react';
+import { format } from 'date-fns';
 
 const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
   if (!workOrder) return null;
+
+  const displayDate =
+    workOrder.date && !isNaN(new Date(workOrder.date))
+      ? format(new Date(workOrder.date), "dd MMM yyyy")
+      : "";
 
   return (
     <div ref={ref} className="p-5">
@@ -10,7 +16,7 @@ const PrintableWorkOrder = React.forwardRef(({ workOrder }, ref) => {
         {workOrder.jobAddress.streetNumber} {workOrder.jobAddress.streetName}, {workOrder.jobAddress.surburb}<br />
         {workOrder.jobAddress.city}
       </address>
-      <p className="mb-4"><strong>Date:</strong> {workOrder.date}</p>
+      <p className="mb-4"><strong>Date:</strong> {displayDate}</p>
       
       <h3 className="font-bold mb-2">Work Items</h3>
       <div className="overflow-x-auto"> {/* Added overflow-x-auto */}

@@ -1,9 +1,10 @@
+
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { useReactToPrint } from 'react-to-print';
-import Invoice from '@/components/Template.jsx';
+import PrintableWorkOrder from '@/components/PrintableWorkOrder.jsx';
 
 export default function PrintPage() {
   const { id } = useParams();
@@ -51,7 +52,7 @@ export default function PrintPage() {
 
   return (
     <main>
-      <Invoice ref={componentRef} workOrder={workOrder} />
+      <PrintableWorkOrder ref={componentRef} workOrder={workOrder} />
     </main>
   );
 }
