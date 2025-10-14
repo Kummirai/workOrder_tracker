@@ -12,29 +12,45 @@ export default function PrintPage() {
 
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
+    onAfterPrint: () => {
+      window.close();
+    },
   });
 
   useEffect(() => {
-    const fetchWorkOrder = async () => {
-      const response = await fetch(`/api/work_orders/${id}`);
-      const data = await response.json();
-      setWorkOrder(data);
-    };
-    fetchWorkOrder();
+    if (id) {
+      const fetchWorkOrder = async () => {
+        const response = await fetch(`/api/work_orders/${id}`);
+        if (response.ok) {
+          const data = await response.json();
+          setWorkOrder(data);
+        }
+      };
+      fetchWorkOrder();
+    }
   }, [id]);
 
-  return (
-    <main className="p-5">
-      <div className="mb-4">
-        <button
-          onClick={handlePrint}
-          disabled={!workOrder}
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer disabled:bg-gray-400"
-        >
-          Print
-        </button>
+  useEffect(() => {
+    if (workOrder) {
+      // Small delay to allow content to render properly before printing
+      const timer = setTimeout(() => {
+        handlePrint();
+      }, 500);
+      return () => clearTimeout(timer);
+    }
+  }, [workOrder, handlePrint]);
+
+  if (!workOrder) {
+    return (
+      <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+        <p className="font-semibold text-gray-700">Preparing document for printing...</p>
       </div>
-      {/* The Invoice component will return null if workOrder is not ready */}
+    );
+  }
+
+  return (
+    <main>
       <Invoice ref={componentRef} workOrder={workOrder} />
     </main>
   );
