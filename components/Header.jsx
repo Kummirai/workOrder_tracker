@@ -32,7 +32,7 @@ const Header = () => {
     <header className='bg-[#5e17eb] p-4 sm:p-5 sm:px-10 shadow-lg'>
       <nav className='flex items-center justify-between text-white'>
         <Link href='/dashboard' className='flex items-center'>
-          <p className='font-extrabold font-serif tracking-wide text-xl sm:text-2xl'>Jobs</p>
+          <p className='font-extrabold font-serif tracking-wide text-xl sm:text-2xl'>W/O</p>
         </Link>
 
         {/* Hamburger Button */}
