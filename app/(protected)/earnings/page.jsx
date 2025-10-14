@@ -1,3 +1,4 @@
+
 "use client";
 
 import { useState, useEffect } from "react";
@@ -9,6 +10,7 @@ export default function EarningsPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [statusFilter, setStatusFilter] = useState("all"); // "all", "paid", "unpaid"
 
   useEffect(() => {
     const fetchWorkOrders = async () => {
@@ -30,6 +32,25 @@ export default function EarningsPage() {
     fetchWorkOrders();
   }, []);
 
+  const handleMarkAsPaid = async (id) => {
+    const response = await fetch(`/api/work_orders/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ paid: true, status: 'paid' }),
+    });
+
+    if (response.ok) {
+      setWorkOrders(workOrders.map(order => 
+        order._id === id ? { ...order, paid: true, status: 'paid' } : order
+      ));
+    } else {
+      console.error("Failed to mark as paid");
+      alert("Failed to mark as paid. Please try again.");
+    }
+  };
+
   const calculateEarnings = (cost) => {
     if (typeof cost !== 'number') return 0;
     return (cost / 2) * 0.08;
@@ -47,7 +68,11 @@ export default function EarningsPage() {
     const matchesStartDate = startDate ? (orderDate && orderDate >= new Date(new Date(startDate).toDateString())) : true;
     const matchesEndDate = endDate ? (orderDate && orderDate <= new Date(new Date(endDate).toDateString())) : true;
 
-    return matchesSearch && matchesStartDate && matchesEndDate;
+    const matchesStatus = statusFilter === 'all' ? true :
+      statusFilter === 'paid' ? order.paid === true :
+      order.paid !== true;
+
+    return matchesSearch && matchesStartDate && matchesEndDate && matchesStatus;
   });
 
   const totalEarnings = filteredWorkOrders.reduce((sum, order) => {
@@ -94,13 +119,27 @@ export default function EarningsPage() {
             inputValue={endDate}
           />
         </div>
+        <div className="mt-4">
+          <span className="font-semibold text-gray-700 mr-4">Status:</span>
+          <div className="inline-flex rounded-md shadow-sm" role="group">
+            <button type="button" onClick={() => setStatusFilter('all')} className={`px-4 py-2 text-sm font-medium ${statusFilter === 'all' ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'} border border-gray-200 rounded-l-lg hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700`}>
+                All
+            </button>
+            <button type="button" onClick={() => setStatusFilter('unpaid')} className={`px-4 py-2 text-sm font-medium ${statusFilter === 'unpaid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'} border border-gray-200 hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700`}>
+                Unpaid
+            </button>
+            <button type="button" onClick={() => setStatusFilter('paid')} className={`px-4 py-2 text-sm font-medium ${statusFilter === 'paid' ? 'bg-blue-600 text-white' : 'bg-white text-gray-900'} border border-gray-200 rounded-r-md hover:bg-gray-100 focus:z-10 focus:ring-2 focus:ring-blue-700`}>
+                Paid
+            </button>
+          </div>
+        </div>
       </section>
 
       <div className="mb-6 p-5 border rounded-xl bg-green-50 border-green-300 shadow-sm">
         <h2 className="font-bold text-green-800 text-2xl">
           Total Estimated Earnings: R {totalEarnings.toFixed(2)}
         </h2>
-        <p className="text-green-700 mt-1">This is an estimation based on the formula (Cost / 2 * 0.08).</p>
+        <p className="text-green-700 mt-1">This is an estimation based on the formula (Cost / 2 * 0.08) for the filtered jobs.</p>
       </div>
 
       <div className="overflow-x-auto bg-white rounded-lg shadow">
@@ -111,6 +150,8 @@ export default function EarningsPage() {
               <th className="text-left p-3 font-semibold text-gray-600">Address</th>
               <th className="text-right p-3 font-semibold text-gray-600">Cost (excl. VAT)</th>
               <th className="text-right p-3 font-semibold text-gray-600">Earnings</th>
+              <th className="text-left p-3 font-semibold text-gray-600">Status</th>
+              <th className="text-center p-3 font-semibold text-gray-600">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -119,17 +160,38 @@ export default function EarningsPage() {
                 const cost = order.jobDetails?.cost || 0;
                 const earnings = calculateEarnings(cost);
                 return (
-                  <tr key={order._id} className="border-b border-gray-200 hover:bg-gray-50">
+                  <tr key={order._id} className={`border-b border-gray-200 ${order.paid ? 'bg-green-50' : 'hover:bg-gray-50'}`}>
                     <td className="p-3 whitespace-nowrap">{order.jobAddress?.jobNumber || 'N/A'}</td>
                     <td className="p-3 whitespace-nowrap">{`${order.jobAddress?.streetNumber || ''} ${order.jobAddress?.streetName || ''}, ${order.jobAddress?.surburb || ''}`}</td>
                     <td className="p-3 whitespace-nowrap text-right">R {cost.toFixed(2)}</td>
                     <td className="p-3 whitespace-nowrap text-right font-semibold text-green-700">R {earnings.toFixed(2)}</td>
+                    <td className="p-3 whitespace-nowrap">
+                      {order.paid ? (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-200 text-green-800">
+                              Paid
+                          </span>
+                      ) : (
+                          <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-yellow-100 text-yellow-800">
+                              Unpaid
+                          </span>
+                      )}
+                    </td>
+                    <td className="p-3 whitespace-nowrap text-center">
+                      {!order.paid && (
+                          <button
+                              onClick={() => handleMarkAsPaid(order._id)}
+                              className="bg-green-600 text-white px-3 py-1 rounded-md hover:bg-green-700 text-sm font-semibold transition-colors duration-200"
+                          >
+                              Mark as Paid
+                          </button>
+                      )}
+                    </td>
                   </tr>
                 )
               })
             ) : (
               <tr>
-                <td colSpan="4" className="text-center p-10 text-gray-500">No work orders found for the selected filters.</td>
+                <td colSpan="6" className="text-center p-10 text-gray-500">No work orders found for the selected filters.</td>
               </tr>
             )}
           </tbody>
