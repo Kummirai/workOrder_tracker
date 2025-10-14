@@ -120,45 +120,45 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
 
       {/* Items Table with Totals */}
       <div className="mb-8 border border-gray-300">
-        <table className="w-full border-collapse">
+        <table className="w-full border-collapse text-xs">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 print:text-xs">Code</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 print:text-xs">Description</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 print:text-xs">Quantity</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 print:text-xs">Unit Price</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 print:text-xs">Tax</th>
-              <th className="text-left py-2 px-4 font-semibold print:text-xs">Net Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Code</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Quantity</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Unit Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Tax</th>
+              <th className="text-left py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
-                <td className="py-1 px-4 border-r border-gray-300 print:text-xs">{item.itemNumber}</td>
-                <td className="py-1 px-4 border-r border-gray-300 print:text-xs">{item.description}</td>
-                <td className="py-1 px-4 border-r border-gray-300 print:text-xs">{item.quantity}</td>
-                <td className="py-1 px-4 border-r border-gray-300 print:text-xs">R {item.rate.toFixed(2)}</td>
-                <td className="py-1 px-4 border-r border-gray-300 print:text-xs">R {(item.cost * 0.15).toFixed(2)}</td>
-                <td className="py-1 px-4 print:text-xs">R {item.cost.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.itemNumber}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.quantity}</td>
+                <td className="py-1 px-4 border-r border-gray-300">R {item.rate.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-1 px-4">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
 
             {/* Totals Section as part of the table */}
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300 print:text-xs">Sub Total:</td>
-              <td className="py-3 px-4 font-semibold whitespace-nowrap print:text-xs">R {subTotal.toFixed(2)}</td>
+              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Sub Total:</td>
+              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300 print:text-xs">Amount excluding Tax</td>
-              <td className="py-2 px-4 font-semibold whitespace-nowrap print:text-xs">R {subTotal.toFixed(2)}</td>
+              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Amount excluding Tax</td>
+              <td className="py-2 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300 print:text-xs">Tax 15%</td>
-              <td className="py-2 px-4 whitespace-nowrap print:text-xs">R {tax.toFixed(2)}</td>
+              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Tax 15%</td>
+              <td className="py-2 px-4 whitespace-nowrap">R {tax.toFixed(2)}</td>
             </tr>
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300 print:text-xs">Total</td>
-              <td className="py-3 px-4 font-semibold whitespace-nowrap print:text-xs">R {total.toFixed(2)}</td>
+              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Total</td>
+              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {total.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
