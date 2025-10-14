@@ -1,13 +1,13 @@
-
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import { useReactToPrint } from 'react-to-print';
 import Invoice from '@/components/Template.jsx';
 
 export default function PrintPage() {
   const { id } = useParams();
+  const router = useRouter();
   const [workOrder, setWorkOrder] = useState(null);
   const componentRef = useRef();
 
@@ -27,6 +27,9 @@ export default function PrintPage() {
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     pageStyle: pageStyle,
+    onAfterPrint: () => {
+      router.back();
+    },
   });
 
   useEffect(() => {

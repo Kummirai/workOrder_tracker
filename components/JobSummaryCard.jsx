@@ -60,7 +60,7 @@ const JobSummaryCard = ({ job, status, onDelete }) => {
         <Link href={`/work_orders/${job._id}/edit`} className="p-2 rounded-full hover:bg-yellow-100 text-yellow-600 transition-colors duration-200" title="Edit">
           <FaPencilAlt className="w-5 h-5" />
         </Link>
-        <Link href={`/work_orders/${job._id}/print`} target="_blank" rel="noopener noreferrer" className="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors duration-200" title="Print">
+        <Link href={`/work_orders/${job._id}/print`} className="p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors duration-200" title="Print">
           <FaPrint className="w-5 h-5" />
         </Link>
         <button onClick={handleDelete} className="p-2 rounded-full hover:bg-red-100 text-red-600 transition-colors duration-200 cursor-pointer" title="Delete">
