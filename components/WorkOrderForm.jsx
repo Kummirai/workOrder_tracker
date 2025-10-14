@@ -46,7 +46,11 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
       setSurburb(workOrderToEdit.jobAddress.surburb);
       setCity(workOrderToEdit.jobAddress.city);
       setStatus(workOrderToEdit.status);
-      setDate(workOrderToEdit.date ? new Date(workOrderToEdit.date).toISOString().slice(0, 10) : new Date().toISOString().slice(0, 10));
+      if (workOrderToEdit.date && !isNaN(new Date(workOrderToEdit.date))) {
+        setDate(new Date(workOrderToEdit.date).toISOString().slice(0, 10));
+      } else {
+        setDate(new Date().toISOString().slice(0, 10));
+      }
       setWorkItems(workOrderToEdit.jobDetails.workItems);
       if (workOrderToEdit.jobDetails.materials) {
         setMaterials(workOrderToEdit.jobDetails.materials);

@@ -9,6 +9,10 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
   const subTotal = workOrder.jobDetails.cost;
   const tax = subTotal * 0.15;
   const total = subTotal + tax;
+  const displayDate =
+    workOrder.date && !isNaN(new Date(workOrder.date))
+      ? format(new Date(workOrder.date), "dd MMM yyyy")
+      : "";
 
   return (
     <div ref={ref} className="max-w-6xl mx-auto p-4 md:p-6 bg-white border border-gray-300">
@@ -39,7 +43,7 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
         <div className="text-left md:text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
-            <div className="font-semibold">{format(new Date(workOrder.date), 'dd MMM yyyy')}</div>
+            <div className="font-semibold">{displayDate}</div>
           </div>
           <div>
             <div className="font-semibold">Tax Invoice no: TLCP/{workOrder.jobAddress.jobNumber}</div>
