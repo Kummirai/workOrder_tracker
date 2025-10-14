@@ -63,8 +63,8 @@ export default function PrintPage() {
           Print Invoice
         </button>
       </div>
-      <div className="max-w-4xl mx-auto bg-white shadow-lg">
-        <Invoice ref={componentRef} workOrder={workOrder} />
+      <div ref={componentRef} className="max-w-4xl mx-auto bg-white shadow-lg">
+        <Invoice workOrder={workOrder} />
       </div>
     </main>
   );

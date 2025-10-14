@@ -119,27 +119,27 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
       </div>
 
       {/* Items Table with Totals */}
-      <div className="mb-8 border border-gray-300 overflow-x-auto lg:overflow-x-visible">
+      <div className="mb-8 border border-gray-300">
         <table className="w-full border-collapse">
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Code</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Description</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Quantity</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Unit Price</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Tax</th>
-              <th className="text-left py-2 px-4 font-semibold whitespace-nowrap">Net Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Code</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Quantity</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Unit Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Tax</th>
+              <th className="text-left py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
             {workOrder.jobDetails.workItems.map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.description}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
-                <td className="py-1 px-4 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.itemNumber}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.quantity}</td>
+                <td className="py-1 px-4 border-r border-gray-300">R {item.rate.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-1 px-4">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
 
