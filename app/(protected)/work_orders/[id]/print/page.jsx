@@ -45,6 +45,12 @@ export default function PrintPage() {
     }
   }, [id]);
 
+  useEffect(() => {
+    if (workOrder) {
+      handlePrint();
+    }
+  }, [workOrder, handlePrint]);
+
   if (!workOrder) {
     return (
       <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
@@ -55,19 +61,13 @@ export default function PrintPage() {
   }
 
   return (
-    <main className="p-8 bg-gray-100 min-h-screen">
-      <div className="max-w-4xl mx-auto mb-8 text-center">
-        <h1 className="text-2xl font-bold text-gray-800 mb-2">Print Preview</h1>
-        <p className="text-gray-600">Click the button below to print the invoice.</p>
-        <button
-          onClick={handlePrint}
-          className="mt-4 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer font-semibold"
-        >
-          Print Invoice
-        </button>
-      </div>
-      <div className="max-w-4xl mx-auto bg-white shadow-lg">
+    <main>
+      <div className="hidden">
         <Invoice ref={componentRef} workOrder={workOrder} />
+      </div>
+      <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-blue-500 mb-4"></div>
+        <p className="font-semibold text-gray-700">Preparing to print...</p>
       </div>
     </main>
   );
