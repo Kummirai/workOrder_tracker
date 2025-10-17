@@ -28,8 +28,12 @@ export default function PrintPage() {
     router.back();
   }, [router]);
 
+  const reactToPrintContent = useCallback(() => {
+    return componentRef.current;
+  }, []);
+
   const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
+    content: reactToPrintContent,
     pageStyle: pageStyle,
     onAfterPrint: onAfterPrint,
   });
