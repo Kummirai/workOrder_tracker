@@ -22,9 +22,9 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
       }`}
     >
       {/* Header Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
+      <div className="flex flex-wrap justify-between items-start gap-4 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
-        <div className="flex items-start justify-between">
+        <div className="flex-1 min-w-[150px] flex items-start justify-between">
           <img
             src="/Picture1.png"
             alt="TLOPO Construction Logo"
@@ -43,7 +43,7 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
         </div>
 
         {/* Right Column - Invoice Details */}
-        <div className="text-left md:text-right border border-gray-300 p-3">
+        <div className="flex-1 min-w-[200px] text-left md:text-right border border-gray-300 p-3">
           <div className="font-bold text-xl mb-2">TAX INVOICE</div>
           <div className="mb-2">
             <div className="font-semibold">{displayDate}</div>
@@ -57,9 +57,9 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
       </div>
 
       {/* Contact Information Section */}
-      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4 items-start">
+      <div className="flex flex-wrap justify-between items-start gap-4 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Sender */}
-        <div className="text-sm">
+        <div className="flex-1 min-w-[250px] text-sm">
           <div className="grid grid-cols-[max-content_1fr] gap-x-2">
             <span className="font-semibold">Cell no:</span>
             <span>071 318 4854 (Prince Ramano)</span>
@@ -82,7 +82,7 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
         </div>
 
         {/* Right Column - Receiver */}
-        <div className="text-sm">
+        <div className="flex-1 min-w-[250px] text-sm">
           <div className="font-semibold">City Power Johannesburg</div>
           <div>
             <span className="font-semibold">Vat Reg :</span>

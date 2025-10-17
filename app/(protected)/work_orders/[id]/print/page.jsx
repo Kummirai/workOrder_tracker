@@ -66,11 +66,20 @@ export default function PrintPage() {
           .print-container .invoice-for-print table {
             font-size: 12px; /* Table text 12px (original visual size) */
           }
+          .print-container .invoice-for-print table {
+            display: block !important;
+            width: max-content !important;
+            max-width: unset !important; /* Remove any max-width constraints */
+          }
           .print-container .invoice-for-print table th,
           .print-container .invoice-for-print table td {
             padding: 4px;
-            white-space: normal !important;
-            word-break: break-word;
+            white-space: nowrap !important; /* Prevent text wrapping */
+            word-break: keep-all !important; /* Ensure words are not broken */
+          }
+          .print-container .invoice-for-print .overflow-x-auto {
+            overflow-x: auto !important; /* Ensure horizontal scrolling for tables */
+            display: block !important; /* Ensure the container is a block element */
           }
           .print-container .invoice-for-print .banking-details-content {
             font-size: 9pt; /* Banking details content 9pt */
