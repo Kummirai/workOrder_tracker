@@ -36,7 +36,7 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 5mm; /* Reduced margin on all sides */
+          margin: 0mm 5mm; /* 0mm top/bottom, 5mm left/right */
         }
         @media print {
           body * {
@@ -55,6 +55,7 @@ export default function PrintPage() {
             padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
+            padding-top: 5mm; /* Add top padding to the invoice content */
           }
           .print-container .invoice-for-print h1,
           .print-container .invoice-for-print h2,
