@@ -78,6 +78,12 @@ export default function PrintPage() {
           .print-container .invoice-for-print .banking-details-container {
             page-break-inside: avoid; /* Prevent banking details from splitting */
           }
+          .print-container .invoice-for-print .print-tight-spacing {
+            margin-bottom: 0.5rem !important; /* Reduce bottom margin */
+            padding-bottom: 0.5rem !important; /* Reduce bottom padding */
+            margin-top: 0.5rem !important; /* Reduce top margin */
+            padding-top: 0.5rem !important; /* Reduce top padding */
+          }
           .no-print {
             display: none;
           }
