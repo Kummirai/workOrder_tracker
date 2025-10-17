@@ -36,7 +36,7 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 0 5mm; /* 5mm top/bottom, 15mm left/right */
+          margin: 5mm; /* Reduced margin on all sides */
         }
         @media print {
           body * {
@@ -50,20 +50,32 @@ export default function PrintPage() {
             /* The visibility text-sm md:mt-24 rules are sufficient to isolate the component */
           }
           .print-container .invoice-for-print {
+            font-size: 11px; /* All text 11px */
             max-width: 100% !important;
             padding: 0 !important;
             border: none !important;
             box-shadow: none !important;
           }
-          .print-container .invoice-for-print table {
-            table-layout: fixed;
-            width: 100%;
+          .print-container .invoice-for-print h1,
+          .print-container .invoice-for-print h2,
+          .print-container .invoice-for-print h3,
+          .print-container .invoice-for-print h4 {
+            font-size: 14px; /* Headings 14px */
           }
-          text-sm md:mt-24 .print-container .invoice-for-print table th,
+          .print-container .invoice-for-print table {
+            font-size: 12px; /* Table text 12px (original visual size) */
+          }
+          .print-container .invoice-for-print table th,
           .print-container .invoice-for-print table td {
             padding: 4px;
             white-space: normal !important;
             word-break: break-word;
+          }
+          .print-container .invoice-for-print .banking-details-content {
+            font-size: 9pt; /* Banking details content 9pt */
+          }
+          .print-container .invoice-for-print .banking-details-container {
+            page-break-inside: avoid; /* Prevent banking details from splitting */
           }
           .no-print {
             display: none;
