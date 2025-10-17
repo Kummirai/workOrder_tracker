@@ -63,7 +63,7 @@ export default function PrintPage() {
           }
           .print-container .invoice-for-print table th,
           .print-container .invoice-for-print table td {
-            padding: 4px 8px;
+            padding: 4px;
             white-space: normal !important;
             word-break: break-word;
           }

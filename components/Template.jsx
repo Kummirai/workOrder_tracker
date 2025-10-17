@@ -117,12 +117,12 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
       <div className="mb-8 border border-gray-300 overflow-x-auto">
         <table className="w-full border-collapse text-xs">
           <colgroup>
-            <col style={{ width: '10%' }} />
-            <col style={{ width: '30%' }} />
+            <col style={{ width: '8%' }} />
+            <col style={{ width: '44%' }} />
             <col style={{ width: '12%' }} />
-            <col style={{ width: '16%' }} />
-            <col style={{ width: '16%' }} />
-            <col style={{ width: '16%' }} />
+            <col style={{ width: '12%' }} />
+            <col style={{ width: '12%' }} />
+            <col style={{ width: '12%' }} />
           </colgroup>
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
