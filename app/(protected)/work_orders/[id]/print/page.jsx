@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useReactToPrint } from 'react-to-print';
 import Invoice from '@/components/Template.jsx';
@@ -24,12 +24,14 @@ export default function PrintPage() {
     }
   `;
 
+  const onAfterPrint = useCallback(() => {
+    router.back();
+  }, [router]);
+
   const handlePrint = useReactToPrint({
     content: () => componentRef.current,
     pageStyle: pageStyle,
-    onAfterPrint: () => {
-      router.back();
-    },
+    onAfterPrint: onAfterPrint,
   });
 
   useEffect(() => {
