@@ -5,17 +5,20 @@ import { NextResponse } from 'next/server';
 export async function GET(request) {
   const { searchParams } = new URL(request.url);
   const search = searchParams.get('search') || '';
+  const status = searchParams.get('status'); // new query param
 
   const { workOrdersCollection } = await getCollections();
 
   let query = {};
   if (search) {
-    query = {
-      $or: [
+    query['$or'] = [
         { "jobAddress.jobNumber": { $regex: search, $options: 'i' } },
         { "jobAddress.streetName": { $regex: search, $options: 'i' } }
-      ]
-    };
+    ];
+  }
+
+  if (status) {
+      query.status = status;
   }
 
   const workOrders = await workOrdersCollection.find(query).toArray();

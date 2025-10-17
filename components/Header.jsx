@@ -75,6 +75,9 @@ const Header = () => {
           <Link href={'/work_orders'} className={navLinkClasses('/work_orders')}>
             Add Work Order
           </Link>
+          <Link href={'/jobs'} className={navLinkClasses('/jobs')}>
+            Jobs
+          </Link>
           <Link href={'/boq_items'} className={navLinkClasses('/boq_items')}>
             BOQ Items
           </Link>
@@ -110,6 +113,13 @@ const Header = () => {
               onClick={() => setIsMenuOpen(false)}
             >
               Add Work Order
+            </Link>
+            <Link
+              href={'/jobs'}
+              className={mobileNavLinkClasses('/jobs')}
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Jobs
             </Link>
             <Link
               href={'/boq_items'}
