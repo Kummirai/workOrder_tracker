@@ -75,7 +75,7 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
         </div>
 
         {/* Right Column - Receiver */}
-        <div className="text-sm md:mt-24">
+        <div className="text-sm">
           <div className="font-semibold">City Power Johannesburg</div>
           <div>
             <span className="font-semibold">Vat Reg :</span>

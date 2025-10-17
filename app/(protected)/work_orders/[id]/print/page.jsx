@@ -36,7 +36,7 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 5mm;
+          margin: 0 5mm; /* 5mm top/bottom, 15mm left/right */
         }
         @media print {
           body * {
