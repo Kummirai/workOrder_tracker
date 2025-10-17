@@ -1,7 +1,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 
-const Invoice = React.forwardRef(({ workOrder }, ref) => {
+const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
   if (!workOrder) {
     return null; // Or a loading state
   }
@@ -15,19 +15,17 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
       : "";
 
   return (
-    <div ref={ref} className="max-w-6xl mx-auto p-4 md:p-6 bg-white border border-gray-300">
+    <div ref={ref} className={`max-w-6xl mx-auto p-4 md:p-6 bg-white border border-gray-300 ${className || ''}`}>
       {/* Header Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Company Details */}
-        <div className="flex items-start">
-          <div className="flex items-center mb-4">
-            <img
-              src="/Picture1.png"
-              alt="TLOPO Construction Logo"
-              className="w-40 md:w-50 h-auto mr-4 object-contain"
-            />
-          </div>
-          <div className="space-y-1 text-sm">
+        <div className="flex items-start justify-between">
+          <img
+            src="/Picture1.png"
+            alt="TLOPO Construction Logo"
+            className="w-40 h-auto object-contain"
+          />
+          <div className="text-sm text-right">
             <div>
               <span className="font-semibold">Reg No</span>
               <span className="ml-2">2002/098222/23</span>
@@ -54,22 +52,19 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
       {/* Contact Information Section */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
         {/* Left Column - Sender */}
-        <div className="space-y-2 text-sm">
-          <div>
+        <div className="text-sm">
+          <div className="grid grid-cols-[max-content_1fr] gap-x-2">
             <span className="font-semibold">Cell no:</span>
-            <span className="ml-2">071 318 4854 (Prince Ramano)</span>
-          </div>
-          <div>
+            <span>071 318 4854 (Prince Ramano)</span>
+            
             <span className="font-semibold">Tel no:</span>
-            <span className="ml-2">012 644 0874</span>
-          </div>
-          <div>
+            <span>012 644 0874</span>
+
             <span className="font-semibold">Fax no:</span>
-            <span className="ml-2">(086 667 9557)</span>
-          </div>
-          <div>
+            <span>(086 667 9557)</span>
+
             <span className="font-semibold">E-mail address:</span>
-            <span className="ml-2">tlopocons@gmail.com</span>
+            <span>tlopocons@gmail.com</span>
           </div>
 
           <div className="mt-4">
@@ -80,22 +75,22 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
         </div>
 
         {/* Right Column - Receiver */}
-        <div className="space-y-2 text-sm">
+        <div className="text-sm md:mt-10">
           <div className="font-semibold">City Power Johannesburg</div>
-          <div className="text-sm">
+          <div>
             <span className="font-semibold">Vat Reg :</span>
             <span className="ml-2">4710191182</span>
           </div>
 
-          <div className="mt-4">
-            <div className="text-sm font-semibold">P.O Box 17</div>
+          <div className="mt-8">
+            <div className="font-semibold">P.O Box 17</div>
             <div>GARSFONTEN</div>
             <div>0042</div>
           </div>
 
           {/* Deliver To Section */}
-          <div className="mt-4 border border-gray-300 p-2">
-            <div className="font-semibold text-sm">Deliver to</div>
+          <div className="mt-8 border border-gray-300 p-2">
+            <div className="font-semibold">Deliver to</div>
             <div className="font-semibold">City Power Johannesburg</div>
             <div>Alex Depot</div>
           </div>
@@ -121,14 +116,22 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
       {/* Items Table with Totals */}
       <div className="mb-8 border border-gray-300 overflow-x-auto">
         <table className="w-full border-collapse text-xs">
+          <colgroup>
+            <col style={{ width: '10%' }} />
+            <col style={{ width: '30%' }} />
+            <col style={{ width: '12%' }} />
+            <col style={{ width: '16%' }} />
+            <col style={{ width: '16%' }} />
+            <col style={{ width: '16%' }} />
+          </colgroup>
           <thead>
             <tr className="border-b border-gray-300 bg-gray-50">
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Code</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Description</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Quantity</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Unit Price</th>
-              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300 whitespace-nowrap">Tax</th>
-              <th className="text-left py-2 px-4 font-semibold whitespace-nowrap">Net Price</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Code</th>
+              <th className="text-left py-2 px-4 font-semibold border-r border-gray-300">Description</th>
+              <th className="text-right py-2 px-4 font-semibold border-r border-gray-300">Quantity</th>
+              <th className="text-right py-2 px-4 font-semibold border-r border-gray-300">Unit Price</th>
+              <th className="text-right py-2 px-4 font-semibold border-r border-gray-300">Tax</th>
+              <th className="text-right py-2 px-4 font-semibold">Net Price</th>
             </tr>
           </thead>
           <tbody>
@@ -141,31 +144,35 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
               })
               .map((item, index) => (
               <tr key={index} className="border-b border-gray-200">
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.itemNumber}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.description}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">{item.quantity}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {item.rate.toFixed(2)}</td>
-                <td className="py-1 px-4 border-r border-gray-300 whitespace-nowrap">R {(item.cost * 0.15).toFixed(2)}</td>
-                <td className="py-1 px-4 whitespace-nowrap">R {item.cost.toFixed(2)}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.itemNumber}</td>
+                <td className="py-1 px-4 border-r border-gray-300">{item.description}</td>
+                <td className="py-1 px-4 text-right border-r border-gray-300">{item.quantity}</td>
+                <td className="py-1 px-4 text-right border-r border-gray-300">R {item.rate.toFixed(2)}</td>
+                <td className="py-1 px-4 text-right border-r border-gray-300">R {(item.cost * 0.15).toFixed(2)}</td>
+                <td className="py-1 px-4 text-right">R {item.cost.toFixed(2)}</td>
               </tr>
             ))}
 
             {/* Totals Section as part of the table */}
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Sub Total:</td>
-              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
+              <td colSpan="4" className="py-1 px-4"></td>
+              <td className="py-1 px-4 text-right font-semibold border-r border-gray-300">Sub Total:</td>
+              <td className="py-1 px-4 text-right font-semibold">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Amount excluding Tax</td>
-              <td className="py-2 px-4 font-semibold whitespace-nowrap">R {subTotal.toFixed(2)}</td>
+              <td colSpan="4" className="py-1 px-4"></td>
+              <td className="py-1 px-4 text-right border-r border-gray-300">Amount excluding Tax</td>
+              <td className="py-1 px-4 text-right font-semibold">R {subTotal.toFixed(2)}</td>
             </tr>
             <tr className="bg-gray-50">
-              <td colSpan={5} className="py-2 px-4 text-right border-r border-gray-300">Tax 15%</td>
-              <td className="py-2 px-4 whitespace-nowrap">R {tax.toFixed(2)}</td>
+              <td colSpan="4" className="py-1 px-4"></td>
+              <td className="py-1 px-4 text-right border-r border-gray-300">Tax 15%</td>
+              <td className="py-1 px-4 text-right">R {tax.toFixed(2)}</td>
             </tr>
             <tr className="border-t-2 border-gray-300 bg-gray-50">
-              <td colSpan={5} className="py-3 px-4 text-right font-semibold border-r border-gray-300">Total</td>
-              <td className="py-3 px-4 font-semibold whitespace-nowrap">R {total.toFixed(2)}</td>
+              <td colSpan="4" className="py-1 px-4"></td>
+              <td className="py-1 px-4 text-right font-semibold border-r border-gray-300">Total</td>
+              <td className="py-1 px-4 text-right font-semibold">R {total.toFixed(2)}</td>
             </tr>
           </tbody>
         </table>
@@ -174,27 +181,21 @@ const Invoice = React.forwardRef(({ workOrder }, ref) => {
       {/* Footer with Banking Details */}
       <div className="border-t border-gray-300 pt-6">
         <div className="font-bold text-lg mb-4 text-start">BANKING DETAILS</div>
-        <div className="grid grid-cols-1 text-sm text-start">
-          <div>
-            <div className="font-semibold">Bank Name:</div>
-            <div>First National Bank</div>
-          </div>
-          <div className="flex">
-            <div className="font-semibold flex">Acc holder:</div>
-            <div>Tlopo Construction and General Services</div>
-          </div>
-          <div className="flex">
-            <div className="font-semibold">Acc no:</div>
-            <div>62103590007</div>
-          </div>
-          <div className="flex">
-            <div className="font-semibold">Type of Acc:</div>
-            <div>Cheque</div>
-          </div>
-          <div className="flex">
-            <div className="font-semibold">Branch Name:</div>
-            <div>Menlyn</div>
-          </div>
+        <div className="grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1 text-sm text-start">
+          <div className="font-semibold">Bank Name:</div>
+          <div>First National Bank</div>
+          
+          <div className="font-semibold">Acc holder:</div>
+          <div>Tlopo Construction and General Services</div>
+          
+          <div className="font-semibold">Acc no:</div>
+          <div>62103590007</div>
+          
+          <div className="font-semibold">Type of Acc:</div>
+          <div>Cheque</div>
+          
+          <div className="font-semibold">Branch Name:</div>
+          <div>Menlyn</div>
         </div>
       </div>
 
