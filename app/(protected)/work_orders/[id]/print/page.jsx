@@ -1,8 +1,8 @@
-'use client';
+"use client";
 
-import { useEffect, useState } from 'react';
-import { useParams, useRouter } from 'next/navigation';
-import Invoice from '@/components/Template.jsx';
+import { useEffect, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
+import Invoice from "@/components/Template.jsx";
 
 export default function PrintPage() {
   const { id } = useParams();
@@ -36,20 +36,18 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 15mm;
+          margin: 5mm;
         }
         @media print {
           body * {
             visibility: hidden;
           }
-          .print-container, .print-container * {
+          .print-container,
+          .print-container * {
             visibility: visible;
           }
           .print-container {
-            position: absolute;
-            left: 0;
-            top: 0;
-            width: 100%;
+            /* The visibility text-sm md:mt-24 rules are sufficient to isolate the component */
           }
           .print-container .invoice-for-print {
             max-width: 100% !important;
@@ -61,7 +59,7 @@ export default function PrintPage() {
             table-layout: fixed;
             width: 100%;
           }
-          .print-container .invoice-for-print table th,
+          text-sm md:mt-24 .print-container .invoice-for-print table th,
           .print-container .invoice-for-print table td {
             padding: 4px;
             white-space: normal !important;
@@ -74,8 +72,12 @@ export default function PrintPage() {
       `}</style>
       <main className="p-8 bg-gray-100 min-h-screen">
         <div className="max-w-4xl mx-auto mb-8 text-center no-print">
-          <h1 className="text-2xl font-bold text-gray-800 mb-2">Print Preview</h1>
-          <p className="text-gray-600">Click the button below to print the invoice.</p>
+          <h1 className="text-2xl font-bold text-gray-800 mb-2">
+            Print Preview
+          </h1>
+          <p className="text-gray-600">
+            Click the button below to print the invoice.
+          </p>
           <button
             onClick={() => window.print()}
             className="mt-4 bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer font-semibold"

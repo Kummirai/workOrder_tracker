@@ -3,7 +3,7 @@ import { format } from 'date-fns';
 
 const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
   if (!workOrder) {
-    return null; // Or a loading state
+    return null;
   }
 
   const subTotal = workOrder.jobDetails.cost;
@@ -50,7 +50,7 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
       </div>
 
       {/* Contact Information Section */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4">
+      <div className="grid grid-cols-2 gap-8 mb-6 border-b border-gray-300 pb-4 items-start">
         {/* Left Column - Sender */}
         <div className="text-sm">
           <div className="grid grid-cols-[max-content_1fr] gap-x-2">
@@ -75,7 +75,7 @@ const Invoice = React.forwardRef(({ workOrder, className }, ref) => {
         </div>
 
         {/* Right Column - Receiver */}
-        <div className="text-sm md:mt-10">
+        <div className="text-sm md:mt-24">
           <div className="font-semibold">City Power Johannesburg</div>
           <div>
             <span className="font-semibold">Vat Reg :</span>
