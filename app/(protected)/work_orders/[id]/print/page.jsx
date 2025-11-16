@@ -36,9 +36,15 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 20mm;
+          margin: 10mm;
         }
         @media print {
+          main {
+            min-height: initial !important;
+          }
+          body {
+            font-size: 12px;
+          }
           body * {
             visibility: hidden;
           }
@@ -56,6 +62,12 @@ export default function PrintPage() {
           }
           .no-print {
             display: none;
+          }
+          .print-container table {
+            font-size: 11px;
+          }
+          .print-container th, .print-container td {
+            padding: 4px !important;
           }
         }
       `}</style>

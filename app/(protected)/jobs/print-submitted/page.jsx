@@ -14,12 +14,22 @@ export default function PrintSubmittedJobsPage() {
   const pageStyle = `
     @page {
       size: A4;
-      margin: 20mm;
+      margin: 10mm;
     }
     @media print {
+      main {
+        min-height: initial !important;
+      }
       body {
         -webkit-print-color-adjust: exact;
         color-adjust: exact;
+        font-size: 12px;
+      }
+      table {
+        font-size: 11px;
+      }
+      th, td {
+        padding: 4px !important;
       }
     }
   `;
