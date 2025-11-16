@@ -28,6 +28,7 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
 
   const [boqSearchQuery, setBoqSearchQuery] = useState("");
   const [filteredBoqItems, setFilteredBoqItems] = useState([]);
+  const [editingItemIndex, setEditingItemIndex] = useState(null);
 
   useEffect(() => {
     const fetchBoqItems = async () => {
@@ -107,6 +108,48 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
     const newWorkItems = [...workItems];
     newWorkItems.splice(index, 1);
     setWorkItems(newWorkItems);
+  };
+
+  const handleEditItem = (index) => {
+    setEditingItemIndex(index);
+    const item = workItems[index];
+    setSelectedBoqItem(item.boqId);
+    setBoqSearchQuery(item.description);
+    setQuantity(item.quantity);
+  };
+
+  const handleUpdateItem = () => {
+    if (!selectedBoqItem || quantity <= 0 || editingItemIndex === null) {
+      return;
+    }
+    const selectedItem = boqItems.find((item) => item._id === selectedBoqItem);
+    if (selectedItem) {
+      const updatedItem = {
+        boqId: selectedItem._id,
+        itemNumber: selectedItem.itemNumber,
+        description: selectedItem.description,
+        unit: selectedItem.unit,
+        rate: selectedItem.rate,
+        quantity: parseFloat(quantity),
+        cost: selectedItem.rate * parseFloat(quantity),
+      };
+      const newWorkItems = [...workItems];
+      newWorkItems[editingItemIndex] = updatedItem;
+      setWorkItems(newWorkItems);
+      
+      // Reset state
+      setEditingItemIndex(null);
+      setSelectedBoqItem("");
+      setBoqSearchQuery("");
+      setQuantity(1);
+    }
+  };
+
+  const handleCancelEdit = () => {
+    setEditingItemIndex(null);
+    setSelectedBoqItem("");
+    setBoqSearchQuery("");
+    setQuantity(1);
   };
 
   const handleAddMaterial = () => {
@@ -284,14 +327,23 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
               inputValue={quantity}
             />
           </div>
-          <div>
+          <div className="flex gap-2">
             <button
               type="button"
-              onClick={handleAddItem}
+              onClick={editingItemIndex !== null ? handleUpdateItem : handleAddItem}
               className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors duration-200 cursor-pointer w-full"
             >
-              Add Item
+              {editingItemIndex !== null ? 'Update' : 'Add'}
             </button>
+            {editingItemIndex !== null && (
+              <button
+                type="button"
+                onClick={handleCancelEdit}
+                className="bg-gray-500 text-white px-4 py-2 rounded-md hover:bg-gray-600 transition-colors duration-200 cursor-pointer w-full"
+              >
+                Cancel
+              </button>
+            )}
           </div>
         </div>
 
@@ -320,6 +372,13 @@ const WorkOrderForm = ({ workOrderToEdit }) => {
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">R {item.rate.toFixed(2)}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-right">R {item.cost.toFixed(2)}</td>
                   <td className="px-4 py-2 whitespace-nowrap text-sm text-gray-900 text-center">
+                    <button
+                      type="button"
+                      onClick={() => handleEditItem(index)}
+                      className="text-blue-600 hover:text-blue-900 font-medium transition-colors duration-200 cursor-pointer mr-4"
+                    >
+                      Edit
+                    </button>
                     <button
                       type="button"
                       onClick={() => handleRemoveItem(index)}
