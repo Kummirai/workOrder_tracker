@@ -36,7 +36,7 @@ export default function PrintPage() {
       <style jsx global>{`
         @page {
           size: A4;
-          margin: 0mm 5mm; /* 0mm top/bottom, 5mm left/right */
+          margin: 20mm;
         }
         @media print {
           body * {
@@ -47,51 +47,12 @@ export default function PrintPage() {
             visibility: visible;
           }
           .print-container {
-            /* The visibility text-sm md:mt-24 rules are sufficient to isolate the component */
-          }
-          .print-container .invoice-for-print {
-            font-size: 11px; /* All text 11px */
-            max-width: 100% !important;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
             padding: 0 !important;
-            border: none !important;
-            box-shadow: none !important;
-            padding-top: 5mm; /* Add top padding to the invoice content */
-          }
-          .print-container .invoice-for-print h1,
-          .print-container .invoice-for-print h2,
-          .print-container .invoice-for-print h3,
-          .print-container .invoice-for-print h4 {
-            font-size: 14px; /* Headings 14px */
-          }
-          .print-container .invoice-for-print table {
-            font-size: 12px; /* Table text 12px (original visual size) */
-          }
-          .print-container .invoice-for-print table {
-            display: block !important;
-            width: max-content !important;
-            max-width: unset !important; /* Remove any max-width constraints */
-          }
-          .print-container .invoice-for-print table th,
-          .print-container .invoice-for-print table td {
-            padding: 4px;
-            white-space: nowrap !important; /* Prevent text wrapping */
-            word-break: keep-all !important; /* Ensure words are not broken */
-          }
-          .print-container .invoice-for-print .overflow-x-auto {
-            overflow-x: auto !important; /* Ensure horizontal scrolling for tables */
-            display: block !important; /* Ensure the container is a block element */
-          }
-          .print-container .invoice-for-print .banking-details-content {
-            font-size: 9pt; /* Banking details content 9pt */
-          }
-          .print-container .invoice-for-print .banking-details-container {
-            page-break-inside: avoid; /* Prevent banking details from splitting */
-          }
-          .print-container .invoice-for-print .print-tight-spacing {
-            margin-bottom: 0.5rem !important; /* Reduce bottom margin */
-            padding-bottom: 0.5rem !important; /* Reduce bottom padding */
-            margin-top: 0.5rem !important; /* Reduce top margin */
-            padding-top: 0.5rem !important; /* Reduce top padding */
+            margin: 0 !important;
           }
           .no-print {
             display: none;

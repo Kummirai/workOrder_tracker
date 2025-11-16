@@ -62,7 +62,7 @@ export default function BoqItems() {
         </tbody>
       </table>
       </div>
-      <Template />
+
     </main>
   );
 }
