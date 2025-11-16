@@ -3,6 +3,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
+import Link from "next/link";
+import { FaEye, FaPencilAlt } from "react-icons/fa";
 
 export default function JobsPage() {
   const [workOrders, setWorkOrders] = useState([]);
@@ -176,14 +178,30 @@ export default function JobsPage() {
                   </span>
                 </td>
                 <td className="p-3 whitespace-nowrap text-center">
-                  {order.status !== "submitted" && (
-                    <button
-                      onClick={() => handleSubmitJob(order._id)}
-                      className="bg-purple-600 text-white px-3 py-1 rounded-md hover:bg-purple-700 text-sm font-semibold"
+                  <div className="flex items-center justify-center space-x-2">
+                    <Link
+                      href={`/work_orders/${order._id}`}
+                      className="text-blue-600 hover:text-blue-900"
+                      title="View"
                     >
-                      Submit Job
-                    </button>
-                  )}
+                      <FaEye className="w-5 h-5" />
+                    </Link>
+                    <Link
+                      href={`/work_orders/${order._id}/edit`}
+                      className="text-yellow-600 hover:text-yellow-900"
+                      title="Edit"
+                    >
+                      <FaPencilAlt className="w-5 h-5" />
+                    </Link>
+                    {order.status !== "submitted" && (
+                      <button
+                        onClick={() => handleSubmitJob(order._id)}
+                        className="bg-purple-600 text-white px-3 py-1 rounded-md hover:bg-purple-700 text-sm font-semibold"
+                      >
+                        Submit Job
+                      </button>
+                    )}
+                  </div>
                 </td>
               </tr>
             ))}
